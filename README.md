@@ -1,2 +1,2 @@
-# tourism_trust_bct4mas
+# startups_evaluation_innmind_bct4mas
 MAS (Jade) + BCT (Hyperledger)
