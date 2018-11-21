@@ -1,0 +1,29 @@
+{
+	"agentTypes":
+	[
+		"CAAgent",
+		"BCAgent",
+		"BCAgent",
+		"BCAgent"
+	],
+
+	"agentNames":
+	[
+		"main",
+		"a1",
+		"a2",
+		"a3"
+	],
+  "port": "19816",
+  "agentImagePath": "resources/images/agentFigure.png",
+  "evaluateImagePath": "resources/images/evaluate.png",
+	"okIconPath":"resources/images/okIcon.png",
+  "agentImagesHotelsPath": [
+    "resources/images/hotels/ambassadorCrans.jpg",
+    "resources/images/hotels/parcHotelCrans.jpg",
+    "resources/images/hotels/royalHotelCrans.jpg",
+    "resources/images/hotels/weisshornLandscapeCrans.jpg",
+    "resources/images/hotels/guardaHotelCrans.png",
+    "resources/images/hotels/centralHotel.jpg"
+  ]
+}

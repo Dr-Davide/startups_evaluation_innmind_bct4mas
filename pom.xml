@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>startups_evaluation_innmind_bct4mas</groupId>
+    <artifactId>startups_evaluation_innmind_bct4mas</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0</version>
+    <name>startups_evaluation_innmind_bct4mas</name>
+    <description>BCT4MAS implementation for InnMind</description>
+    <url>https://innmind.com/</url>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Davide Calvaresi</name>
+            <email>davide.calvaresi@hevs.ch</email>
+        </developer>
+        <developer>
+            <name>Valerio Mattioli</name>
+            <email>valeriomattioli580@gmail.com</email>
+        </developer>
+    </developers>
+
+    <!--Se includi questa repo va in conflitto con commons.codec (probabilmente carica da qua v1.3 e io devo usare la >v1.4-->
+    <!--Se non includi questa repo mvn install non trova jade, quindi trovare il modo per usare la repo jade solo per jade-->
+    <!--Sistemato con exclude quando richiamo la dependency di jade-->
+    <!-- questa sotto è la soluzione più grezza in caso servisse in futuro, esplicitiamo la dipendenza alla versione voluta direttamente da qua-->
+    <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+    <!--<dependency>-->
+    <!--<groupId>commons-codec</groupId>-->
+    <!--<artifactId>commons-codec</artifactId>-->
+    <!--<version>1.9</version>-->
+    <!--</dependency>-->
+    <repositories>
+        <repository>
+            <id>tilab</id>
+            <url>http://jade.tilab.com/maven/</url>
+        </repository>
+    </repositories>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.hyperledger.fabric-sdk-java</groupId>
+            <artifactId>fabric-sdk-java</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tilab.jade</groupId>
+            <artifactId>jade</artifactId>
+            <version>4.5.0</version>
+            <exclusions>
+                <exclusion>
+                    <!-- Exclude commons-codec from tilab.jade-->
+                    <!-- Because otherwise will get v1.3 and I need > 1.3-->
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jcabi</groupId>
+            <artifactId>jcabi-log</artifactId>
+            <version>0.17.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <!--<resource>-->
+            <!--<directory>bc-mas-app</directory>-->
+            <!--</resource>-->
+            <resource>
+                <directory>chaincode/trustreputationledger</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- Build an executable JAR -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>start.StartNetwork</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <!-- further conf here -->
+                            <outputDirectory>${java.io.tmpdir}/libs</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+
+    </build>
+</project>
