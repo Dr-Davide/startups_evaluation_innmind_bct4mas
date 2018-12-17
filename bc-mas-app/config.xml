@@ -1,0 +1,97 @@
+<?xml version = "1.0"?>
+
+<!-- 
+########################################################################################
+
+On <heuristic>, you have to choose between:
+cost
+time
+
+cost: the service with the lower cost will be chosen first
+time: the service with the lower time execution will be chosen first
+
+########################################################################################
+On <configType>, you have to choose between:
+config1
+config2
+config3
+config4
+
+Every configuration runs a different scenario on the demo. 
+NOTE: Before starting the demo, FOR EACH CONFIGTYPE EXPECIALLY FOR config2, be sure to clean all ledgers by re-running startFabric.sh
+
+Agents on the scenario: a1 a2 a3
+
+config1:
+1) a1 needs service2, so he query the serviceLedger and he will know that service2 is available from a2 and a3
+2) a1 will now choose one of them, by getting the one with the lowest weight -> (a3)
+3) a3 will execute the service2 for a1
+4) a1 will get the response and he is happy
+
+config2:
+1) a1 needs service5 which doesn't exist for now
+2) a1 will query the serviceLedger every 10 seconds
+3) at some point, a3 will insert service3 on his service list
+4) a1 finally finds that service5 is available from a3
+3) a3 will execute the service2 for a1
+4) a1 will get the response and he is happy
+
+config3:
+1) a1 needs service3, he query the ledger and he discover that service3 is available on a3 and a4 (which doesnt exists, like if he is in a downtime)
+2) a1 will now choose one of them, by getting the one with the lowest weight -> (a4)
+3) a1 will see that a4 is not answering, so he decides to contact a3
+4) a3 answers
+5) a3 will execute the service3 for a1
+6) a1 will get the response and he is happy 
+
+config4:
+1) a1 needs service2, but before he query the ledger, his certificate is revoked
+2) a1 fails to query the ledger
+
+########################################################################################
+
+
+-->
+<config>
+	<heuristic>cost</heuristic>
+	<configType>config1</configType>
+	<agents>
+		<agent name = "a1">
+			<services>
+				<service name = "service1">
+					<description>desc1</description>
+					<weight>1</weight>
+					<time>1</time>
+				</service>
+			</services>
+		</agent>
+		<agent name = "a2">
+			<services>
+				<service name = "service2">
+					<description>desc2</description>
+					<weight>5</weight>
+					<time>9</time>
+				</service>
+			</services>
+		</agent>
+		<agent name = "a3">
+			<services>
+				<service name = "service2">
+					<description>desc2</description>
+					<weight>4</weight>
+					<time>10</time>
+				</service>
+				<service name = "service3">
+					<description>desc3</description>
+					<weight>4</weight>
+					<time>8</time>
+				</service>
+				<service name = "service5">
+					<description>desc5</description>
+					<weight>7</weight>
+					<time>3</time>
+				</service>
+			</services>
+		</agent>
+	</agents>
+</config>
