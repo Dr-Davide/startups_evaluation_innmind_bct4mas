@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7352a795-b1e2-47f3-86d2-7083d6bb561a" name="Default Changelist" comment="" />
+    <list default="true" id="7352a795-b1e2-47f3-86d2-7083d6bb561a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/APDescription.txt" beforeDir="false" afterPath="$PROJECT_DIR$/APDescription.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chaincode/hyperledger/fabric/servicech.block" beforeDir="false" afterPath="$PROJECT_DIR$/chaincode/hyperledger/fabric/servicech.block" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chaincode/hyperledger/fabric/transch.block" beforeDir="false" afterPath="$PROJECT_DIR$/chaincode/hyperledger/fabric/transch.block" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/startups_evaluation_innmind_bct4mas.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/startups_evaluation_innmind_bct4mas.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup-fabric-network/temp/fabric/servicech.block" beforeDir="false" afterPath="$PROJECT_DIR$/setup-fabric-network/temp/fabric/servicech.block" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup-fabric-network/temp/fabric/transch.block" beforeDir="false" afterPath="$PROJECT_DIR$/setup-fabric-network/temp/fabric/transch.block" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/StartClass.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -116,23 +123,23 @@
       <updated>1545060870379</updated>
       <workItem from="1545060874514" duration="508000" />
       <workItem from="1545070286424" duration="1144000" />
+      <workItem from="1545072024322" duration="408000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1652000" />
+    <option name="totallyTimeSpent" value="2060000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-2" width="1024" height="770" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25460124" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2597137" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.32917318" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32917318" />
@@ -145,6 +152,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32917318" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
