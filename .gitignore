@@ -1,5 +1,8 @@
-/target/
-/bc-mas-app/hfc-key-store/
-/.idea/
-/logs/
-/chaincode/hyperledger/fabric/
+target/
+# Log file
+*.log
+bc-mas-app/hfc-key-store/
+.idea/
+logs/
+chaincode/hyperledger/fabric/
+setup-fabric-network/temp/fabric/
