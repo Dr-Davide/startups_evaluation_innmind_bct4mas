@@ -6,12 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="bct4mas" />
+        <module name="startups_evaluation_innmind_bct4mas" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="bc4mas" target="1.8" />
-      <module name="bct4mas" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
