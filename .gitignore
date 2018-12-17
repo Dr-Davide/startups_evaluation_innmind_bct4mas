@@ -1,2 +1,5 @@
 /target/
 /bc-mas-app/hfc-key-store/
+/.idea/
+/logs/
+/chaincode/hyperledger/fabric/
