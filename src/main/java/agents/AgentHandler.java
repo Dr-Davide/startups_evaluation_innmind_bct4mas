@@ -36,4 +36,5 @@ public class AgentHandler extends Agent {
     addBehaviour(new AddAgent(agentName, agentType, expirationCertificate));
   }
 
+
 }

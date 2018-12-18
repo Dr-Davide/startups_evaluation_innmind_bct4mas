@@ -1,6 +1,6 @@
 package controllers;
 
-import model.dao.ReputationDAO;
+import model.dao.InnMindReputationDAO;
 import model.dao.FeatureRelationAgentDAO;
 import model.pojo.InnMindReputation;
 import model.pojo.FeatureRelationAgent;
@@ -58,9 +58,9 @@ public class UpdateController {
         throws ProposalException, InvalidArgumentException {
         boolean allPeerSuccess;
         String[] updateParams = {stringNewReputationValue};
-        ReputationDAO reputationDAO = new ReputationDAO();
+        InnMindReputationDAO innMindReputationDAO = new InnMindReputationDAO();
         allPeerSuccess =
-            reputationDAO.update(clientHF, userHF, channel, innMindReputationPojo, updateParams);
+            innMindReputationDAO.update(clientHF, userHF, channel, innMindReputationPojo, updateParams);
         return allPeerSuccess;
     }
 

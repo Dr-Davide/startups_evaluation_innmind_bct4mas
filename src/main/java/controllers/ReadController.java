@@ -55,12 +55,12 @@ public class ReadController {
     public static InnMindReputation getReputation(HFClient clientHF, Channel channel, String agentId,
                                                   String serviceId, String agentRole) {
 
-        ReputationDAO reputationDAO = new ReputationDAO();
+        InnMindReputationDAO innMindReputationDAO = new InnMindReputationDAO();
 
         String reputationId = agentId + serviceId + agentRole;
 
         Optional<InnMindReputation> optionalReputation =
-            reputationDAO.get(clientHF, channel, reputationId);
+            innMindReputationDAO.get(clientHF, channel, reputationId);
 
         InnMindReputation innMindReputationPojo = optionalReputation.get();
         return innMindReputationPojo;
@@ -76,10 +76,10 @@ public class ReadController {
      */
     public static InnMindReputation getReputation(HFClient clientHF, Channel channel,
                                                   String reputationId) {
-        ReputationDAO reputationDAO = new ReputationDAO();
+        InnMindReputationDAO innMindReputationDAO = new InnMindReputationDAO();
 
         Optional<InnMindReputation> optionalReputation =
-            reputationDAO.get(clientHF, channel, reputationId);
+            innMindReputationDAO.get(clientHF, channel, reputationId);
 
         InnMindReputation innMindReputationPojo = optionalReputation.get();
 

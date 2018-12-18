@@ -14,6 +14,7 @@ import org.hyperledger.fabric.sdk.Channel;
 import org.hyperledger.fabric.sdk.HFClient;
 import org.hyperledger.fabric.sdk.User;
 import view.BCAgentGui;
+import view.StartupAgentGui;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -26,10 +27,10 @@ import java.util.ArrayList;
 public class BCAgent extends Agent {
 
     private static final long serialVersionUID = 5801630293298208379L;
-    // private BCAgentGui startupAgentGui;
+    // private BCAgentGui expertAgentGui;
   public BCAgentGui bcAgentGui; // TODO: Temporary Public to permit evaluation, after evaluation
                                 // Refactoring as a distinct behaviour we can go bakc to private
-                                // startupAgentGui
+                                // expertAgentGui
 
 
   private String myName;
@@ -117,7 +118,7 @@ public class BCAgent extends Agent {
   public void showDenyExecution(String[] parsedMessage) {
     String serviceId = parsedMessage[0];
     String denialExecuterAgent = parsedMessage[1];
-    // startupAgentGui.getMessagesTabPanel().getInBoxMessagesPanel().addMessageInTableModel(message);
+    // expertAgentGui.getMessagesTabPanel().getInBoxMessagesPanel().addMessageInTableModel(message);
     JOptionPane.showMessageDialog(bcAgentGui.getAskFeatureTabPanel(),
         "Demander: " + getLocalName() + ": Your request has been denied. Denial Agent: "
             + denialExecuterAgent + ", for the service: " + serviceId + ", retry the ask",

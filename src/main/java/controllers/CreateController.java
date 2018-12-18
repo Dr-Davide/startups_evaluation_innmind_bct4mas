@@ -137,7 +137,7 @@ public class CreateController {
     }
 
     /**
-     * Create a new reputation record in the ledger using ReputationDAO
+     * Create a new reputation record in the ledger using InnMindReputationDAO
      * @param agentId
      * @param serviceId
      * @param agentRole
@@ -154,7 +154,7 @@ public class CreateController {
         String reputationId, HFClient clientHF, User userHF, Channel channel,
         String stringInitialReputationValue) throws ProposalException, InvalidArgumentException {
         boolean allPeerSuccess;
-        ReputationDAO reputationDAO = new ReputationDAO();
+        InnMindReputationDAO innMindReputationDAO = new InnMindReputationDAO();
         InnMindReputation innMindReputationPojo = new InnMindReputation();
 
         innMindReputationPojo.setInnMindReputationId(reputationId);
@@ -163,7 +163,7 @@ public class CreateController {
         innMindReputationPojo.setAgentRole(agentRole);
         innMindReputationPojo.setValue(stringInitialReputationValue);
 
-        allPeerSuccess = reputationDAO.create(clientHF, userHF, channel, innMindReputationPojo);
+        allPeerSuccess = innMindReputationDAO.create(clientHF, userHF, channel, innMindReputationPojo);
 
         return allPeerSuccess;
     }

@@ -99,7 +99,8 @@ public class AddFeature extends OneShotBehaviour {
 
           //            RangeQueriesController.loadStructFeatureInLedger(newStructFeature, bcAgent);
 
-          bcAgent = BCAgentController.loadStructFeatureInAgent(newFeatureView, bcAgent);
+//          bcAgent = BCAgentController.loadStructFeatureInAgent(newFeatureView, bcAgent);
+          bcAgent.featuresList.add(newFeatureView);
         }
 
         bcAgent.addBehaviour(new RefreshBcAgentGui(bcAgent));

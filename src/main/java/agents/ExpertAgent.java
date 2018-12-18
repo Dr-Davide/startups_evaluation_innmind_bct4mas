@@ -20,10 +20,10 @@ import java.util.ArrayList;
 public class ExpertAgent  extends BCAgent {
 
     private static final long serialVersionUID = 5801630293298208379L;
-    // private BCAgentGui startupAgentGui;
-    public ExpertAgentGui startupAgentGui; // TODO: Temporary Public to permit evaluation, after evaluation
+    // private BCAgentGui expertAgentGui;
+    public ExpertAgentGui expertAgentGui; // TODO: Temporary Public to permit evaluation, after evaluation
     // Refactoring as a distinct behaviour we can go bakc to private
-    // startupAgentGui
+    // expertAgentGui
 
 
     private String myName;
@@ -37,16 +37,18 @@ public class ExpertAgent  extends BCAgent {
 
     private String configurationType = null;
 
-    public ArrayList<FeatureView> featuresList = new ArrayList<>();
+//    public ArrayList<FeatureView> featuresList = new ArrayList<>();
 
     ////////////////////////////////////
 
     @Override
     protected void setup() {
 
+
         // TODO: Disaccoppiare (loosely coupled) gui dall'agente
-        startupAgentGui = new ExpertAgentGui(this);
-        startupAgentGui.showGui();
+        expertAgentGui = new ExpertAgentGui(this);
+        bcAgentGui = expertAgentGui;
+        expertAgentGui.showGui();
 
         SequentialBehaviour sequentialBehaviour = bootAgentHouseWork();
         // SequentialBehaviour sequentialBehaviour = bootAgentHouseWorkWithConfigInitialization(); //
@@ -58,7 +60,7 @@ public class ExpertAgent  extends BCAgent {
 
     public void addMessage(ACLMessage message) {
         try {
-            startupAgentGui.getMessagesTabPanel().getInBoxMessagesPanel().addMessageInTableModel(message);
+            expertAgentGui.getMessagesTabPanel().getInBoxMessagesPanel().addMessageInTableModel(message);
         } catch (UnreadableException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -67,7 +69,7 @@ public class ExpertAgent  extends BCAgent {
 
     public void deleteMessage(Integer deletingMessageIndex) {
         try {
-            startupAgentGui.getMessagesTabPanel().getInBoxMessagesPanel()
+            expertAgentGui.getMessagesTabPanel().getInBoxMessagesPanel()
                     .deleteMessageInTableModel(deletingMessageIndex);
         } catch (UnreadableException e) {
             // TODO Auto-generated catch block
@@ -78,9 +80,9 @@ public class ExpertAgent  extends BCAgent {
     public void updateManageFeaturesTableModelData() {
 
         // NEW
-        startupAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getManageFeaturesPanel()
+        expertAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getManageFeaturesPanel()
                 .setAgentFeatureList(getFeaturesList());
-        startupAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getManageFeaturesPanel()
+        expertAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getManageFeaturesPanel()
                 .updateTableModelData();
     }
 
@@ -90,9 +92,9 @@ public class ExpertAgent  extends BCAgent {
     public void updateSelectLeafFeaturesTableModelData() {
 
         // NEW
-        startupAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getAddCompositeFeaturePanel()
+        expertAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getAddCompositeFeaturePanel()
                 .getSelectLeafFeaturesPanel().setAgentFeatureList(getFeaturesList());
-        startupAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getAddCompositeFeaturePanel()
+        expertAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getAddCompositeFeaturePanel()
                 .getSelectLeafFeaturesPanel().updateTableModelData();
     }
 
@@ -100,19 +102,19 @@ public class ExpertAgent  extends BCAgent {
     public void updateSearchFeaturesResultTableModelData(
             ArrayList<FeatureRelationAgent> searchFeatureResult, ArrayList<model.pojo.Agent> agentList,
             ArrayList<Feature> serviceList, ArrayList<InnMindReputation> innMindReputationList) {
-        startupAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel()
+        expertAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel()
                 .setSearchFeatureResult(searchFeatureResult);
-        startupAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel().setAgents(agentList);
-        startupAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel().setFeatures(serviceList);
-        startupAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel().setInnMindReputations(innMindReputationList);
-        startupAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel().updateTableModelData();
+        expertAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel().setAgents(agentList);
+        expertAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel().setFeatures(serviceList);
+        expertAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel().setInnMindReputations(innMindReputationList);
+        expertAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel().updateTableModelData();
     }
 
     public void showDenyExecution(String[] parsedMessage) {
         String serviceId = parsedMessage[0];
         String denialExecuterAgent = parsedMessage[1];
-        // startupAgentGui.getMessagesTabPanel().getInBoxMessagesPanel().addMessageInTableModel(message);
-        JOptionPane.showMessageDialog(startupAgentGui.getAskFeatureTabPanel(),
+        // expertAgentGui.getMessagesTabPanel().getInBoxMessagesPanel().addMessageInTableModel(message);
+        JOptionPane.showMessageDialog(expertAgentGui.getAskFeatureTabPanel(),
                 "Demander: " + getLocalName() + ": Your request has been denied. Denial Agent: "
                         + denialExecuterAgent + ", for the service: " + serviceId + ", retry the ask",
                 getLocalName() + " Request Denied", JOptionPane.INFORMATION_MESSAGE);

@@ -26,7 +26,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class StartupAgentGui extends JFrame {
+public class StartupAgentGui extends BCAgentGui {
 
     private static final Logger log = Logger.getLogger(BCAgentGui.class);
 
@@ -45,7 +45,8 @@ public class StartupAgentGui extends JFrame {
      */
     public StartupAgentGui(BCAgent agent) {
 
-        super(agent.getLocalName());
+//        super(agent.getLocalName());
+        super(true, agent);
 
         JadeJson2Pojo jadeJson2Pojo = new JadeJson2Pojo();
 
@@ -613,7 +614,7 @@ public class StartupAgentGui extends JFrame {
         String showInputDialogTitle = "Feature Naming Conflict";
 
         //    newFeatureId = JOptionPane
-        //        .showInputDialog(bcAgent.startupAgentGui.getPanel(), showInputDialogMessage,
+        //        .showInputDialog(bcAgent.expertAgentGui.getPanel(), showInputDialogMessage,
         //            showInputDialogTitle, JOptionPane.QUESTION_MESSAGE);
         newFeatureId = (String) JOptionPane
                 .showInputDialog(bcAgent.bcAgentGui.getPanel(), showInputDialogMessage,

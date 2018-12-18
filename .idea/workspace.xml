@@ -4,14 +4,21 @@
     <list default="true" id="7352a795-b1e2-47f3-86d2-7083d6bb561a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/startups_evaluation_innmind_bct4mas.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/startups_evaluation_innmind_bct4mas.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/start/JadeJson2Pojo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/JadeJson2Pojo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agents/AgentHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agents/AgentHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agents/BCAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agents/BCAgent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agents/ExpertAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agents/ExpertAgent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agents/StartupAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agents/StartupAgent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/behaviours/GetFeaturesList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/behaviours/GetFeaturesList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/behaviours/ReceiveMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/behaviours/ReceiveMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/CreateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/CreateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ReadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ReadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/UpdateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/UpdateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/ReputationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/InnMindReputationDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/AgentHandlerGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/AgentHandlerGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/BCAgentGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/BCAgentGui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/ExpertAgentGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ExpertAgentGui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/StartupAgentGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/StartupAgentGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/panel/AgentInformationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/panel/AgentInformationPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/panel/AskFeaturePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/panel/AskFeaturePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/panel/AskFeatureWithAgentInformationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/panel/AskFeatureWithAgentInformationPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/panel/ManageCompositeAndLeafFeaturesTabPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/panel/ManageCompositeAndLeafFeaturesTabPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/configJade.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/configJade.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,50 +30,123 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/start/StartClass.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/agents/AgentHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="153" column="28" selection-start-line="153" selection-start-column="28" selection-end-line="153" selection-end-column="28" />
+            <state relative-caret-position="249">
+              <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/AddAgent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-30">
+              <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/RefreshBcAgentGui.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="118">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/agents/StartupAgent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-285">
+              <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
               <folding>
-                <element signature="e#4810#4811#0" expanded="true" />
-                <element signature="e#4853#4854#0" expanded="true" />
+                <element signature="e#12779#12780#0" expanded="true" />
+                <element signature="e#12814#12815#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/AskFeatureWithAgentInformationPanel.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/agents/BCAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/AgentInformationPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="47" column="7" lean-forward="true" selection-start-line="47" selection-start-column="7" selection-end-line="47" selection-end-column="7" />
+            <state>
+              <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
               <folding>
-                <element signature="e#1122#1123#0" expanded="true" />
-                <element signature="e#1147#1148#0" expanded="true" />
-                <element signature="e#3565#3566#0" expanded="true" />
-                <element signature="e#4379#4380#0" expanded="true" />
-                <element signature="e#4534#4535#0" expanded="true" />
-                <element signature="e#4662#4663#0" expanded="true" />
-                <element signature="e#4838#4839#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#6101#6102#0" expanded="true" />
+                <element signature="e#6154#6155#0" expanded="true" />
+                <element signature="e#9137#9138#0" expanded="true" />
+                <element signature="e#9197#9198#0" expanded="true" />
+                <element signature="e#10669#10670#0" expanded="true" />
+                <element signature="e#10694#10695#0" expanded="true" />
+                <element signature="e#10789#10790#0" expanded="true" />
+                <element signature="e#10818#10819#0" expanded="true" />
+                <element signature="e#10885#10886#0" expanded="true" />
+                <element signature="e#10908#10909#0" expanded="true" />
+                <element signature="e#10999#11000#0" expanded="true" />
+                <element signature="e#11029#11030#0" expanded="true" />
+                <element signature="e#11102#11103#0" expanded="true" />
+                <element signature="e#11128#11129#0" expanded="true" />
+                <element signature="e#11231#11232#0" expanded="true" />
+                <element signature="e#11267#11268#0" expanded="true" />
+                <element signature="e#11328#11329#0" expanded="true" />
+                <element signature="e#11349#11350#0" expanded="true" />
+                <element signature="e#11430#11431#0" expanded="true" />
+                <element signature="e#11456#11457#0" expanded="true" />
+                <element signature="e#11542#11543#0" expanded="true" />
+                <element signature="e#11575#11576#0" expanded="true" />
+                <element signature="e#11701#11702#0" expanded="true" />
+                <element signature="e#11746#11747#0" expanded="true" />
+                <element signature="e#11834#11835#0" expanded="true" />
+                <element signature="e#11871#11872#0" expanded="true" />
+                <element signature="e#11995#11996#0" expanded="true" />
+                <element signature="e#12042#12043#0" expanded="true" />
+                <element signature="e#12124#12125#0" expanded="true" />
+                <element signature="e#12158#12159#0" expanded="true" />
+                <element signature="e#12272#12273#0" expanded="true" />
+                <element signature="e#12314#12315#0" expanded="true" />
+                <element signature="e#12408#12409#0" expanded="true" />
+                <element signature="e#12437#12438#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/view/BCAgentGui.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/GetFeaturesList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="395" column="14" selection-start-line="395" selection-start-column="14" selection-end-line="396" selection-end-column="91" />
+            <state relative-caret-position="97">
+              <caret line="34" column="9" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/logic/ReputationLogic.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1608">
+              <caret line="81" selection-start-line="81" selection-end-line="81" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="149">
+              <caret line="102" column="51" selection-start-line="102" selection-start-column="51" selection-end-line="102" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/agents/ExpertAgent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="40" selection-start-line="40" selection-end-line="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -75,162 +155,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/start/JadeJson2Pojo.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controllers/BCAgentController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-45">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-              <folding>
-                <element signature="e#1247#1248#0" expanded="true" />
-                <element signature="e#1278#1279#0" expanded="true" />
-                <element signature="e#1014#1015#0" expanded="true" />
-                <element signature="e#1054#1055#0" expanded="true" />
-                <element signature="e#1021#1022#0" expanded="true" />
-                <element signature="e#1062#1063#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/FeatureAgentInformationPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="49" column="42" lean-forward="true" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/view/ExpertAgentGui.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="48" selection-start-line="48" selection-end-line="57" selection-end-column="108" />
-              <folding>
-                <element signature="docComment;method#StartupAgentGui#0;class#StartupAgentGui#0" />
-                <element signature="e#1142#1241#0" />
-                <element signature="class#2369:4009" />
-                <element signature="method#actionPerformed#0;class#2369:4009" />
-                <element signature="e#1811#2970#0" />
-                <element signature="e#3702#3969#0" />
-                <element signature="class#4257:7632" />
-                <element signature="method#actionPerformed#0;class#4257:7632" />
-                <element signature="e#4390#7304#0" />
-                <element signature="e#4593#6965#1" />
-                <element signature="e#6971#7278#1" />
-                <element signature="e#7325#7592#0" />
-                <element signature="class#7856:10573" />
-                <element signature="method#actionPerformed#0;class#7856:10573" />
-                <element signature="e#7989#10239#0" />
-                <element signature="e#8155#9968#1" />
-                <element signature="e#9302#9513#1" />
-                <element signature="e#9519#9936#1" />
-                <element signature="e#9974#10213#1" />
-                <element signature="e#10260#10533#0" />
-                <element signature="class#10795:16097" />
-                <element signature="method#actionPerformed#0;class#10795:16097" />
-                <element signature="e#10928#15763#0" />
-                <element signature="e#11094#15492#1" />
-                <element signature="e#12122#12179#0" />
-                <element signature="e#12965#15460#0" />
-                <element signature="e#15498#15737#1" />
-                <element signature="e#15784#16057#0" />
-                <element signature="class#16322:19745" />
-                <element signature="method#actionPerformed#0;class#16322:19745" />
-                <element signature="e#16465#18658#0" />
-                <element signature="e#17180#17279#1" />
-                <element signature="e#17285#18538#1" />
-                <element signature="e#17650#17757#1" />
-                <element signature="e#17763#18508#1" />
-                <element signature="e#18215#18336#1" />
-                <element signature="e#18342#18473#1" />
-                <element signature="e#18690#18969#0" />
-                <element signature="method#selectedHeuristic#0;class#16322:19745" />
-                <element signature="e#20034#20087#0" />
-                <element signature="e#20223#20430#1" />
-                <element signature="e#20436#21080#1" />
-                <element signature="e#20733#20797#0" />
-                <element signature="e#22384#22482#0" />
-                <element signature="e#22887#22990#0" />
-                <element signature="class#23161:27032" />
-                <element signature="method#actionPerformed#0;class#23161:27032" />
-                <element signature="e#23304#25743#0" />
-                <element signature="e#23419#25464#1" />
-                <element signature="e#25167#25200#0" />
-                <element signature="e#25470#25716#1" />
-                <element signature="e#25775#26062#0" />
-                <element signature="method#selectedHeuristic#0;class#23161:27032" />
-                <element signature="e#26823#26918#0" />
-                <element signature="class#27186:29415" />
-                <element signature="method#actionPerformed#0;class#27186:29415" />
-                <element signature="e#27401#29135#1" />
-                <element signature="e#28159#28185#0" />
-                <element signature="e#28511#28778#1" />
-                <element signature="e#28784#29108#1" />
-                <element signature="e#29141#29374#1" />
-                <element signature="class#29564:31861" />
-                <element signature="method#actionPerformed#0;class#29564:31861" />
-                <element signature="e#29779#31581#1" />
-                <element signature="e#30537#30563#0" />
-                <element signature="e#30875#31224#1" />
-                <element signature="e#31230#31554#1" />
-                <element signature="e#31587#31820#1" />
-                <element signature="e#31183#31231#0" />
-                <element signature="docComment;method#buildTabbedPane#0;class#StartupAgentGui#0" />
-                <element signature="method#getDifferentId#0;class#StartupAgentGui#0" />
-                <element signature="e#32875#32907#0" />
-                <element signature="method#getExecuterEvaluation#0;class#StartupAgentGui#0" />
-                <element signature="method#getDemanderEvaluation#0;class#StartupAgentGui#0" />
-                <element signature="docComment;method#getEvaluation#0;class#StartupAgentGui#0" />
-                <element signature="method#getEvaluation#0;class#StartupAgentGui#0" />
-                <element signature="e#34751#34849#0" />
-                <element signature="e#34882#34926#0" />
-                <element signature="e#35583#35678#0" />
-                <element signature="method#showOkMessage#0;class#StartupAgentGui#0" />
-                <element signature="e#36349#36447#0" />
-                <element signature="e#36480#36524#0" />
-                <element signature="method#getFeatureCompletedMessage#0;class#StartupAgentGui#0" />
-                <element signature="method#showGui#0;class#StartupAgentGui#0" />
-                <element signature="e#37881#37894#0" />
-                <element signature="e#38023#38057#0" />
-                <element signature="docComment;method#getAskFeatureTabPanel#0;class#StartupAgentGui#0" />
-                <element signature="docComment;method#setAskFeatureTabPanel#0;class#StartupAgentGui#0" />
-                <element signature="method#setAskFeatureTabPanel#0;class#StartupAgentGui#0" />
-                <element signature="docComment;method#getMessagesTabPanel#0;class#StartupAgentGui#0" />
-                <element signature="docComment;method#setMessagesTabPanel#0;class#StartupAgentGui#0" />
-                <element signature="docComment;method#getPanel#0;class#StartupAgentGui#0" />
-                <element signature="docComment;method#setPanel#0;class#StartupAgentGui#0" />
-                <element signature="docComment;method#getManageCompositeAndLeafFeaturesTabPanel#0;class#StartupAgentGui#0" />
-                <element signature="method#getManageCompositeAndLeafFeaturesTabPanel#0;class#StartupAgentGui#0" />
-                <element signature="docComment;method#setManageCompositeAndLeafFeaturesTabPanel#0;class#StartupAgentGui#0" />
-                <element signature="method#setManageCompositeAndLeafFeaturesTabPanel#0;class#StartupAgentGui#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/ManageCompositeAndLeafFeaturesTabPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="43" column="30" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/view/StartupAgentGui.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="67" column="63" lean-forward="true" selection-start-line="67" selection-start-column="63" selection-end-line="67" selection-end-column="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/ManageFeaturesPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-727">
-              <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+            <state relative-caret-position="119">
+              <caret line="105" column="6" selection-start-line="105" selection-start-column="6" selection-end-line="105" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -246,11 +174,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ManageCompositeAndLeafServicesTabPanel</find>
-      <find>ServiceRelationAgentDAO</find>
-      <find>getAddLeafServicePanel</find>
-      <find>setAgentServiceList</find>
-      <find>ServiceView</find>
       <find>Service</find>
       <find>GetReputation</find>
       <find>&quot;ReputationId&quot;</find>
@@ -276,6 +199,11 @@
       <find>Agent Information</find>
       <find>StartupAgentGui.this</find>
       <find>jadeJson2Pojo</find>
+      <find>bcAgent.bcAgentGui</find>
+      <find>Jade</find>
+      <find>protected</find>
+      <find>updateManageFeaturesTableModelData</find>
+      <find>private</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -298,6 +226,7 @@
       <replace>StartupAgentGui.this</replace>
       <replace>ExpertAgentGui</replace>
       <replace>ExpertAgentGui.this</replace>
+      <replace>protected</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -319,13 +248,11 @@
         <option value="$PROJECT_DIR$/src/main/java/controllers/DeleteController.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/panel/ManageFeaturesPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/panel/AddCompositeFeaturePanel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/agents/BCAgent.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/pojo/Review.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/panel/AddAgentPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/GeneralLedgerInteraction.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/dao/AgentDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/behaviours/ComputeReputation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/model/dao/ReputationDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/dao/FeatureDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/dao/ReviewDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/controllers/CreateController.java" />
@@ -334,26 +261,31 @@
         <option value="$PROJECT_DIR$/src/main/java/model/RangeQueries.java" />
         <option value="$PROJECT_DIR$/src/main/java/logic/ReputationLogic.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/panel/SearchFeatureResultPanel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/view/BCAgentGui.java" />
-        <option value="$PROJECT_DIR$/src/main/java/agents/StartupAgent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/agents/AgentHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/agents/ExpertAgent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/view/AgentHandlerGui.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/panel/AskFeaturePanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/panel/AskFeatureWithAgentInformationPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/start/JadeJson2Pojo.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/panel/FeatureAgentInformationPanel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/view/ExpertAgentGui.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/panel/AgentInformationPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/panel/ManageCompositeAndLeafFeaturesTabPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/model/dao/ReputationDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/model/dao/InnMindReputationDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/view/ExpertAgentGui.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/StartupAgentGui.java" />
+        <option value="$PROJECT_DIR$/src/main/java/view/BCAgentGui.java" />
+        <option value="$PROJECT_DIR$/src/main/java/agents/AgentHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/view/AgentHandlerGui.java" />
+        <option value="$PROJECT_DIR$/src/main/java/behaviours/AddAgent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/agents/BCAgent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java" />
+        <option value="$PROJECT_DIR$/src/main/java/agents/ExpertAgent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/agents/StartupAgent.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1091" />
-    <option name="y" value="45" />
-    <option name="width" value="1213" />
+    <option name="y" value="73" />
+    <option name="width" value="607" />
     <option name="height" value="695" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -482,7 +414,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545150924755" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545156751890" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../tourism_trust_bct4mas" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -521,15 +453,15 @@
       <workItem from="1545060874514" duration="508000" />
       <workItem from="1545070286424" duration="1144000" />
       <workItem from="1545072024322" duration="408000" />
-      <workItem from="1545079007826" duration="31075000" />
+      <workItem from="1545079007826" duration="36675000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33135000" />
+    <option name="totallyTimeSpent" value="38735000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1091" y="45" width="1213" height="695" extended-state="6" />
+    <frame x="1091" y="73" width="1213" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27163666" />
@@ -540,9 +472,9 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.20318021" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.093639575" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.053003535" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.5795053" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.16254418" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.11130742" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -571,55 +503,51 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/logic/ReputationLogic.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/agents/BCAgent.java</url>
           <line>87</line>
           <properties />
-          <option name="timeStamp" value="31" />
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/logic/ReputationLogic.java</url>
-          <line>94</line>
+          <url>file://$PROJECT_DIR$/src/main/java/behaviours/RefreshBcAgentGui.java</url>
+          <line>17</line>
           <properties />
-          <option name="timeStamp" value="33" />
+          <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/logic/ReputationLogic.java</url>
-          <line>81</line>
+          <url>file://$PROJECT_DIR$/src/main/java/agents/StartupAgent.java</url>
+          <line>82</line>
           <properties />
-          <option name="timeStamp" value="34" />
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/agents/StartupAgent.java</url>
+          <line>380</line>
+          <properties />
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/controllers/BCAgentController.java</url>
+          <line>105</line>
+          <properties />
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/controllers/BCAgentController.java</url>
+          <line>106</line>
+          <properties />
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java</url>
+          <line>102</line>
+          <properties />
+          <option name="timeStamp" value="45" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/chaincode/innMind/vendor/github.com/pavva91/assets/activity.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/pojo/FeatureRelationAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/pojo/InnMindReputation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/CheckerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2">
-          <caret line="112" selection-start-line="112" selection-end-line="112" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/EvaluateFeature.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="74">
@@ -681,24 +609,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/dao/ReputationDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controllers/ReadController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="76" column="41" lean-forward="true" selection-start-line="76" selection-start-column="41" selection-end-line="76" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/GetFeaturesList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="279" lean-forward="true" selection-start-line="279" selection-end-line="279" />
         </state>
       </provider>
     </entry>
@@ -736,13 +650,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="88" column="39" lean-forward="true" selection-start-line="88" selection-start-column="39" selection-end-line="88" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/LoadConfigFeaturesListOnSL.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="410">
@@ -761,13 +668,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="311">
           <caret line="230" column="39" selection-start-line="230" selection-start-column="39" selection-end-line="230" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/BCAgentController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="91" column="26" selection-start-line="91" selection-start-column="26" selection-end-line="91" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -833,29 +733,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/logic/ReputationLogic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/SearchFeatureResultPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
           <caret line="57" column="62" selection-start-line="57" selection-start-column="62" selection-end-line="57" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/agents/BCAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5532">
-          <caret line="417" column="1" lean-forward="true" selection-start-line="25" selection-end-line="417" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#12521#12522#0" expanded="true" />
-            <element signature="e#12558#12559#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -881,55 +762,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/AddAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/agents/StartupAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="43" lean-forward="true" selection-start-line="20" selection-end-line="388" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#11851#11852#0" expanded="true" />
-            <element signature="e#11888#11889#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/agents/ExpertAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1914">
-          <caret line="48" column="34" lean-forward="true" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#12399#12400#0" expanded="true" />
-            <element signature="e#12440#12441#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/agents/AgentHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/UpdateFeatureRelationAgent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
           <caret line="66" selection-start-line="66" selection-end-line="70" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/view/AgentHandlerGui.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1665">
-          <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
         </state>
       </provider>
     </entry>
@@ -969,27 +805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
           <caret line="49" column="42" lean-forward="true" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/view/BCAgentGui.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="395" column="14" selection-start-line="395" selection-start-column="14" selection-end-line="396" selection-end-column="91" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/start/StartClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="153" column="28" selection-start-line="153" selection-start-column="28" selection-end-line="153" selection-end-column="28" />
-          <folding>
-            <element signature="e#4810#4811#0" expanded="true" />
-            <element signature="e#4853#4854#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1038,10 +853,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/pojo/InnMindReputation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/dao/InnMindReputationDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2085">
+          <caret line="153" column="62" lean-forward="true" selection-start-line="153" selection-start-column="62" selection-end-line="153" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/start/StartClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="76" column="25" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
+          <folding>
+            <element signature="e#4810#4811#0" expanded="true" />
+            <element signature="e#4853#4854#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/agents/CAAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/ExecuteFeature.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="82" selection-start-line="82" selection-end-line="82" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/view/ExpertAgentGui.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="48" selection-start-line="48" selection-end-line="57" selection-end-column="108" />
+        <state relative-caret-position="255">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
           <folding>
             <element signature="docComment;method#StartupAgentGui#0;class#StartupAgentGui#0" />
             <element signature="e#1142#1241#0" />
@@ -1144,10 +998,143 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/view/BCAgentGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2568#2569#0" expanded="true" />
+            <element signature="e#2607#2608#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/view/StartupAgentGui.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="67" column="63" lean-forward="true" selection-start-line="67" selection-start-column="63" selection-end-line="67" selection-end-column="63" />
+        <state relative-caret-position="-330">
+          <caret line="47" column="38" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/view/AgentHandlerGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="109" column="28" selection-start-line="109" selection-start-column="28" selection-end-line="109" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/agents/AgentHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/AddAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-30">
+          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/logic/ReputationLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1608">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/BCAgentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="105" column="6" selection-start-line="105" selection-start-column="6" selection-end-line="105" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/RefreshBcAgentGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/GetFeaturesList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="34" column="9" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/agents/BCAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6101#6102#0" expanded="true" />
+            <element signature="e#6154#6155#0" expanded="true" />
+            <element signature="e#9137#9138#0" expanded="true" />
+            <element signature="e#9197#9198#0" expanded="true" />
+            <element signature="e#10669#10670#0" expanded="true" />
+            <element signature="e#10694#10695#0" expanded="true" />
+            <element signature="e#10789#10790#0" expanded="true" />
+            <element signature="e#10818#10819#0" expanded="true" />
+            <element signature="e#10885#10886#0" expanded="true" />
+            <element signature="e#10908#10909#0" expanded="true" />
+            <element signature="e#10999#11000#0" expanded="true" />
+            <element signature="e#11029#11030#0" expanded="true" />
+            <element signature="e#11102#11103#0" expanded="true" />
+            <element signature="e#11128#11129#0" expanded="true" />
+            <element signature="e#11231#11232#0" expanded="true" />
+            <element signature="e#11267#11268#0" expanded="true" />
+            <element signature="e#11328#11329#0" expanded="true" />
+            <element signature="e#11349#11350#0" expanded="true" />
+            <element signature="e#11430#11431#0" expanded="true" />
+            <element signature="e#11456#11457#0" expanded="true" />
+            <element signature="e#11542#11543#0" expanded="true" />
+            <element signature="e#11575#11576#0" expanded="true" />
+            <element signature="e#11701#11702#0" expanded="true" />
+            <element signature="e#11746#11747#0" expanded="true" />
+            <element signature="e#11834#11835#0" expanded="true" />
+            <element signature="e#11871#11872#0" expanded="true" />
+            <element signature="e#11995#11996#0" expanded="true" />
+            <element signature="e#12042#12043#0" expanded="true" />
+            <element signature="e#12124#12125#0" expanded="true" />
+            <element signature="e#12158#12159#0" expanded="true" />
+            <element signature="e#12272#12273#0" expanded="true" />
+            <element signature="e#12314#12315#0" expanded="true" />
+            <element signature="e#12408#12409#0" expanded="true" />
+            <element signature="e#12437#12438#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="102" column="51" selection-start-line="102" selection-start-column="51" selection-end-line="102" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/agents/ExpertAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/agents/StartupAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-285">
+          <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+          <folding>
+            <element signature="e#12779#12780#0" expanded="true" />
+            <element signature="e#12814#12815#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

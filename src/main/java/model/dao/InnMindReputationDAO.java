@@ -18,15 +18,14 @@ import java.util.*;
 
 // TODO: extend GeneralLedgerInteraction
 
-public class ReputationDAO extends GeneralLedgerInteraction implements Dao<InnMindReputation> {
+public class InnMindReputationDAO extends GeneralLedgerInteraction implements Dao<InnMindReputation> {
 
-    private static final Logger log = Logger.getLogger(ReputationDAO.class);
+    private static final Logger log = Logger.getLogger(InnMindReputationDAO.class);
 
 
     @Override
     public Optional<InnMindReputation> get(HFClient hfClient, Channel channel, String reputationId) {
 
-//        String chaincodeFunction = "GetReputation";
         String chaincodeFunction = "GetInnMindReputation";
 
         String[] chaincodeArguments = new String[] {reputationId};
@@ -152,7 +151,7 @@ public class ReputationDAO extends GeneralLedgerInteraction implements Dao<InnMi
 
 
     /**
-     * You can only modify the {@link InnMindReputation.value}
+     * You can only modify the {@link InnMindReputation} value
      */
     @Override public boolean update(HFClient clientHF, User userHF, Channel channel,
                                     InnMindReputation innMindReputationToUpdate, String[] params)

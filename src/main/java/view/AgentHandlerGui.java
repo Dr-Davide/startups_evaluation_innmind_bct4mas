@@ -81,9 +81,9 @@ public class AgentHandlerGui extends JFrame {
         String agentName = addAgentPanel.getPanelAgentName().getTextField().getText().trim();
         // String agentName = addAgentPanel.getComboBoxAgentNames().getSelectedItem().toString();
 //        String agentType = addAgentPanel.getComboBoxAgentTypes().getSelectedItem().toString();
-        String agentRole = addAgentPanel.getComboBoxAgentTypes().getSelectedItem().toString();
+        String agentRoleInput = addAgentPanel.getComboBoxAgentTypes().getSelectedItem().toString();
         // TODO: Passare per decidere view
-        log.info("agent Role: " + agentRole);
+        log.info("agent Role: " + agentRoleInput);
         String expirationCertificate =
             addAgentPanel.getPanelExpirationCertificate().getTextField().getText().trim();
 
@@ -93,7 +93,7 @@ public class AgentHandlerGui extends JFrame {
 
         // TODO: Aggiungere controllo se agente (nome) esiste già
         String agentType;
-        switch (agentRole) {
+        switch (agentRoleInput) {
           case InnMindReputation.STARTUP_ROLE :
             agentType = "StartupAgent";
             break;
@@ -106,6 +106,7 @@ public class AgentHandlerGui extends JFrame {
             log.error(illegalStateException);
             throw illegalStateException;
         }
+//        String agentType = "BCAgent";
         agentHandler.addAgentTrigger(agentName, agentType, expirationCertificate);
       }
     });

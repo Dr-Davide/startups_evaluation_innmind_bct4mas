@@ -62,6 +62,9 @@ public class BCAgentGui extends JFrame {
       new ManageCompositeAndLeafFeaturesTabPanel();
   private JComponent panel;
 
+  BCAgentGui(boolean skip,BCAgent agent){
+    super(agent.getLocalName());
+  }
   /**
    *
    * BCAgentGui @param agent
@@ -625,7 +628,7 @@ public class BCAgentGui extends JFrame {
     String showInputDialogTitle = "Feature Naming Conflict";
 
     //    newFeatureId = JOptionPane
-    //        .showInputDialog(bcAgent.startupAgentGui.getPanel(), showInputDialogMessage,
+    //        .showInputDialog(bcAgent.expertAgentGui.getPanel(), showInputDialogMessage,
     //            showInputDialogTitle, JOptionPane.QUESTION_MESSAGE);
     newFeatureId = (String) JOptionPane
         .showInputDialog(bcAgent.bcAgentGui.getPanel(), showInputDialogMessage,
