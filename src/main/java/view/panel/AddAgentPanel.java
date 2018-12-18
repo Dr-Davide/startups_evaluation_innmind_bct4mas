@@ -1,5 +1,7 @@
 package view.panel;
 
+import model.pojo.InnMindReputation;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,7 +12,7 @@ public class AddAgentPanel extends JPanel {
   private CouplePanel panelAgentType = new CouplePanel("Agent Type");
   // TODO: Per ora andare a prendere valori da configJade.json
   private String[] agentNames = {"main", "a1", "a2", "a3"};
-    private String[] agentTypes = {"BCAgent"};
+    private String[] agentRoles = {InnMindReputation.STARTUP_ROLE,InnMindReputation.EXPERT_ROLE};
   private JComboBox comboBoxAgentNames;
   private JComboBox comboBoxAgentTypes;
 
@@ -66,7 +68,7 @@ public class AddAgentPanel extends JPanel {
     gbc_lblType.gridx = 1;
     gbc_lblType.gridy = 2;
     add(lblType, gbc_lblType);
-    comboBoxAgentTypes = new JComboBox(agentTypes);
+    comboBoxAgentTypes = new JComboBox(agentRoles);
     GridBagConstraints gbc_comboBoxAgentTypes = new GridBagConstraints();
     gbc_comboBoxAgentTypes.gridwidth = 3;
     gbc_comboBoxAgentTypes.insets = new Insets(0, 0, 5, 0);
@@ -135,17 +137,17 @@ public class AddAgentPanel extends JPanel {
   }
 
   /**
-   * @return the agentTypes
+   * @return the agentRoles
    */
-  public String[] getAgentTypes() {
-    return agentTypes;
+  public String[] getAgentRoles() {
+    return agentRoles;
   }
 
   /**
-   * @param agentTypes the agentTypes to set
+   * @param agentRoles the agentRoles to set
    */
-  public void setAgentTypes(String[] agentTypes) {
-    this.agentTypes = agentTypes;
+  public void setAgentRoles(String[] agentRoles) {
+    this.agentRoles = agentRoles;
   }
 
   /**

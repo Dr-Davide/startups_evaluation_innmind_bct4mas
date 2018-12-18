@@ -23,7 +23,7 @@ public class CheckerController {
 
     public static boolean isTimestampTwoTimesActivities(HFClient hfClient, Channel channel,
       String demanderAgentId, String executerAgentId, String timestamp) {
-      ArrayList<Activity> activitiesList = new ArrayList<>();
+      ArrayList<Review> activitiesList = new ArrayList<>();
         //    activitiesList = transactionLedgerInteraction.getActivitiesByDemanderExecuterTimestamp(hfClient,
         //        channel, demanderAgentId, executerAgentId, timestamp);
         activitiesList = RangeQueries.getActivitiesByDemanderExecuterTimestamp(hfClient,
@@ -44,9 +44,9 @@ public class CheckerController {
      */
     public static boolean isActivityAlreadyInLedger(BCAgent bcAgent, String evaluationId) {
         HFClient clientHF = bcAgent.getHfClient();
-        Channel channel = bcAgent.getHfServiceChannel();
+        Channel channel = bcAgent.getHfTransactionChannel();
 
-        Activity agentPojo = ReadController.getActivity(clientHF, channel, evaluationId);
+        Review agentPojo = ReadController.getActivity(clientHF, channel, evaluationId);
 
         boolean isAgentIntheledger = agentPojo.getEvaluationId().toString().equals(evaluationId);
 
@@ -61,7 +61,7 @@ public class CheckerController {
      */
     public static boolean isAgentAlreadyInLedger(BCAgent bcAgent) {
         HFClient clientHF = bcAgent.getHfClient();
-        Channel channel = bcAgent.getHfServiceChannel();
+        Channel channel = bcAgent.getHfTransactionChannel();
         // TODO: Usare ID veramente
         String agentId = bcAgent.getMyName();
 
@@ -83,14 +83,14 @@ public class CheckerController {
     static boolean isReputationAlreadyInLedger(BCAgent bcAgent, String agentId, String serviceId,
         String agentRole) {
         HFClient clientHF = bcAgent.getHfClient();
-        Channel channel = bcAgent.getHfServiceChannel();
+        Channel channel = bcAgent.getHfTransactionChannel();
 
         String reputationId = agentId + serviceId + agentRole;
 
-        Reputation reputationPojo = ReadController.getReputation(clientHF, channel, reputationId);
+        InnMindReputation innMindReputationPojo = ReadController.getReputation(clientHF, channel, reputationId);
 
         boolean isReputationInTheLedger =
-            reputationPojo.getReputationId().toString().equals(reputationId);
+            innMindReputationPojo.getInnMindReputationId().toString().equals(reputationId);
 
         return isReputationInTheLedger;
     }
@@ -104,15 +104,15 @@ public class CheckerController {
      * @throws ProposalException
      * @throws InvalidArgumentException
      */
-    public static boolean isServiceAlreadyInLedger(String serviceId, BCAgent bcAgent) {
+    public static boolean isFeatureAlreadyInLedger(String serviceId, BCAgent bcAgent) {
         HFClient clientHF = bcAgent.getHfClient();
-        Channel channel = bcAgent.getHfServiceChannel();
+        Channel channel = bcAgent.getHfTransactionChannel();
 
-        Service servicePojo = ReadController.getService(clientHF, channel, serviceId);
+        Feature featurePojo = ReadController.getFeature(clientHF, channel, serviceId);
 
-        boolean isServiceAlreadyInLedger = servicePojo.getServiceId().toString().equals(serviceId);
+        boolean isFeatureAlreadyInLedger = featurePojo.getFeatureId().toString().equals(serviceId);
 
-        return isServiceAlreadyInLedger;
+        return isFeatureAlreadyInLedger;
 
     }
 
@@ -141,13 +141,13 @@ public class CheckerController {
      * @param agentIdsList
      * @return
      */
-    public static boolean isAgentListEmpty(ArrayList<ServiceRelationAgent> agentIdsList) {
+    public static boolean isAgentListEmpty(ArrayList<FeatureRelationAgent> agentIdsList) {
         boolean emptyAgentList;
         emptyAgentList = isRangeQueryResultEmpty(agentIdsList);
         return emptyAgentList;
     }
 
-    private static boolean isAgentInAgentList(ArrayList<ServiceRelationAgent> agentsList,
+    private static boolean isAgentInAgentList(ArrayList<FeatureRelationAgent> agentsList,
         String agentId) {
         boolean agentInAgentList = false;
         // per segnalare "non trovato" setto il campo agentId del primo agente della lista a ""
@@ -156,7 +156,7 @@ public class CheckerController {
             agentInAgentList = false;
         } else {
             // cerco nella lista (index 2 equivale a agentId)
-            for (ServiceRelationAgent agentValuesList : agentsList) {
+            for (FeatureRelationAgent agentValuesList : agentsList) {
                 if (agentValuesList.getAgentId().toString().equals(agentId)) {
                     agentInAgentList = true;
                 }
@@ -165,12 +165,12 @@ public class CheckerController {
         return agentInAgentList;
     }
 
-    public static boolean isServiceMappedWithAgent(String serviceId, BCAgent bcAgent) {
-        ArrayList<ServiceRelationAgent> agentsMappedWithService = RangeQueries
-            .getAgentsByService(bcAgent.getHfClient(), bcAgent.getHfServiceChannel(), serviceId);
+    public static boolean isFeatureMappedWithAgent(String serviceId, BCAgent bcAgent) {
+        ArrayList<FeatureRelationAgent> agentsMappedWithFeature = RangeQueries
+            .getAgentsByFeature(bcAgent.getHfClient(), bcAgent.getHfTransactionChannel(), serviceId);
         String agentId = bcAgent.getMyName();
-        boolean isServiceMappedWithAgent = isAgentInAgentList(agentsMappedWithService, agentId);
-        return isServiceMappedWithAgent;
+        boolean isFeatureMappedWithAgent = isAgentInAgentList(agentsMappedWithFeature, agentId);
+        return isFeatureMappedWithAgent;
     }
 
 

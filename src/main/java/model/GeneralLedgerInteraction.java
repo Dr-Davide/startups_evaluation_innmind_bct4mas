@@ -12,7 +12,8 @@ import java.util.Collection;
 
 public class GeneralLedgerInteraction {
 
-  public String chaincodeName = "trustreputationledger";
+//  public String chaincodeName = "trustreputationledger";
+  public String chaincodeName = "innMind";
 
   /**
    * Constructor

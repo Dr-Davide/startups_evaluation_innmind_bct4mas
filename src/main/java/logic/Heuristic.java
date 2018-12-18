@@ -3,7 +3,7 @@ package logic;
 import java.util.ArrayList;
 import java.util.Comparator;
 import org.w3c.dom.Document;
-import model.StructServiceRequest;
+import model.StructFeatureRequest;
 
 /**
  * Class that implements the heuristic algorithms
@@ -38,8 +38,8 @@ public class Heuristic {
    * @param myList
    * @return
    */
-  public StructServiceRequest getLowerCost(ArrayList<StructServiceRequest> myList) {
-    StructServiceRequest lowerCost;
+  public StructFeatureRequest getLowerCost(ArrayList<StructFeatureRequest> myList) {
+    StructFeatureRequest lowerCost;
     myList = this.costOrdering(myList);
     lowerCost = myList.get(0);
     return lowerCost;
@@ -51,8 +51,8 @@ public class Heuristic {
    * @param myList
    * @return
    */
-  public StructServiceRequest getLowerTime(ArrayList<StructServiceRequest> myList) {
-    StructServiceRequest lowerTime;
+  public StructFeatureRequest getLowerTime(ArrayList<StructFeatureRequest> myList) {
+    StructFeatureRequest lowerTime;
     myList = this.timeOrdering(myList);
     lowerTime = myList.get(0);
     return lowerTime;
@@ -64,8 +64,8 @@ public class Heuristic {
    * @param myList
    * @return
    */
-  public ArrayList<StructServiceRequest> costOrdering(ArrayList<StructServiceRequest> myList) {
-    myList.sort(Comparator.comparing(StructServiceRequest::getServiceCost));
+  public ArrayList<StructFeatureRequest> costOrdering(ArrayList<StructFeatureRequest> myList) {
+    myList.sort(Comparator.comparing(StructFeatureRequest::getFeatureCost));
     return myList;
   }
 
@@ -75,20 +75,20 @@ public class Heuristic {
    * @param myList
    * @return
    */
-  public ArrayList<StructServiceRequest> timeOrdering(ArrayList<StructServiceRequest> myList) {
-    myList.sort(Comparator.comparing(StructServiceRequest::getServiceTime));
+  public ArrayList<StructFeatureRequest> timeOrdering(ArrayList<StructFeatureRequest> myList) {
+    myList.sort(Comparator.comparing(StructFeatureRequest::getFeatureTime));
     return myList;
   }
 
   /**
-   * Implement the by Reputation Reverse Ordering (Higher value on top) of myList
+   * Implement the by InnMindReputation Reverse Ordering (Higher value on top) of myList
    *
    * @param myList
    * @return
    */
-  public ArrayList<StructServiceRequest> reputationOrdering(ArrayList<StructServiceRequest> myList) {
-    myList.sort(Comparator.comparing(StructServiceRequest::getReputation));
-    ArrayList<StructServiceRequest> descendingOrderedList = new ArrayList<StructServiceRequest>();
+  public ArrayList<StructFeatureRequest> reputationOrdering(ArrayList<StructFeatureRequest> myList) {
+    myList.sort(Comparator.comparing(StructFeatureRequest::getReputation));
+    ArrayList<StructFeatureRequest> descendingOrderedList = new ArrayList<StructFeatureRequest>();
     for (int i = myList.size() - 1; i >= 0; i--) {
       descendingOrderedList.add(myList.get(i));
     }

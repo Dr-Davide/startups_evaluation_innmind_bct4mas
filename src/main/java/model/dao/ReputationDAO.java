@@ -4,7 +4,7 @@ import com.google.protobuf.ByteString;
 import fabric.ChaincodeEventCapture;
 import fabric.SdkIntegration;
 import model.GeneralLedgerInteraction;
-import model.pojo.Reputation;
+import model.pojo.InnMindReputation;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.*;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
@@ -18,19 +18,20 @@ import java.util.*;
 
 // TODO: extend GeneralLedgerInteraction
 
-public class ReputationDAO extends GeneralLedgerInteraction implements Dao<Reputation> {
+public class ReputationDAO extends GeneralLedgerInteraction implements Dao<InnMindReputation> {
 
     private static final Logger log = Logger.getLogger(ReputationDAO.class);
 
 
     @Override
-    public Optional<Reputation> get(HFClient hfClient, Channel channel, String reputationId) {
+    public Optional<InnMindReputation> get(HFClient hfClient, Channel channel, String reputationId) {
 
-        String chaincodeFunction = "GetReputation";
+//        String chaincodeFunction = "GetReputation";
+        String chaincodeFunction = "GetInnMindReputation";
 
         String[] chaincodeArguments = new String[] {reputationId};
 
-        Reputation reputationPojo = new Reputation();
+        InnMindReputation innMindReputationPojo = new InnMindReputation();
 
         Collection<ProposalResponse> proposalResponseCollection = null;
         // proposalResponseCollection contiene le risposte dei 3 peer
@@ -60,11 +61,11 @@ public class ReputationDAO extends GeneralLedgerInteraction implements Dao<Reput
                     // add at the answer only the response of the first peer
                     // (if all success we infer that the data returned are all the same)
                     if (firstPeerAnswer) {
-                        reputationPojo.setReputationId(jsonObject.getString("ReputationId"));
-                        reputationPojo.setAgentId(jsonObject.getString("AgentId"));
-                        reputationPojo.setServiceId(jsonObject.getString("ServiceId"));
-                        reputationPojo.setAgentRole(jsonObject.getString("AgentRole"));
-                        reputationPojo.setValue(jsonObject.getString("Value"));
+                        innMindReputationPojo.setInnMindReputationId(jsonObject.getString("InnMindReputationId"));
+                        innMindReputationPojo.setAgentId(jsonObject.getString("AgentId"));
+                        innMindReputationPojo.setFeatureId(jsonObject.getString("FeatureId"));
+                        innMindReputationPojo.setAgentRole(jsonObject.getString("AgentRole"));
+                        innMindReputationPojo.setValue(jsonObject.getString("Value"));
 
                         firstPeerAnswer = false;
                     }
@@ -82,7 +83,7 @@ public class ReputationDAO extends GeneralLedgerInteraction implements Dao<Reput
             }
         }
 
-        Optional<Reputation> optionalReputation = Optional.of(reputationPojo);
+        Optional<InnMindReputation> optionalReputation = Optional.of(innMindReputationPojo);
 
         return optionalReputation;
     }
@@ -91,23 +92,23 @@ public class ReputationDAO extends GeneralLedgerInteraction implements Dao<Reput
   /**
    *
    */
-  public List<Reputation> getAll() {
+  public List<InnMindReputation> getAll() {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public boolean create(HFClient clientHF, User userHF, Channel channel, Reputation newReputation)
+  public boolean create(HFClient clientHF, User userHF, Channel channel, InnMindReputation newInnMindReputation)
       throws ProposalException, InvalidArgumentException {
 
-    String chaincodeFunctionName = "CreateReputation";
-    String expectedEventName = "ReputationCreatedEvent";
+    String chaincodeFunctionName = "CreateInnMindReputation";
+    String expectedEventName = "InnMindReputationCreatedEvent";
     Integer eventTimeout = 150;
 
-    String agentId = newReputation.getAgentId().toString();
-    String serviceId = newReputation.getServiceId().toString();
-    String agentRole = newReputation.getAgentRole().toString();
-    String value = newReputation.getValue().toString();
+    String agentId = newInnMindReputation.getAgentId().toString();
+    String serviceId = newInnMindReputation.getFeatureId().toString();
+    String agentRole = newInnMindReputation.getAgentRole().toString();
+    String value = newInnMindReputation.getValue().toString();
 
     String[] chaincodeArguments = new String[] {agentId, serviceId, agentRole, value};
 
@@ -151,10 +152,10 @@ public class ReputationDAO extends GeneralLedgerInteraction implements Dao<Reput
 
 
     /**
-     * You can only modify the {@link Reputation.value}
+     * You can only modify the {@link InnMindReputation.value}
      */
     @Override public boolean update(HFClient clientHF, User userHF, Channel channel,
-        Reputation reputationToUpdate, String[] params)
+                                    InnMindReputation innMindReputationToUpdate, String[] params)
         throws ProposalException, InvalidArgumentException {
 
         if (params.length != 1) {
@@ -167,7 +168,7 @@ public class ReputationDAO extends GeneralLedgerInteraction implements Dao<Reput
       String expectedEventName = "ReputationModifiedEvent";
       Integer eventTimeout = 150;
 
-      String reputationId = reputationToUpdate.getReputationId().toString();
+      String reputationId = innMindReputationToUpdate.getInnMindReputationId().toString();
       String newValue = params[0];
 
       String[] chaincodeArguments = new String[] {reputationId, newValue};
@@ -210,7 +211,7 @@ public class ReputationDAO extends GeneralLedgerInteraction implements Dao<Reput
 
   }
 
-  @Override public boolean delete(HFClient clientHF, User user, Channel channel, Reputation t) {
+  @Override public boolean delete(HFClient clientHF, User user, Channel channel, InnMindReputation t) {
     // TODO Auto-generated method stub
     return false;
 

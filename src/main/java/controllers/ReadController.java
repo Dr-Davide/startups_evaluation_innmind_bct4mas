@@ -19,11 +19,11 @@ public class ReadController {
      * @param activityId
      * @return
      */
-    static Activity getActivity(HFClient clientHF, Channel channel, String activityId) {
-        ActivityDAO activityDAO = new ActivityDAO();
-        Optional<Activity> optionalAgent = activityDAO.get(clientHF, channel, activityId);
-        Activity activityPojo = optionalAgent.get();
-        return activityPojo;
+    static Review getActivity(HFClient clientHF, Channel channel, String activityId) {
+        ReviewDAO reviewDAO = new ReviewDAO();
+        Optional<Review> optionalAgent = reviewDAO.get(clientHF, channel, activityId);
+        Review reviewPojo = optionalAgent.get();
+        return reviewPojo;
     }
 
 
@@ -52,18 +52,18 @@ public class ReadController {
      * @param agentRole
      * @return
      */
-    public static Reputation getReputation(HFClient clientHF, Channel channel, String agentId,
-        String serviceId, String agentRole) {
+    public static InnMindReputation getReputation(HFClient clientHF, Channel channel, String agentId,
+                                                  String serviceId, String agentRole) {
 
         ReputationDAO reputationDAO = new ReputationDAO();
 
         String reputationId = agentId + serviceId + agentRole;
 
-        Optional<Reputation> optionalReputation =
+        Optional<InnMindReputation> optionalReputation =
             reputationDAO.get(clientHF, channel, reputationId);
 
-        Reputation reputationPojo = optionalReputation.get();
-        return reputationPojo;
+        InnMindReputation innMindReputationPojo = optionalReputation.get();
+        return innMindReputationPojo;
     }
 
     /**
@@ -74,16 +74,16 @@ public class ReadController {
      * @param reputationId
      * @return
      */
-    public static Reputation getReputation(HFClient clientHF, Channel channel,
-        String reputationId) {
+    public static InnMindReputation getReputation(HFClient clientHF, Channel channel,
+                                                  String reputationId) {
         ReputationDAO reputationDAO = new ReputationDAO();
 
-        Optional<Reputation> optionalReputation =
+        Optional<InnMindReputation> optionalReputation =
             reputationDAO.get(clientHF, channel, reputationId);
 
-        Reputation reputationPojo = optionalReputation.get();
+        InnMindReputation innMindReputationPojo = optionalReputation.get();
 
-        return reputationPojo;
+        return innMindReputationPojo;
     }
 
     /**
@@ -94,11 +94,11 @@ public class ReadController {
      * @param serviceId
      * @return
      */
-    public static Service getService(HFClient clientHF, Channel channel, String serviceId) {
-        ServiceDAO serviceDAO = new ServiceDAO();
-        Optional<Service> optionalService = serviceDAO.get(clientHF, channel, serviceId);
-        Service servicePojo = optionalService.get();
-        return servicePojo;
+    public static Feature getFeature(HFClient clientHF, Channel channel, String serviceId) {
+        FeatureDAO featureDAO = new FeatureDAO();
+        Optional<Feature> optionalFeature = featureDAO.get(clientHF, channel, serviceId);
+        Feature featurePojo = optionalFeature.get();
+        return featurePojo;
     }
 
     /**
@@ -109,12 +109,12 @@ public class ReadController {
      * @param relationId
      * @return
      */
-    public static ServiceRelationAgent getServiceRelationAgent(HFClient clientHF, Channel channel,
-        String relationId) {
-        ServiceRelationAgentDAO serviceRelationAgentDAO = new ServiceRelationAgentDAO();
-        Optional<ServiceRelationAgent> optionalServiceRelationAgent =
+    public static FeatureRelationAgent getFeatureRelationAgent(HFClient clientHF, Channel channel,
+                                                               String relationId) {
+        FeatureRelationAgentDAO serviceRelationAgentDAO = new FeatureRelationAgentDAO();
+        Optional<FeatureRelationAgent> optionalFeatureRelationAgent =
             serviceRelationAgentDAO.get(clientHF, channel, relationId);
-        ServiceRelationAgent serviceRelationAgentPojo = optionalServiceRelationAgent.get();
-        return serviceRelationAgentPojo;
+        FeatureRelationAgent featureRelationAgentPojo = optionalFeatureRelationAgent.get();
+        return featureRelationAgentPojo;
     }
 }

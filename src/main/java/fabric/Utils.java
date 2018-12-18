@@ -1,6 +1,6 @@
 package fabric;
 
-import model.pojo.Activity;
+import model.pojo.Review;
 import org.apache.log4j.Logger;
 import start.HFJson2Pojo;
 import start.StartClass;
@@ -195,24 +195,24 @@ public class Utils {
      * @param activitiesList
      * @return
      */
-    public static void printActivitiesList(ArrayList<Activity> activitiesList) {
+    public static void printActivitiesList(ArrayList<Review> activitiesList) {
         int i = 0;
-        for (Activity singleActivity : activitiesList) {
-          log.info("Activity NUMERO " + i + ": ");
-          log.info("EvaluationId: " + singleActivity.getEvaluationId().toString());
-          log.info("WriterAgentId: " + singleActivity.getWriterAgentId().toString());
+        for (Review singleReview : activitiesList) {
+          log.info("Review NUMERO " + i + ": ");
+          log.info("EvaluationId: " + singleReview.getEvaluationId().toString());
+          log.info("WriterAgentId: " + singleReview.getWriterAgentId().toString());
             System.out
-                .println("DemanderAgentId: " + singleActivity.getDemanderAgentId().toString());
+                .println("DemanderAgentId: " + singleReview.getStartupAgentId().toString());
             System.out
-                .println("ExecuterAgentId: " + singleActivity.getExecuterAgentId().toString());
+                .println("ExecuterAgentId: " + singleReview.getExpertAgentId().toString());
             System.out
-                .println("ExecutedServiceId: " + singleActivity.getExecutedServiceId().toString());
+                .println("ExecutedFeatureId: " + singleReview.getReviewedFeatureId().toString());
           log.info(
-                "ExecutedServiceTxId: " + singleActivity.getExecutedServiceTxId().toString());
+                "ExecutedFeatureTxId: " + singleReview.getReviewedFeatureTxId().toString());
           log.info(
-                "ExecutedServiceTimestamp: " + singleActivity.getExecutedServiceTimestamp()
+                "ExecutedFeatureTimestamp: " + singleReview.getReviewedFeatureTimestamp()
                     .toString());
-          log.info("Value: " + singleActivity.getValue().toString());
+          log.info("Value: " + singleReview.getValue().toString());
             i++;
         }
     }

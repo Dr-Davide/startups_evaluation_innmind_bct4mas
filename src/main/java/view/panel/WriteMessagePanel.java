@@ -31,29 +31,29 @@ public class WriteMessagePanel extends JPanel {
         new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     setLayout(gridBagLayout);
 
-    GridBagConstraints gbc_lblAddService = new GridBagConstraints();
-    gbc_lblAddService.anchor = GridBagConstraints.NORTH;
-    gbc_lblAddService.gridwidth = 3;
-    gbc_lblAddService.insets = new Insets(0, 0, 5, 5);
-    gbc_lblAddService.gridx = 1;
-    gbc_lblAddService.gridy = 1;
+    GridBagConstraints gbc_lblAddFeature = new GridBagConstraints();
+    gbc_lblAddFeature.anchor = GridBagConstraints.NORTH;
+    gbc_lblAddFeature.gridwidth = 3;
+    gbc_lblAddFeature.insets = new Insets(0, 0, 5, 5);
+    gbc_lblAddFeature.gridx = 1;
+    gbc_lblAddFeature.gridy = 1;
     lblWriteTitle.setFont(new Font("Dialog", Font.BOLD, 16));
-    // lblAddService.setFont(new Font("Ubuntu Light", Font.BOLD, 16));
-    add(lblWriteTitle, gbc_lblAddService);
-    GridBagConstraints gbc_panelServiceName = new GridBagConstraints();
-    gbc_panelServiceName.gridwidth = 3;
-    gbc_panelServiceName.fill = GridBagConstraints.BOTH;
-    gbc_panelServiceName.insets = new Insets(0, 0, 5, 5);
-    gbc_panelServiceName.gridx = 1;
-    gbc_panelServiceName.gridy = 3;
-    add(panelMessageTo, gbc_panelServiceName);
-    GridBagConstraints gbc_panelServiceDescription = new GridBagConstraints();
-    gbc_panelServiceDescription.gridwidth = 3;
-    gbc_panelServiceDescription.fill = GridBagConstraints.BOTH;
-    gbc_panelServiceDescription.insets = new Insets(0, 0, 5, 5);
-    gbc_panelServiceDescription.gridx = 1;
-    gbc_panelServiceDescription.gridy = 4;
-    add(panelMessageSubject, gbc_panelServiceDescription);
+    // lblAddFeature.setFont(new Font("Ubuntu Light", Font.BOLD, 16));
+    add(lblWriteTitle, gbc_lblAddFeature);
+    GridBagConstraints gbc_panelFeatureName = new GridBagConstraints();
+    gbc_panelFeatureName.gridwidth = 3;
+    gbc_panelFeatureName.fill = GridBagConstraints.BOTH;
+    gbc_panelFeatureName.insets = new Insets(0, 0, 5, 5);
+    gbc_panelFeatureName.gridx = 1;
+    gbc_panelFeatureName.gridy = 3;
+    add(panelMessageTo, gbc_panelFeatureName);
+    GridBagConstraints gbc_panelFeatureDescription = new GridBagConstraints();
+    gbc_panelFeatureDescription.gridwidth = 3;
+    gbc_panelFeatureDescription.fill = GridBagConstraints.BOTH;
+    gbc_panelFeatureDescription.insets = new Insets(0, 0, 5, 5);
+    gbc_panelFeatureDescription.gridx = 1;
+    gbc_panelFeatureDescription.gridy = 4;
+    add(panelMessageSubject, gbc_panelFeatureDescription);
 
     GridBagConstraints gbc_lblBody = new GridBagConstraints();
     gbc_lblBody.anchor = GridBagConstraints.WEST;
@@ -72,12 +72,12 @@ public class WriteMessagePanel extends JPanel {
     add(textPane, gbc_textPane);
 
     btnSendMessage = new JButton("Send");
-    GridBagConstraints gbc_buttonAddService = new GridBagConstraints();
-    gbc_buttonAddService.insets = new Insets(0, 0, 5, 5);
-    gbc_buttonAddService.fill = GridBagConstraints.VERTICAL;
-    gbc_buttonAddService.gridx = 2;
-    gbc_buttonAddService.gridy = 8;
-    add(btnSendMessage, gbc_buttonAddService);
+    GridBagConstraints gbc_buttonAddFeature = new GridBagConstraints();
+    gbc_buttonAddFeature.insets = new Insets(0, 0, 5, 5);
+    gbc_buttonAddFeature.fill = GridBagConstraints.VERTICAL;
+    gbc_buttonAddFeature.gridx = 2;
+    gbc_buttonAddFeature.gridy = 8;
+    add(btnSendMessage, gbc_buttonAddFeature);
 
   }
 

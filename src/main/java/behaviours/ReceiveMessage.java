@@ -4,7 +4,7 @@ import agents.BCAgent;
 import jade.core.AID;
 import jade.core.behaviours.TickerBehaviour;
 import jade.lang.acl.ACLMessage;
-import model.ServiceView;
+import model.FeatureView;
 import org.apache.log4j.Logger;
 
 import java.sql.Timestamp;
@@ -58,14 +58,14 @@ public class ReceiveMessage extends TickerBehaviour {
         break;
 
       // ACLMessage.ACCEPT_PROPOSAL
-      // DEPRECATO (Uso ExecuteService Behaviour)
+      // DEPRECATO (Uso ExecuteFeature Behaviour)
       // TODO: ELIMINARE DEFINITIVAMENTE
       case ACLMessage.ACCEPT_PROPOSAL:
         // case 0:
 
         // Receive the OK to erogate the service from the demander agent
 
-        //        executeService(message);
+        //        executeFeature(message);
 
         break;
 
@@ -90,7 +90,7 @@ public class ReceiveMessage extends TickerBehaviour {
 
         // agent that insert, whoffer, whorequest, whichservice, txid (random code),
         // timestamp, outcome (ok or no), rating
-        bcAgent.addBehaviour(new EvaluateService(bcAgent, message));
+        bcAgent.addBehaviour(new EvaluateFeature(bcAgent, message));
 
         //        serviceCompleted(message);
 
@@ -112,9 +112,9 @@ public class ReceiveMessage extends TickerBehaviour {
     getReplyMessage().setPerformative(ACLMessage.PROPOSE);
 
     String serviceRequested = msg.getContent();
-    ArrayList<ServiceView> agentServices = bcAgent.servicesList;
+    ArrayList<FeatureView> agentFeatures = bcAgent.featuresList;
 
-    setServiceInReplyMessage(serviceRequested, agentServices);
+    setFeatureInReplyMessage(serviceRequested, agentFeatures);
     log.info("REPLY CONTENT: " + getReplyMessage().getContent());
 
     myAgent.send(getReplyMessage());
@@ -124,29 +124,29 @@ public class ReceiveMessage extends TickerBehaviour {
    * Put the service agent's cost and time in the service needed response
    * 
    * @param serviceRequested
-   * @param agentServices
+   * @param agentFeatures
    */
-  private void setServiceInReplyMessage(String serviceRequested,
-      ArrayList<ServiceView> agentServices) {
+  private void setFeatureInReplyMessage(String serviceRequested,
+      ArrayList<FeatureView> agentFeatures) {
 
-    for (int i = 0; i < agentServices.size(); i++) {
-      if (serviceRequested.equals(agentServices.get(i).getName())) {
+    for (int i = 0; i < agentFeatures.size(); i++) {
+      if (serviceRequested.equals(agentFeatures.get(i).getName())) {
 
-        getReplyMessage().setContent("msgArrived/" + bcAgent.servicesList.get(i).getCost() + "/"
-            + bcAgent.servicesList.get(i).getTime() + "/"
-            + bcAgent.servicesList.get(i).getReputation());
+        getReplyMessage().setContent("msgArrived/" + bcAgent.featuresList.get(i).getCost() + "/"
+            + bcAgent.featuresList.get(i).getTime() + "/"
+            + bcAgent.featuresList.get(i).getReputation());
 
         log.info(bcAgent.getLocalName() + ": i can offer "
-            + agentServices.get(i).getName() + " with weight=" + agentServices.get(i).getCost()
-            + " and time=" + agentServices.get(i).getTime() + ", with reputation="
-            + agentServices.get(i).getReputation());
+            + agentFeatures.get(i).getName() + " with weight=" + agentFeatures.get(i).getCost()
+            + " and time=" + agentFeatures.get(i).getTime() + ", with reputation="
+            + agentFeatures.get(i).getReputation());
         break;
       }
     }
   }
 
   //  @Deprecated
-  //  private void executeService(ACLMessage aclMessage) {
+  //  private void executeFeature(ACLMessage aclMessage) {
   //    // TODO: Aggiungere nel messaggio la description del servizio
   //    Timestamp timestamp = new Timestamp(System.currentTimeMillis()); // Create the timestamp to
   //                                                                     // memorize the time when the
@@ -163,7 +163,7 @@ public class ReceiveMessage extends TickerBehaviour {
   //                  "Agent: " + bcAgent.getLocalName() + ": executing " + aclMessage.getContent()
   //                      + " for agent:  " + aclMessage.getSender().getLocalName());
   //              try {
-  //                  // Simulate Service Execution
+  //                  // Simulate Feature Execution
   //                  log.info(aclMessage.getContent());
   //                  TimeUnit.SECONDS.sleep(2);
   //              } catch (InterruptedException e) {
@@ -171,7 +171,7 @@ public class ReceiveMessage extends TickerBehaviour {
   //              }
   //
   //              // TODO: Andare a prendere veramente id service (per ora nome==id)
-  //              String executedServiceId = aclMessage.getContent();
+  //              String executedFeatureId = aclMessage.getContent();
   //              String messageContent = aclMessage.getContent();
   //              String senderName = aclMessage.getSender().getLocalName();
   //
@@ -179,7 +179,7 @@ public class ReceiveMessage extends TickerBehaviour {
   //              // TODO: Accomplish in jade MVC architecture
   //              String executerEvaluation = JOptionPane.showInputDialog(
   //                  "Agent " + bcAgent.getLocalName().toString()
-  //                      + " please evaluate the QoS as the Service Executer Role in the transaction",
+  //                      + " please evaluate the QoS as the Feature Executer Role in the transaction",
   //                  "6.0");
   //              // JOptionPane.showMessageDialog(null, "Select the evaluation of the service",
   //              // "InfoBox: " + "Heuristic Needed", JOptionPane.INFORMATION_MESSAGE);
@@ -189,7 +189,7 @@ public class ReceiveMessage extends TickerBehaviour {
   //              log.info("Executer Evaluation: " + executerEvaluation);
   //              String stringTimestamp = timestamp.toString();
   //              boolean isCreatedActivity = CreateController
-  //                  .createExecuterWriterActivity(bcAgent, demanderAgentId, executedServiceId,
+  //                  .createExecuterWriterActivity(bcAgent, demanderAgentId, executedFeatureId,
   //                      stringTimestamp,
   //                      executerEvaluation);
   //              if (isCreatedActivity) {
@@ -198,25 +198,25 @@ public class ReceiveMessage extends TickerBehaviour {
   //                  sendCreatedActivityMessage(messageContent, senderName, bcAgent.getMyName(),
   //                      timestamp);
   //              } else {
-  //                  log.info("Not Created Activity by the executer");
+  //                  log.info("Not Created Review by the executer");
   //              }
   //
   //              // TODO: Aggiungere verifica se è secondo (EXECUTER)
   //              boolean isSecondWriterAgent;
   //              isSecondWriterAgent = CheckerController
   //                  .isTimestampTwoTimesActivities(bcAgent.getHfClient(),
-  //                      bcAgent.getHfServiceChannel(), aclMessage.getSender().getLocalName(),
+  //                      bcAgent.getHfTransactionChannel(), aclMessage.getSender().getLocalName(),
   //                      bcAgent.getMyName(), timestamp.toString());
   //
   //
   //              // // TODO: Trigger Algoritmo Calcolo Reputazione
   //              if (isSecondWriterAgent) {
   //
-  //                  ArrayList<Activity> activitiesList;
+  //                  ArrayList<Review> activitiesList;
   //
   //                  activitiesList = RangeQueries
   //                      .getActivitiesByDemanderExecuterTimestamp(bcAgent.getHfClient(),
-  //                          bcAgent.getHfServiceChannel(), aclMessage.getSender().getLocalName(),
+  //                          bcAgent.getHfTransactionChannel(), aclMessage.getSender().getLocalName(),
   //                          bcAgent.getMyName(), timestamp.toString());
   //
   //                  Utils.printActivitiesList(activitiesList);
@@ -241,13 +241,13 @@ public class ReceiveMessage extends TickerBehaviour {
    */
   private void sendCreatedActivityMessage(String messageContent, String senderName, String myName,
       Timestamp timestamp) {
-    String executedServiceTxId = UUID.randomUUID().toString();
+    String executedFeatureTxId = UUID.randomUUID().toString();
     ACLMessage replyAclMessage = new ACLMessage(ACLMessage.INFORM_REF);
     replyAclMessage
-        .setContent("serviceDone%" + executedServiceTxId + "%" + messageContent + "%" + timestamp);
+        .setContent("serviceDone%" + executedFeatureTxId + "%" + messageContent + "%" + timestamp);
     replyAclMessage.addReceiver(new AID(senderName, AID.ISLOCALNAME));
     log.info(myName + " :inserting transaction at timestamp " + timestamp + " and txid "
-        + executedServiceTxId + "ACL MESSAGE: " + messageContent);
+        + executedFeatureTxId + "ACL MESSAGE: " + messageContent);
     bcAgent.send(replyAclMessage);
 
   }

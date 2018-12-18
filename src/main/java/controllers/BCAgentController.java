@@ -2,7 +2,7 @@ package controllers;
 
 import agents.BCAgent;
 import fabric.SdkIntegration;
-import model.ServiceView;
+import model.FeatureView;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.HFClient;
 import org.hyperledger.fabric.sdk.User;
@@ -26,7 +26,7 @@ public class BCAgentController {
      *
      * @param bcAgent
      * @param documentXML
-     * @param bcServiceList
+     * @param bcFeatureList
      * @throws CryptoException
      * @throws InvalidArgumentException
      * @throws InvocationTargetException
@@ -36,7 +36,7 @@ public class BCAgentController {
      * @throws IllegalAccessException
      */
     public static void setBCAgentValuesFromXml(BCAgent bcAgent, Document documentXML,
-        ArrayList<ServiceView> bcServiceList)
+        ArrayList<FeatureView> bcFeatureList)
         throws CryptoException, InvalidArgumentException, IllegalAccessException,
         InstantiationException, ClassNotFoundException, NoSuchMethodException,
         InvocationTargetException {
@@ -49,7 +49,7 @@ public class BCAgentController {
         bcAgent.setHfClient(HFClient.createNewInstance());
         CryptoSuite cryptoSuite = CryptoSuite.Factory.getCryptoSuite();
         bcAgent.getHfClient().setCryptoSuite(cryptoSuite);
-        bcAgent.setServicesList(bcServiceList);
+        bcAgent.setFeaturesList(bcFeatureList);
     }
 
     /**
@@ -79,72 +79,72 @@ public class BCAgentController {
         bcAgent.setMyAddress(bcAgent.getName());
         bcAgent.setHfClient(hfClient);
         bcAgent.getHfClient().setCryptoSuite(cryptoSuite);
-        // bcAgent.setServicesList(bcServiceList);
+        // bcAgent.setFeaturesList(bcFeatureList);
     }
 
 
     /**
-     * Add the newStructService to the BCAgent.servicesList
+     * Add the newStructFeature to the BCAgent.featuresList
      *
-     * @param newServiceViewList
+     * @param newFeatureViewList
      * @return
      */
-    public static BCAgent refreshStructServiceListInAgent(ArrayList<ServiceView> newServiceViewList,
+    public static BCAgent refreshStructFeatureListInAgent(ArrayList<FeatureView> newFeatureViewList,
         BCAgent bcAgent) {
-      bcAgent.setServicesList(newServiceViewList);
+      bcAgent.setFeaturesList(newFeatureViewList);
         return bcAgent;
     }
 
     /**
-     * Add the newStructService to the BCAgent.servicesList
+     * Add the newStructFeature to the BCAgent.featuresList
      *
-     * @param newServiceView
+     * @param newFeatureView
      * @return
      */
-    public static BCAgent loadStructServiceInAgent(ServiceView newServiceView,
-        BCAgent bcAgent) {
-      bcAgent.servicesList.add(newServiceView);
+    public static BCAgent loadStructFeatureInAgent(FeatureView newFeatureView,
+                                                   BCAgent bcAgent) {
+      bcAgent.featuresList.add(newFeatureView);
         return bcAgent;
     }
 
-  public static BCAgent deleteStructServiceInAgent(String serviceId, BCAgent bcAgent) {
+  public static BCAgent deleteStructFeatureInAgent(String serviceId, BCAgent bcAgent) {
 
-    for (int i = 0; i < bcAgent.servicesList.size(); i++) {
-      if (bcAgent.servicesList.get(i).getServiceId() == serviceId) {
-        bcAgent.servicesList.remove(i);
+    for (int i = 0; i < bcAgent.featuresList.size(); i++) {
+      if (bcAgent.featuresList.get(i).getFeatureId() == serviceId) {
+        bcAgent.featuresList.remove(i);
       }
     }
     return bcAgent;
   }
 
-  public static BCAgent updateStructServiceCostInAgent(String serviceId, BCAgent bcAgent,
+  public static BCAgent updateStructFeatureCostInAgent(String serviceId, BCAgent bcAgent,
       String cost) {
 
-    for (int i = 0; i < bcAgent.servicesList.size(); i++) {
-      if (bcAgent.servicesList.get(i).getServiceId() == serviceId) {
-        bcAgent.servicesList.get(i).setCost(cost);
+    for (int i = 0; i < bcAgent.featuresList.size(); i++) {
+      if (bcAgent.featuresList.get(i).getFeatureId() == serviceId) {
+        bcAgent.featuresList.get(i).setCost(cost);
       }
     }
     return bcAgent;
   }
 
-  public static BCAgent updateStructServiceTimeInAgent(String serviceId, BCAgent bcAgent,
+  public static BCAgent updateStructFeatureTimeInAgent(String serviceId, BCAgent bcAgent,
       String time) {
 
-    for (int i = 0; i < bcAgent.servicesList.size(); i++) {
-      if (bcAgent.servicesList.get(i).getServiceId() == serviceId) {
-        bcAgent.servicesList.get(i).setTime(time);
+    for (int i = 0; i < bcAgent.featuresList.size(); i++) {
+      if (bcAgent.featuresList.get(i).getFeatureId() == serviceId) {
+        bcAgent.featuresList.get(i).setTime(time);
       }
     }
     return bcAgent;
   }
 
-  public static BCAgent updateStructServiceDescriptionInAgent(String serviceId, BCAgent bcAgent,
+  public static BCAgent updateStructFeatureDescriptionInAgent(String serviceId, BCAgent bcAgent,
       String description) {
 
-    for (int i = 0; i < bcAgent.servicesList.size(); i++) {
-      if (bcAgent.servicesList.get(i).getServiceId() == serviceId) {
-        bcAgent.servicesList.get(i).setDescription(description);
+    for (int i = 0; i < bcAgent.featuresList.size(); i++) {
+      if (bcAgent.featuresList.get(i).getFeatureId() == serviceId) {
+        bcAgent.featuresList.get(i).setDescription(description);
       }
     }
     return bcAgent;
@@ -164,7 +164,7 @@ public class BCAgentController {
                 throw new NullPointerException(
                     "HFClient of BCAgent object " + bcAgent.getName() + " is null");
             }
-            //      Channel hfServiceChannel, hfTransactionChannel;
+            //      Channel hfFeatureChannel, hfTransactionChannel;
 
             log.info("LoadCert Begin of agent: " + name);
 

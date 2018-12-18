@@ -2,9 +2,9 @@ package controllers;
 
 import agents.BCAgent;
 import model.RangeQueries;
-import model.pojo.Activity;
-import model.pojo.Reputation;
-import model.pojo.Service;
+import model.pojo.Review;
+import model.pojo.Feature;
+import model.pojo.InnMindReputation;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.Channel;
 import org.hyperledger.fabric.sdk.HFClient;
@@ -34,7 +34,7 @@ public class ComplexWorkflowController {
         String reputationId = agentId + serviceId + agentRole;
         HFClient clientHF = bcAgent.getHfClient();
         User userHF = bcAgent.getUser();
-        Channel channel = bcAgent.getHfServiceChannel();
+        Channel channel = bcAgent.getHfTransactionChannel();
         String stringNewReputationValue = newReputationValue.toString();
 
         if (CheckerController.isReputationAlreadyInLedger(bcAgent, agentId, serviceId, agentRole)) {
@@ -56,56 +56,56 @@ public class ComplexWorkflowController {
     }
 
 
-    private static boolean createServiceAndCoupleWithAgent(BCAgent bcAgent, String serviceId,
+    private static boolean createFeatureAndCoupleWithAgent(BCAgent bcAgent, String serviceId,
         String serviceName, String serviceDescription, String serviceComposition, String agentId,
         String cost, String time, HFClient clientHF, Channel channel, User user,
         ArrayList<String> serviceIds) throws Exception {
       serviceIds.add(serviceId);
         boolean allPeerSuccess;
-        if (!CheckerController.isServiceMappedWithAgent(serviceId, bcAgent)) {
+        if (!CheckerController.isFeatureMappedWithAgent(serviceId, bcAgent)) {
             // MAP SERVICE WITH AGENT
             log.info("SERVICE NOT MAPPED WITH AGENT");
 
-            if (!CheckerController.isServiceAlreadyInLedger(serviceId, bcAgent)) {
+            if (!CheckerController.isFeatureAlreadyInLedger(serviceId, bcAgent)) {
                 // CREATE SERVICE
                 log.info("SERVICE DOESN'T EXIST");
-                CreateController.createService(clientHF, user, channel, serviceId, serviceName,
+                CreateController.createFeature(clientHF, user, channel, serviceId, serviceName,
                     serviceDescription, serviceComposition);
             }
             // GET SERVICE
-            Service servicePojo;
-            servicePojo = ReadController.getService(clientHF, channel, serviceId);
+            Feature featurePojo;
+            featurePojo = ReadController.getFeature(clientHF, channel, serviceId);
 
-            String newlyCreatedServiceId = servicePojo.getServiceId().toString();
+            String newlyCreatedFeatureId = featurePojo.getFeatureId().toString();
 
           // TODO: ADD CONTROLLO SE IL SERVIZIO COMPOSTO GIA ESISTENTE CORRISPONDE CON QUELLO CHE VOGLIO CREARE ORA
-          String serviceCompositionString = servicePojo.getServiceComposition().toString();
-          String[] ledgerServiceCompositonPartsRaw = serviceCompositionString.split(",");
-          ArrayList<String> ledgerServiceCompositionParts = new ArrayList<>();
-          for (int i = 0; i < ledgerServiceCompositonPartsRaw.length; i++) {
-            String leafServiceId = ledgerServiceCompositonPartsRaw[i].replace("\"", "");
-            ledgerServiceCompositionParts.add(leafServiceId);
+          String serviceCompositionString = featurePojo.getFeatureComposition().toString();
+          String[] ledgerFeatureCompositonPartsRaw = serviceCompositionString.split(",");
+          ArrayList<String> ledgerFeatureCompositionParts = new ArrayList<>();
+          for (int i = 0; i < ledgerFeatureCompositonPartsRaw.length; i++) {
+            String leafFeatureId = ledgerFeatureCompositonPartsRaw[i].replace("\"", "");
+            ledgerFeatureCompositionParts.add(leafFeatureId);
           }
 
-          String[] userServiceCompositionPartsRaw = serviceComposition.split(",");
-          ArrayList<String> userServiceCompositionParts = new ArrayList<>();
-          for (int i = 0; i < userServiceCompositionPartsRaw.length; i++) {
-            String leafServiceId = userServiceCompositionPartsRaw[i];
-            userServiceCompositionParts.add(leafServiceId);
+          String[] userFeatureCompositionPartsRaw = serviceComposition.split(",");
+          ArrayList<String> userFeatureCompositionParts = new ArrayList<>();
+          for (int i = 0; i < userFeatureCompositionPartsRaw.length; i++) {
+            String leafFeatureId = userFeatureCompositionPartsRaw[i];
+            userFeatureCompositionParts.add(leafFeatureId);
           }
 
-          log.info("LEDGER SERVICE COMPOSITION: " + ledgerServiceCompositionParts);
-          log.info("USER SERVICE COMPOSITION: " + userServiceCompositionParts);
+          log.info("LEDGER SERVICE COMPOSITION: " + ledgerFeatureCompositionParts);
+          log.info("USER SERVICE COMPOSITION: " + userFeatureCompositionParts);
 
-          log.info("SIZE: " + userServiceCompositionParts.size());
+          log.info("SIZE: " + userFeatureCompositionParts.size());
 
           Boolean differentValue = false;
-          if (ledgerServiceCompositionParts.size() == userServiceCompositionParts.size()) {
-            for (int i = 0; i < userServiceCompositionParts.size() && !differentValue; i++) {
+          if (ledgerFeatureCompositionParts.size() == userFeatureCompositionParts.size()) {
+            for (int i = 0; i < userFeatureCompositionParts.size() && !differentValue; i++) {
               Boolean notAlreadyFound = true;
-              for (int j = 0; j < ledgerServiceCompositionParts.size() && notAlreadyFound; j++) {
-                if (userServiceCompositionParts.get(i)
-                    .equals(ledgerServiceCompositionParts.get(j))) {
+              for (int j = 0; j < ledgerFeatureCompositionParts.size() && notAlreadyFound; j++) {
+                if (userFeatureCompositionParts.get(i)
+                    .equals(ledgerFeatureCompositionParts.get(j))) {
                   notAlreadyFound = false;
                 }
               }
@@ -120,10 +120,10 @@ public class ComplexWorkflowController {
 
           if (differentValue) {
             log.info("SONO DIFFERENTI COMPOSITE SERVICES CON STESSO ID");
-            String newServiceId = bcAgent.bcAgentGui.getDifferentId(serviceId);
+            String newFeatureId = bcAgent.bcAgentGui.getDifferentId(serviceId);
             // TODO: Far inserire stesso nome con diverso id per creare nuovo servizio e mapparlo all'agente
-            // Ricorsione con newServiceId
-            allPeerSuccess = createServiceAndCoupleWithAgent(bcAgent, newServiceId, serviceName,
+            // Ricorsione con newFeatureId
+            allPeerSuccess = createFeatureAndCoupleWithAgent(bcAgent, newFeatureId, serviceName,
                 serviceDescription, serviceComposition, agentId, cost, time, clientHF, channel,
                 user, serviceIds);
           } else {
@@ -131,7 +131,7 @@ public class ComplexWorkflowController {
             // OK MAP SERVICE WITH AGENT
             // MAP SERVICE WITH AGENT
             allPeerSuccess = CreateController
-                .createServiceRelationAgent(clientHF, user, channel, newlyCreatedServiceId, agentId,
+                .createFeatureRelationAgent(clientHF, user, channel, newlyCreatedFeatureId, agentId,
                     cost, time, serviceDescription);
           }
 
@@ -142,13 +142,13 @@ public class ComplexWorkflowController {
         return allPeerSuccess;
     }
 
-    public static boolean createServiceAndCoupleWithAgentAndCreateReputation(BCAgent bcAgent,
+    public static boolean createFeatureAndCoupleWithAgentAndCreateReputation(BCAgent bcAgent,
         String serviceId, String serviceName, String serviceDescription, String serviceComposition,
         String agentId, String cost, String time, String initialReputationValue, HFClient clientHF,
         Channel channel,
         User user) throws Exception {
         //        String initialReputationValue = "6.0";
-        String agentRole = Reputation.EXECUTER_ROLE;
+        String agentRole = InnMindReputation.EXPERT_ROLE;
         boolean allPeerSuccess;
         boolean serviceCreationSuccess;
 
@@ -156,7 +156,7 @@ public class ComplexWorkflowController {
 
         // MAP SERVICE WITH AGENT
         serviceCreationSuccess =
-            createServiceAndCoupleWithAgent(bcAgent, serviceId, serviceName, serviceDescription,
+            createFeatureAndCoupleWithAgent(bcAgent, serviceId, serviceName, serviceDescription,
                 serviceComposition, agentId, cost, time, clientHF, channel, user, serviceIds);
       log.info("SERVICE ID TRIED LIST SIZE: " + serviceIds.size());
       for (String singleId : serviceIds) {
@@ -196,20 +196,20 @@ public class ComplexWorkflowController {
         return allPeerSuccess;
     }
 
-    public static boolean createServiceAndCoupleWithAgentAndCreateStandarValueReputation(
+    public static boolean createFeatureAndCoupleWithAgentAndCreateStandarValueReputation(
         BCAgent bcAgent, String serviceId, String serviceName, String serviceDescription,
         String serviceComposition, String agentId, String cost, String time, HFClient clientHF,
         Channel channel, User user)
         throws Exception {
         String initialReputationValue = "6.0";
-        String agentRole = Reputation.EXECUTER_ROLE;
+        String agentRole = InnMindReputation.EXPERT_ROLE;
         boolean allPeerSuccess;
         boolean serviceCreationSuccess;
 
 
         // MAP SERVICE WITH AGENT
         serviceCreationSuccess =
-            createServiceAndCoupleWithAgent(bcAgent, serviceId, serviceName, serviceDescription,
+            createFeatureAndCoupleWithAgent(bcAgent, serviceId, serviceName, serviceDescription,
                 serviceComposition, agentId, cost, time, clientHF, channel, user, null);
         if (serviceCreationSuccess) {
             log.info("CREATION OF REPUTATION");
@@ -227,13 +227,13 @@ public class ComplexWorkflowController {
         return allPeerSuccess;
     }
 
-  public static ArrayList<Activity> getLeavesActivitiesList(List<String> compositionTimestampsList,
-      ArrayList<Activity> leavesActivitiesList, HFClient hfClient, Channel channel,
-      String demanderAgentId, String executerAgentId) {
+  public static ArrayList<Review> getLeavesActivitiesList(List<String> compositionTimestampsList,
+                                                          ArrayList<Review> leavesActivitiesList, HFClient hfClient, Channel channel,
+                                                          String demanderAgentId, String executerAgentId) {
 
     for (int i = 0; i < compositionTimestampsList.size(); i++) {
       String leafTimestamp = compositionTimestampsList.get(i);
-      ArrayList<Activity> leafActivitiesList = RangeQueries
+      ArrayList<Review> leafActivitiesList = RangeQueries
           .getActivitiesByDemanderExecuterTimestamp(hfClient, channel, demanderAgentId,
               executerAgentId, leafTimestamp);
 

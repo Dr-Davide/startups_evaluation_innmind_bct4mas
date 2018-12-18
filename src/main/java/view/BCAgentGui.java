@@ -21,12 +21,12 @@ package view;
 import agents.BCAgent;
 import logic.Heuristic;
 import messages.BCMessage;
-import model.StructServiceRequest;
+import model.StructFeatureRequest;
 import org.apache.log4j.Logger;
 import start.JadeJson2Pojo;
 import start.StartClass;
-import view.panel.AskServiceTabPanel;
-import view.panel.ManageCompositeAndLeafServicesTabPanel;
+import view.panel.AskFeatureTabPanel;
+import view.panel.ManageCompositeAndLeafFeaturesTabPanel;
 import view.panel.MessagesTabPanel;
 
 import javax.imageio.ImageIO;
@@ -55,11 +55,11 @@ public class BCAgentGui extends JFrame {
 
   private static final long serialVersionUID = -8399308930154655548L;
   private BCAgent bcAgent;
-  //  private ManageServicesTabPanel manageServicesTabPanel = new ManageServicesTabPanel();
-  private AskServiceTabPanel askServiceTabPanel = new AskServiceTabPanel();
+  //  private ManageFeaturesTabPanel manageFeaturesTabPanel = new ManageFeaturesTabPanel();
+  private AskFeatureTabPanel askFeatureTabPanel = new AskFeatureTabPanel();
   private MessagesTabPanel messagesTabPanel = new MessagesTabPanel();
-  private ManageCompositeAndLeafServicesTabPanel manageCompositeAndLeafServicesTabPanel =
-      new ManageCompositeAndLeafServicesTabPanel();
+  private ManageCompositeAndLeafFeaturesTabPanel manageCompositeAndLeafFeaturesTabPanel =
+      new ManageCompositeAndLeafFeaturesTabPanel();
   private JComponent panel;
 
   /**
@@ -78,33 +78,33 @@ public class BCAgentGui extends JFrame {
     pack();
     setVisible(true);
     setTitle("BCAgent - Welcome agent " + agent.getLocalName().toString() + "!");
-    //    manageServicesTabPanel.getAddServiceWithAgentImagePanel().getAgentImage().getAgentNameLabel()
+    //    manageFeaturesTabPanel.getAddFeatureWithAgentImagePanel().getAgentImage().getAgentNameLabel()
     //        .setText(agent.getLocalName());
-    manageCompositeAndLeafServicesTabPanel.getAgentImagePanel().getAgentNameLabel()
+    manageCompositeAndLeafFeaturesTabPanel.getAgentImagePanel().getAgentNameLabel()
         .setText(agent.getLocalName());
 
 
     // ADD LEAF SERVICE ACTION IN NEW MANAGE SERVICES (MANAGE COMPOSITE AND LEAF SERVICES)
-    manageCompositeAndLeafServicesTabPanel.getAddLeafServicePanel().getButtonAddService()
+    manageCompositeAndLeafFeaturesTabPanel.getAddLeafFeaturePanel().getButtonAddFeature()
         .addActionListener(new ActionListener() {
 
           @Override
           public void actionPerformed(ActionEvent actionEvent) {
             try {
               // GET FORM DATA
-              String serviceName = manageCompositeAndLeafServicesTabPanel.getAddLeafServicePanel()
-                  .getPanelServiceName().getTextField().getText().trim();
+              String serviceName = manageCompositeAndLeafFeaturesTabPanel.getAddLeafFeaturePanel()
+                  .getPanelFeatureName().getTextField().getText().trim();
               String serviceDescription =
-                  manageCompositeAndLeafServicesTabPanel.getAddLeafServicePanel()
-                      .getPanelServiceDescription().getTextField().getText().trim();
-              String serviceCost = manageCompositeAndLeafServicesTabPanel.getAddLeafServicePanel()
-                  .getPanelServiceCost().getTextField().getText().trim();
-              String serviceTime = manageCompositeAndLeafServicesTabPanel.getAddLeafServicePanel()
-                  .getPanelServiceTime().getTextField().getText().trim();
+                  manageCompositeAndLeafFeaturesTabPanel.getAddLeafFeaturePanel()
+                      .getPanelFeatureDescription().getTextField().getText().trim();
+              String serviceCost = manageCompositeAndLeafFeaturesTabPanel.getAddLeafFeaturePanel()
+                  .getPanelFeatureCost().getTextField().getText().trim();
+              String serviceTime = manageCompositeAndLeafFeaturesTabPanel.getAddLeafFeaturePanel()
+                  .getPanelFeatureTime().getTextField().getText().trim();
 
               // TRIGGER the Behaviour
               bcAgent
-                  .addLeafServiceTrigger(serviceName, serviceDescription, serviceCost, serviceTime);
+                  .addLeafFeatureTrigger(serviceName, serviceDescription, serviceCost, serviceTime);
             } catch (Exception e) {
               JOptionPane.showMessageDialog(BCAgentGui.this,
                   "Failed loading the service : " + e.getMessage(), "Error: ",
@@ -114,43 +114,43 @@ public class BCAgentGui extends JFrame {
         });
 
     // ADD COMPOSITE SERVICE ACTION IN NEW MANAGE SERVICES (MANAGE COMPOSITE AND LEAF SERVICES)
-    manageCompositeAndLeafServicesTabPanel.getAddCompositeServicePanel().getBtnAddCompositeService()
+    manageCompositeAndLeafFeaturesTabPanel.getAddCompositeFeaturePanel().getBtnAddCompositeFeature()
         .addActionListener(new ActionListener() {
 
           @Override public void actionPerformed(ActionEvent actionEvent) {
             try {
-              if (manageCompositeAndLeafServicesTabPanel.getAddCompositeServicePanel()
-                  .getSelectLeafServicesPanel().atLeastTwoSelectedInTableModel()) {
+              if (manageCompositeAndLeafFeaturesTabPanel.getAddCompositeFeaturePanel()
+                  .getSelectLeafFeaturesPanel().atLeastTwoSelectedInTableModel()) {
 
                 ArrayList<Integer> selectedRowIndexes =
-                    manageCompositeAndLeafServicesTabPanel.getAddCompositeServicePanel()
-                        .getSelectLeafServicesPanel().getRowIndexesSelectedInTableModel();
+                    manageCompositeAndLeafFeaturesTabPanel.getAddCompositeFeaturePanel()
+                        .getSelectLeafFeaturesPanel().getRowIndexesSelectedInTableModel();
                 log.info("SELECTED ROW INDEXES SIZE: " + selectedRowIndexes.size());
 
                 // GET FORM DATA
                 String serviceName =
-                    manageCompositeAndLeafServicesTabPanel.getAddCompositeServicePanel()
-                        .getPanelServiceName().getTextField().getText().trim();
+                    manageCompositeAndLeafFeaturesTabPanel.getAddCompositeFeaturePanel()
+                        .getPanelFeatureName().getTextField().getText().trim();
                 String serviceDescription =
-                    manageCompositeAndLeafServicesTabPanel.getAddCompositeServicePanel()
-                        .getPanelServiceDescription().getTextField().getText().trim();
+                    manageCompositeAndLeafFeaturesTabPanel.getAddCompositeFeaturePanel()
+                        .getPanelFeatureDescription().getTextField().getText().trim();
 
                 String serviceComposition =
-                    manageCompositeAndLeafServicesTabPanel.getAddCompositeServicePanel()
-                        .getSelectLeafServicesPanel()
-                        .getServiceCompositionString(selectedRowIndexes);
+                    manageCompositeAndLeafFeaturesTabPanel.getAddCompositeFeaturePanel()
+                        .getSelectLeafFeaturesPanel()
+                        .getFeatureCompositionString(selectedRowIndexes);
                 //                String serviceComposition = "s1,s2";
                 log.info("SERVICE COMPOSITION: " + serviceComposition);
                 String serviceCost =
-                    manageCompositeAndLeafServicesTabPanel.getAddCompositeServicePanel()
-                        .getPanelServiceCost().getTextField().getText().trim();
+                    manageCompositeAndLeafFeaturesTabPanel.getAddCompositeFeaturePanel()
+                        .getPanelFeatureCost().getTextField().getText().trim();
                 String serviceTime =
-                    manageCompositeAndLeafServicesTabPanel.getAddCompositeServicePanel()
-                        .getPanelServiceTime().getTextField().getText().trim();
+                    manageCompositeAndLeafFeaturesTabPanel.getAddCompositeFeaturePanel()
+                        .getPanelFeatureTime().getTextField().getText().trim();
 
                 // TRIGGER the Behaviour
                 bcAgent
-                    .addCompositeServiceTrigger(serviceName, serviceDescription, serviceComposition,
+                    .addCompositeFeatureTrigger(serviceName, serviceDescription, serviceComposition,
                         serviceCost, serviceTime);
               } else {
                 JOptionPane.showMessageDialog(BCAgentGui.this,
@@ -165,37 +165,37 @@ public class BCAgentGui extends JFrame {
           }
         });
 
-    // DELETE SERVICE from the List of my Services (Delete ServiceRelationAgent)
-    manageCompositeAndLeafServicesTabPanel.getManageServicesPanel().getBtnDeleteSelection()
+    // DELETE SERVICE from the List of my Features (Delete FeatureRelationAgent)
+    manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel().getBtnDeleteSelection()
         .addActionListener(new ActionListener() {
 
           @Override public void actionPerformed(ActionEvent actionEvent) {
             try {
-              if (manageCompositeAndLeafServicesTabPanel.getManageServicesPanel()
+              if (manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
                   .onlyOneSelectedInTableModel()) {
 
                 ArrayList<Integer> selectedRowIndexes =
-                    manageCompositeAndLeafServicesTabPanel.getManageServicesPanel()
+                    manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
                         .getRowIndexesSelectedInTableModel();
 
                 // GET TABLE DATA (hidden service id)
-                String selectedServiceId =
-                    manageCompositeAndLeafServicesTabPanel.getManageServicesPanel()
-                        .getServiceId(selectedRowIndexes);
+                String selectedFeatureId =
+                    manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
+                        .getFeatureId(selectedRowIndexes);
 
                 String agentId = bcAgent.getMyName();
 
                 int deleteConfirmation = JOptionPane.showConfirmDialog(BCAgentGui.this,
-                    "Are you sure that you want to delete the service ID: " + selectedServiceId
-                        + " of the agent ID: " + agentId + "?", "Confirm Deletion of Service",
+                    "Are you sure that you want to delete the service ID: " + selectedFeatureId
+                        + " of the agent ID: " + agentId + "?", "Confirm Deletion of Feature",
                     JOptionPane.YES_NO_OPTION);
                 if (deleteConfirmation == JOptionPane.YES_OPTION) {
                   // TRIGGER the Delete Behaviour
-                  bcAgent.deleteServiceRelationAgentTrigger(selectedServiceId, agentId);
+                  bcAgent.deleteFeatureRelationAgentTrigger(selectedFeatureId, agentId);
 
                 } else {
                   JOptionPane.showMessageDialog(BCAgentGui.this,
-                      "Aborted the deletion of  the service ID: " + selectedServiceId
+                      "Aborted the deletion of  the service ID: " + selectedFeatureId
                           + " of the agent ID: " + agentId, "Abort Delete Action",
                       JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -213,34 +213,34 @@ public class BCAgentGui extends JFrame {
           }
         });
 
-    // UPDATE SERVICE from the List of my Services (Update ServiceRelationAgent)
-    manageCompositeAndLeafServicesTabPanel.getManageServicesPanel().getBtnModifyService()
+    // UPDATE SERVICE from the List of my Features (Update FeatureRelationAgent)
+    manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel().getBtnModifyFeature()
         .addActionListener(new ActionListener() {
 
           @Override public void actionPerformed(ActionEvent actionEvent) {
             try {
-              if (manageCompositeAndLeafServicesTabPanel.getManageServicesPanel()
+              if (manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
                   .onlyOneSelectedInTableModel()) {
 
                 ArrayList<Integer> selectedRowIndexes =
-                    manageCompositeAndLeafServicesTabPanel.getManageServicesPanel()
+                    manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
                         .getRowIndexesSelectedInTableModel();
                 log.info("SELECTED ROW INDEXES SIZE: " + selectedRowIndexes.size());
 
                 // GET TABLE DATA (hidden service id)
-                String selectedServiceId =
-                    manageCompositeAndLeafServicesTabPanel.getManageServicesPanel()
-                        .getServiceId(selectedRowIndexes);
+                String selectedFeatureId =
+                    manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
+                        .getFeatureId(selectedRowIndexes);
 
                 String agentId = bcAgent.getMyName();
                 //                String serviceComposition = "s1,s2";
-                log.info("SELECTED SERVICE ID: " + selectedServiceId);
+                log.info("SELECTED SERVICE ID: " + selectedFeatureId);
 
 
                 String[] options = new String[3];
-                //                options[0] = ServiceRelationAgent.COST;
-                //                options[1] = ServiceRelationAgent.TIME;
-                //                options[2] = ServiceRelationAgent.DESCRIPTION;
+                //                options[0] = FeatureRelationAgent.COST;
+                //                options[1] = FeatureRelationAgent.TIME;
+                //                options[2] = FeatureRelationAgent.DESCRIPTION;
 
                 options[0] = "Cost";
                 options[1] = "Time";
@@ -257,7 +257,7 @@ public class BCAgentGui extends JFrame {
                         .showInputDialog(BCAgentGui.this, "Please insert the new Cost Value",
                             "Modify Cost",
                         JOptionPane.INFORMATION_MESSAGE);
-                    bcAgent.updateServiceRelationAgentCostTrigger(selectedServiceId, agentId,
+                    bcAgent.updateFeatureRelationAgentCostTrigger(selectedFeatureId, agentId,
                         newCostValue);
                     break;
                   case 1:
@@ -265,7 +265,7 @@ public class BCAgentGui extends JFrame {
                     String newTimeValue = JOptionPane
                         .showInputDialog(BCAgentGui.this, "Please insert the new Time Value",
                             "Modify Time", JOptionPane.INFORMATION_MESSAGE);
-                    bcAgent.updateServiceRelationAgentTimeTrigger(selectedServiceId, agentId,
+                    bcAgent.updateFeatureRelationAgentTimeTrigger(selectedFeatureId, agentId,
                         newTimeValue);
                     break;
                   case 2:
@@ -273,7 +273,7 @@ public class BCAgentGui extends JFrame {
                     String newDescriptionValue = JOptionPane
                         .showInputDialog(BCAgentGui.this, "Please insert the new Description Value",
                             "Modify Description", JOptionPane.INFORMATION_MESSAGE);
-                    bcAgent.updateServiceRelationAgentDescriptionTrigger(selectedServiceId, agentId,
+                    bcAgent.updateFeatureRelationAgentDescriptionTrigger(selectedFeatureId, agentId,
                         newDescriptionValue);
                     break;
                   default: // should be unreachable
@@ -299,8 +299,8 @@ public class BCAgentGui extends JFrame {
 
 
     // GET SERVICE LIST ACTION (SEARCH SERVICE)
-    askServiceTabPanel.getAskServiceWithAgentInformationPanel().getAskServicePanel()
-        .getButtonGetService()
+    askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAskFeaturePanel()
+        .getButtonGetFeature()
         .addActionListener(new ActionListener() {
 
           @Override
@@ -308,25 +308,25 @@ public class BCAgentGui extends JFrame {
             try {
 
               String serviceName =
-                  askServiceTabPanel.getAskServiceWithAgentInformationPanel().getAskServicePanel()
-                      .getPanelServiceName()
+                  askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAskFeaturePanel()
+                      .getPanelFeatureName()
                   .getTextField().getText().trim();
               String selectedHeuristic;
               boolean selectedCostHeuristic =
-                  askServiceTabPanel.getAskServiceWithAgentInformationPanel().getAskServicePanel()
+                  askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAskFeaturePanel()
                   .getSelectHeuristicPanel().getCostHeuristicRadioButton().isSelected();
               if (selectedCostHeuristic) {
                 selectedHeuristic = Heuristic.COST;
               } else {
                 boolean selectedTimeHeuristic =
-                    askServiceTabPanel.getAskServiceWithAgentInformationPanel().getAskServicePanel()
+                    askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAskFeaturePanel()
                     .getSelectHeuristicPanel().getTimeHeuristicRadioButton().isSelected();
                 if (selectedTimeHeuristic) {
                   selectedHeuristic = Heuristic.TIME;
                 } else {
                   boolean selectedReputationHeuristic =
-                      askServiceTabPanel.getAskServiceWithAgentInformationPanel()
-                          .getAskServicePanel()
+                      askFeatureTabPanel.getAskFeatureWithAgentInformationPanel()
+                          .getAskFeaturePanel()
                       .getSelectHeuristicPanel().getReputationHeuristicRadioButton().isSelected();
                   if (selectedReputationHeuristic) {
                     selectedHeuristic = Heuristic.REPUTATION;
@@ -337,7 +337,7 @@ public class BCAgentGui extends JFrame {
                 }
               }
 
-              bcAgent.getServicesListTrigger(serviceName, selectedHeuristic);
+              bcAgent.getFeaturesListTrigger(serviceName, selectedHeuristic);
 
             } catch (Exception getException) {
               JOptionPane.showMessageDialog(BCAgentGui.this,
@@ -349,33 +349,33 @@ public class BCAgentGui extends JFrame {
 
           /**
            *
-           * @param askServiceTabPanel
+           * @param askFeatureTabPanel
            * @return
            */
-          private boolean selectedHeuristic(AskServiceTabPanel askServiceTabPanel) {
-            return askServiceTabPanel.getAskServiceWithAgentInformationPanel().getAskServicePanel()
+          private boolean selectedHeuristic(AskFeatureTabPanel askFeatureTabPanel) {
+            return askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAskFeaturePanel()
                 .getSelectHeuristicPanel().getCostHeuristicRadioButton().isSelected()
-                || askServiceTabPanel.getAskServiceWithAgentInformationPanel().getAskServicePanel()
+                || askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAskFeaturePanel()
                 .getSelectHeuristicPanel()
                     .getTimeHeuristicRadioButton().isSelected();
           }
         });
 
     // PUT THE AGENT INFORMATION OF THE SELECTED RECORD IN THE RESULT LIST (JTABLE) IN THE AGENT INFORMATION PANEL
-    JTable table = askServiceTabPanel.getSearchServiceResultPanel().getTable();
+    JTable table = askFeatureTabPanel.getSearchFeatureResultPanel().getTable();
     table.getSelectionModel().addListSelectionListener(event -> {
       // put the agentId in the AgentInformationPanel Label
       // TODO: Temporary fix to GUI error in refresh (IndexOutOfBoundException: -1
       if (table.getSelectedRow() == -1) {
-        askServiceTabPanel.getAskServiceWithAgentInformationPanel().getAgentInformationPanel()
+        askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAgentInformationPanel()
             .getAgentNameLabel().setText(table.getValueAt(0, 2).toString());
       } else {
-        // put agent name in ServiceAgentInformationPanel
-        askServiceTabPanel.getAskServiceWithAgentInformationPanel().getAgentInformationPanel()
+        // put agent name in FeatureAgentInformationPanel
+        askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAgentInformationPanel()
             .getAgentNameLabel().setText(table.getValueAt(table.getSelectedRow(), 2).toString());
-        // TODO: put service description in ServiceAgentInformationPanel
-        //        askServiceTabPanel.getAskServiceWithAgentInformationPanel().getAgentInformationPanel()
-        //            .getServiceDescriptionLabel()
+        // TODO: put service description in FeatureAgentInformationPanel
+        //        askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAgentInformationPanel()
+        //            .getFeatureDescriptionLabel()
         //            .setText(table.getValueAt(table.getSelectedRow(), 5).toString());
       }
       JadeJson2Pojo jadeJson2Pojo = new JadeJson2Pojo();
@@ -392,7 +392,7 @@ public class BCAgentGui extends JFrame {
         // TODO: Temporary fix to GUI error in refresh (IndexOutOfBoundException: -1
         if (table.getSelectedRow() == -1) {
           log.info("HOTEL IMAGE PATH: " + jadeJson2Pojo.getAgentImagesHotelsPath().get(0));
-          askServiceTabPanel.getAskServiceWithAgentInformationPanel().getAgentInformationPanel()
+          askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAgentInformationPanel()
               .setAgentImage(
                   ImageIO.read(new File(jadeJson2Pojo.getAgentImagesHotelsPath().get(0))));
         } else {
@@ -401,10 +401,10 @@ public class BCAgentGui extends JFrame {
           InputStream inputStream = StartClass.getInputStreamPublic(
               jadeJson2Pojo.getAgentImagesHotelsPath().get(table.getSelectedRow()));
           BufferedImage agentImage = ImageIO.read(inputStream);
-          //          askServiceTabPanel.getAskServiceWithAgentInformationPanel().getAgentInformationPanel()
+          //          askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAgentInformationPanel()
           //              .setAgentImage(ImageIO.read(
           //                  new File(jadeJson2Pojo.getAgentImagesHotelsPath().get(table.getSelectedRow()))));
-          askServiceTabPanel.getAskServiceWithAgentInformationPanel().getAgentInformationPanel()
+          askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAgentInformationPanel()
               .setAgentImage(agentImage);
         }
       } catch (IOException e) {
@@ -414,43 +414,43 @@ public class BCAgentGui extends JFrame {
     });
 
     // ASK SERVICE ACTION
-    askServiceTabPanel.getSearchServiceResultPanel().getButtonAskServiceSelection()
+    askFeatureTabPanel.getSearchFeatureResultPanel().getButtonAskFeatureSelection()
         .addActionListener(new ActionListener() {
 
           @Override
           public void actionPerformed(ActionEvent e) {
             try {
 
-              if (askServiceTabPanel.getSearchServiceResultPanel().onlyOneSelectedInTableModel()) {
+              if (askFeatureTabPanel.getSearchFeatureResultPanel().onlyOneSelectedInTableModel()) {
 
                 // GET INPUT DATA
-                int selectedRowIndex = askServiceTabPanel.getSearchServiceResultPanel()
+                int selectedRowIndex = askFeatureTabPanel.getSearchFeatureResultPanel()
                     .getRowIndexSelectedInTableModel();
 
                 // TODO: ADD SERVICE ID
 
-                String serviceName = (String) askServiceTabPanel.getSearchServiceResultPanel()
-                    .getRowService(selectedRowIndex);
-                String agentName = (String) askServiceTabPanel.getSearchServiceResultPanel()
+                String serviceName = (String) askFeatureTabPanel.getSearchFeatureResultPanel()
+                    .getRowFeature(selectedRowIndex);
+                String agentName = (String) askFeatureTabPanel.getSearchFeatureResultPanel()
                     .getRowAgent(selectedRowIndex);
-                Integer cost = Integer.parseInt((String) askServiceTabPanel
-                    .getSearchServiceResultPanel().getRowCost(selectedRowIndex));
-                Integer time = Integer.parseInt((String) askServiceTabPanel
-                    .getSearchServiceResultPanel().getRowTime(selectedRowIndex));
-                Float reputation = Float.parseFloat((String) askServiceTabPanel
-                    .getSearchServiceResultPanel().getRowReputation(selectedRowIndex));
-                String serviceId = (String) askServiceTabPanel.getSearchServiceResultPanel()
-                    .getRowServiceId(selectedRowIndex);
+                Integer cost = Integer.parseInt((String) askFeatureTabPanel
+                    .getSearchFeatureResultPanel().getRowCost(selectedRowIndex));
+                Integer time = Integer.parseInt((String) askFeatureTabPanel
+                    .getSearchFeatureResultPanel().getRowTime(selectedRowIndex));
+                Float reputation = Float.parseFloat((String) askFeatureTabPanel
+                    .getSearchFeatureResultPanel().getRowReputation(selectedRowIndex));
+                String serviceId = (String) askFeatureTabPanel.getSearchFeatureResultPanel()
+                    .getRowFeatureId(selectedRowIndex);
 
-                StructServiceRequest selectedStructAgent =
-                    new StructServiceRequest(agentName, cost, time, reputation);
-                ArrayList<StructServiceRequest> singleStructAgent = new ArrayList<>();
+                StructFeatureRequest selectedStructAgent =
+                    new StructFeatureRequest(agentName, cost, time, reputation);
+                ArrayList<StructFeatureRequest> singleStructAgent = new ArrayList<>();
 
 
                 // TODO: REQUEST SERVICE TO AGENT
 
-                //                bcAgent.askSelectedServiceTrigger(serviceName, selectedStructAgent);
-                bcAgent.askSelectedServiceTrigger(serviceId, serviceName, selectedStructAgent);
+                //                bcAgent.askSelectedFeatureTrigger(serviceName, selectedStructAgent);
+                bcAgent.askSelectedFeatureTrigger(serviceId, serviceName, selectedStructAgent);
 
 
               } else {
@@ -469,16 +469,16 @@ public class BCAgentGui extends JFrame {
 
           /**
            *
-           * @param askServiceTabPanel
+           * @param askFeatureTabPanel
            * @return
            */
-          private boolean selectedHeuristic(AskServiceTabPanel askServiceTabPanel) {
-            return askServiceTabPanel.getAskServiceWithAgentInformationPanel().getAskServicePanel()
+          private boolean selectedHeuristic(AskFeatureTabPanel askFeatureTabPanel) {
+            return askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAskFeaturePanel()
                 .getSelectHeuristicPanel().getCostHeuristicRadioButton().isSelected()
-                || askServiceTabPanel.getAskServiceWithAgentInformationPanel().getAskServicePanel()
+                || askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAskFeaturePanel()
                 .getSelectHeuristicPanel()
                     .getTimeHeuristicRadioButton().isSelected();
-            // return askServiceTabPanel.getAskServiceWithAgentInformationPanel().getSelectHeuristicPanel()
+            // return askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getSelectHeuristicPanel()
             // .getButtonGroup().getSelection().isSelected();
           }
         });
@@ -512,7 +512,7 @@ public class BCAgentGui extends JFrame {
               String demanderAgentId = agentName;
 
               if (messageType.equals(BCMessage.SERVICE_EXECUTION)) {
-                bcAgent.executeServiceTrigger(serviceId, demanderAgentId);
+                bcAgent.executeFeatureTrigger(serviceId, demanderAgentId);
                 // Cancellare Record dalla lista
                 bcAgent.deleteMessageTrigger(selectedRowIndex);
               } else {
@@ -558,7 +558,7 @@ public class BCAgentGui extends JFrame {
 
               if (messageType.equals(BCMessage.SERVICE_EXECUTION)) {
                 // TODO: Informare il Demander del diniego
-                bcAgent.denyServiceExecutionTrigger(serviceId, demanderAgentId);
+                bcAgent.denyFeatureExecutionTrigger(serviceId, demanderAgentId);
 
                 // Cancellare Record dalla lista
                 bcAgent.deleteMessageTrigger(selectedRowIndex);
@@ -602,14 +602,14 @@ public class BCAgentGui extends JFrame {
     tabbedPane.putClientProperty("jgoodies.noContentBorder", Boolean.TRUE);
 
 
-    tabbedPane.addTab("Manage Services", manageCompositeAndLeafServicesTabPanel);
-    //    tabbedPane.addTab("Manage Services", manageServicesTabPanel);
+    tabbedPane.addTab("Manage Features", manageCompositeAndLeafFeaturesTabPanel);
+    //    tabbedPane.addTab("Manage Features", manageFeaturesTabPanel);
     GridBagLayout gridBagLayout =
-        (GridBagLayout) askServiceTabPanel.getAskServiceWithAgentInformationPanel()
-            .getAskServicePanel().getLayout();
+        (GridBagLayout) askFeatureTabPanel.getAskFeatureWithAgentInformationPanel()
+            .getAskFeaturePanel().getLayout();
     gridBagLayout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
     gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    tabbedPane.addTab("Ask Service", askServiceTabPanel);
+    tabbedPane.addTab("Ask Feature", askFeatureTabPanel);
     tabbedPane.addTab("Messages", messagesTabPanel);
 
 
@@ -618,28 +618,28 @@ public class BCAgentGui extends JFrame {
     return tabbedPane;
   }
 
-  public String getDifferentId(String oldServiceId) {
-    String newServiceId;
+  public String getDifferentId(String oldFeatureId) {
+    String newFeatureId;
     String showInputDialogMessage =
-        "Service ID: " + oldServiceId + " already used. Insert a valid ID for the service";
-    String showInputDialogTitle = "Service Naming Conflict";
+        "Feature ID: " + oldFeatureId + " already used. Insert a valid ID for the service";
+    String showInputDialogTitle = "Feature Naming Conflict";
 
-    //    newServiceId = JOptionPane
+    //    newFeatureId = JOptionPane
     //        .showInputDialog(bcAgent.bcAgentGui.getPanel(), showInputDialogMessage,
     //            showInputDialogTitle, JOptionPane.QUESTION_MESSAGE);
-    newServiceId = (String) JOptionPane
+    newFeatureId = (String) JOptionPane
         .showInputDialog(bcAgent.bcAgentGui.getPanel(), showInputDialogMessage,
-            showInputDialogTitle, JOptionPane.QUESTION_MESSAGE, null, null, oldServiceId);
+            showInputDialogTitle, JOptionPane.QUESTION_MESSAGE, null, null, oldFeatureId);
 
-    return newServiceId;
+    return newFeatureId;
   }
 
   public String getExecuterEvaluation(String serviceId) {
     String executerEvaluation;
     String showInputDialogMessage =
         "Agent " + bcAgent.getLocalName() + ", please evaluate the QoS of service: " + serviceId
-            + " as the Service Executer Role in the transaction";
-    String showInputDialogTitle = "Executer Service Evaluation";
+            + " as the Feature Executer Role in the transaction";
+    String showInputDialogTitle = "Executer Feature Evaluation";
 
     executerEvaluation = getEvaluation(showInputDialogMessage, showInputDialogTitle);
 
@@ -650,8 +650,8 @@ public class BCAgentGui extends JFrame {
     String demanderEvaluation;
     String showInputDialogMessage =
         "Agent " + bcAgent.getLocalName().toString() + ", please evaluate the QoS of service: "
-            + serviceId + " as the Service Demander Role in the transaction";
-    String showInputDialogTitle = "Demander Service Evaluation";
+            + serviceId + " as the Feature Demander Role in the transaction";
+    String showInputDialogTitle = "Demander Feature Evaluation";
 
     demanderEvaluation = getEvaluation(showInputDialogMessage, showInputDialogTitle);
 
@@ -723,10 +723,10 @@ public class BCAgentGui extends JFrame {
         showInputDialogTitle, JOptionPane.INFORMATION_MESSAGE, newIcon);
   }
 
-  public void getServiceCompletedMessage(String executerAgentId, String executedServiceId) {
+  public void getFeatureCompletedMessage(String executerAgentId, String executedFeatureId) {
     String showInputDialogMessage =
-        "Service: " + executedServiceId + " by executer Agent: " + executerAgentId + " Completed";
-    String showInputDialogTitle = "Service Execution Completed";
+        "Feature: " + executedFeatureId + " by executer Agent: " + executerAgentId + " Completed";
+    String showInputDialogTitle = "Feature Execution Completed";
     showOkMessage(showInputDialogMessage, showInputDialogTitle);
   }
 
@@ -747,17 +747,17 @@ public class BCAgentGui extends JFrame {
   }
 
   /**
-   * @return the askServiceTabPanel
+   * @return the askFeatureTabPanel
    */
-  public AskServiceTabPanel getAskServiceTabPanel() {
-    return askServiceTabPanel;
+  public AskFeatureTabPanel getAskFeatureTabPanel() {
+    return askFeatureTabPanel;
   }
 
   /**
-   * @param askServiceTabPanel the askServiceTabPanel to set
+   * @param askFeatureTabPanel the askFeatureTabPanel to set
    */
-  public void setAskServiceTabPanel(AskServiceTabPanel askServiceTabPanel) {
-    this.askServiceTabPanel = askServiceTabPanel;
+  public void setAskFeatureTabPanel(AskFeatureTabPanel askFeatureTabPanel) {
+    this.askFeatureTabPanel = askFeatureTabPanel;
   }
 
   /**
@@ -789,17 +789,17 @@ public class BCAgentGui extends JFrame {
   }
 
   /**
-   * @return the manageCompositeAndLeafServicesTabPanel
+   * @return the manageCompositeAndLeafFeaturesTabPanel
    */
-  public ManageCompositeAndLeafServicesTabPanel getManageCompositeAndLeafServicesTabPanel() {
-    return manageCompositeAndLeafServicesTabPanel;
+  public ManageCompositeAndLeafFeaturesTabPanel getManageCompositeAndLeafFeaturesTabPanel() {
+    return manageCompositeAndLeafFeaturesTabPanel;
   }
 
   /**
-   * @param manageCompositeAndLeafServicesTabPanel the manageCompositeAndLeafServicesTabPanel to set
+   * @param manageCompositeAndLeafFeaturesTabPanel the manageCompositeAndLeafFeaturesTabPanel to set
    */
-  public void setManageCompositeAndLeafServicesTabPanel(
-      ManageCompositeAndLeafServicesTabPanel manageCompositeAndLeafServicesTabPanel) {
-    this.manageCompositeAndLeafServicesTabPanel = manageCompositeAndLeafServicesTabPanel;
+  public void setManageCompositeAndLeafFeaturesTabPanel(
+      ManageCompositeAndLeafFeaturesTabPanel manageCompositeAndLeafFeaturesTabPanel) {
+    this.manageCompositeAndLeafFeaturesTabPanel = manageCompositeAndLeafFeaturesTabPanel;
   }
 }

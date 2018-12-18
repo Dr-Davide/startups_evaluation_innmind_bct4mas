@@ -15,7 +15,7 @@ public class RefreshBcAgentGui extends OneShotBehaviour {
 
   @Override
   public void action() {
-    bcAgent.updateManageServicesTableModelData();
-    bcAgent.updateSelectLeafServicesTableModelData();
+    bcAgent.updateManageFeaturesTableModelData();
+    bcAgent.updateSelectLeafFeaturesTableModelData();
   }
 }

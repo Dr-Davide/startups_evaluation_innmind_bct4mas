@@ -57,25 +57,25 @@ config4:
 	<configType>config1</configType>
 	<agents>
 		<agent name = "a1">
-			<services>
+			<features>
 				<service name = "service1">
 					<description>desc1</description>
 					<weight>1</weight>
 					<time>1</time>
 				</service>
-			</services>
+			</features>
 		</agent>
 		<agent name = "a2">
-			<services>
+			<features>
 				<service name = "service2">
 					<description>desc2</description>
 					<weight>5</weight>
 					<time>9</time>
 				</service>
-			</services>
+			</features>
 		</agent>
 		<agent name = "a3">
-			<services>
+			<features>
 				<service name = "service2">
 					<description>desc2</description>
 					<weight>4</weight>
@@ -91,7 +91,7 @@ config4:
 					<weight>7</weight>
 					<time>3</time>
 				</service>
-			</services>
+			</features>
 		</agent>
 	</agents>
 </config>

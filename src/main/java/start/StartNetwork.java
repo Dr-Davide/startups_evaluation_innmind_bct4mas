@@ -66,7 +66,7 @@ public class StartNetwork {
     jadeJson2Pojo = StartClass.getJadeJsonConfig(StartClass.JADE_CONFIG_FILE);
     // START RETAGGI SCENARIO
     // StartClass.startJadeRetaggiScenario(jadeJson2Pojo.getAgentNames(),
-    // jadeJson2Pojo.getAgentTypes(), jadeJson2Pojo.getPort());
+    // jadeJson2Pojo.getAgentRoles(), jadeJson2Pojo.getPort());
 
     // START AGENT HANDLER SCENARIO
     StartClass.startJadeHandler(jadeJson2Pojo.getPort());

@@ -537,7 +537,7 @@ func GetFeatureRelationAgentByAgentWithCostAndTimeNotFoundError(stub shim.Chainc
 	}
 
 	// ==== Run the byAgent query ====
-	byAgentQueryIterator, err := a.GetByAgent(agentId, stub)
+	byAgentQueryIterator, err := a.GetFeatureRelationAgentByAgent(agentId, stub)
 	defer byAgentQueryIterator.Close()
 
 	if err != nil {
@@ -566,8 +566,8 @@ func GetFeatureRelationAgentByAgentWithCostAndTimeNotFoundError(stub shim.Chainc
 	stringOut := string(featuresByAgentAsBytes)
 	featureRelationAgentInvokeCallLog.Info(stringOut)
 	if stringOut == "null" {
-		featureRelationAgentInvokeCallLog.Info("Agent exists but has no existing relationships with features")
-		return shim.Error("Feature exists but has no existing relationships with agents")
+		featureRelationAgentInvokeCallLog.Info("Feature exists but has no existing relationships with this agent")
+		return shim.Error("Feature exists but has no existing relationships with this agent")
 	}
 
 	// ==== AgentFeatureRelation saved & indexed. Return success with payload ====

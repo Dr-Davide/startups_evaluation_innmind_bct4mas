@@ -5,11 +5,11 @@ import jade.core.Agent;
 import jade.core.behaviours.SequentialBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
-import model.ServiceView;
-import model.StructServiceRequest;
-import model.pojo.Reputation;
-import model.pojo.Service;
-import model.pojo.ServiceRelationAgent;
+import model.FeatureView;
+import model.StructFeatureRequest;
+import model.pojo.InnMindReputation;
+import model.pojo.Feature;
+import model.pojo.FeatureRelationAgent;
 import org.hyperledger.fabric.sdk.Channel;
 import org.hyperledger.fabric.sdk.HFClient;
 import org.hyperledger.fabric.sdk.User;
@@ -38,12 +38,12 @@ public class BCAgent extends Agent {
   // Link with HF Blockchain
   private User user;
   private HFClient hfClient;
-  private Channel hfServiceChannel;
+  private Channel hfFeatureChannel;
   private Channel hfTransactionChannel;
 
   private String configurationType = null;
 
-  public ArrayList<ServiceView> servicesList = new ArrayList<>();
+  public ArrayList<FeatureView> featuresList = new ArrayList<>();
 
   ////////////////////////////////////
 
@@ -81,44 +81,44 @@ public class BCAgent extends Agent {
     }
   }
 
-  public void updateManageServicesTableModelData() {
+  public void updateManageFeaturesTableModelData() {
 
     // NEW
-    bcAgentGui.getManageCompositeAndLeafServicesTabPanel().getManageServicesPanel()
-        .setAgentServiceList(getServicesList());
-    bcAgentGui.getManageCompositeAndLeafServicesTabPanel().getManageServicesPanel()
+    bcAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getManageFeaturesPanel()
+        .setAgentFeatureList(getFeaturesList());
+    bcAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getManageFeaturesPanel()
         .updateTableModelData();
   }
 
   /**
    * TODO: Da fare query corretta da chaincode
    */
-  public void updateSelectLeafServicesTableModelData() {
+  public void updateSelectLeafFeaturesTableModelData() {
 
     // NEW
-    bcAgentGui.getManageCompositeAndLeafServicesTabPanel().getAddCompositeServicePanel()
-        .getSelectLeafServicesPanel().setAgentServiceList(getServicesList());
-    bcAgentGui.getManageCompositeAndLeafServicesTabPanel().getAddCompositeServicePanel()
-        .getSelectLeafServicesPanel().updateTableModelData();
+    bcAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getAddCompositeFeaturePanel()
+        .getSelectLeafFeaturesPanel().setAgentFeatureList(getFeaturesList());
+    bcAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getAddCompositeFeaturePanel()
+        .getSelectLeafFeaturesPanel().updateTableModelData();
   }
 
 
-  public void updateSearchServicesResultTableModelData(
-      ArrayList<ServiceRelationAgent> searchServiceResult, ArrayList<model.pojo.Agent> agentList,
-      ArrayList<Service> serviceList, ArrayList<Reputation> reputationList) {
-    bcAgentGui.getAskServiceTabPanel().getSearchServiceResultPanel()
-        .setSearchServiceResult(searchServiceResult);
-    bcAgentGui.getAskServiceTabPanel().getSearchServiceResultPanel().setAgents(agentList);
-    bcAgentGui.getAskServiceTabPanel().getSearchServiceResultPanel().setServices(serviceList);
-    bcAgentGui.getAskServiceTabPanel().getSearchServiceResultPanel().setReputations(reputationList);
-    bcAgentGui.getAskServiceTabPanel().getSearchServiceResultPanel().updateTableModelData();
+  public void updateSearchFeaturesResultTableModelData(
+      ArrayList<FeatureRelationAgent> searchFeatureResult, ArrayList<model.pojo.Agent> agentList,
+      ArrayList<Feature> serviceList, ArrayList<InnMindReputation> innMindReputationList) {
+    bcAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel()
+        .setSearchFeatureResult(searchFeatureResult);
+    bcAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel().setAgents(agentList);
+    bcAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel().setFeatures(serviceList);
+    bcAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel().setInnMindReputations(innMindReputationList);
+    bcAgentGui.getAskFeatureTabPanel().getSearchFeatureResultPanel().updateTableModelData();
   }
 
   public void showDenyExecution(String[] parsedMessage) {
     String serviceId = parsedMessage[0];
     String denialExecuterAgent = parsedMessage[1];
     // bcAgentGui.getMessagesTabPanel().getInBoxMessagesPanel().addMessageInTableModel(message);
-    JOptionPane.showMessageDialog(bcAgentGui.getAskServiceTabPanel(),
+    JOptionPane.showMessageDialog(bcAgentGui.getAskFeatureTabPanel(),
         "Demander: " + getLocalName() + ": Your request has been denied. Denial Agent: "
             + denialExecuterAgent + ", for the service: " + serviceId + ", retry the ask",
         getLocalName() + " Request Denied", JOptionPane.INFORMATION_MESSAGE);
@@ -145,8 +145,8 @@ public class BCAgent extends Agent {
       LoadAgentInLedger loadAgentInLedger = new LoadAgentInLedger(this);
       sequentialBehaviour.addSubBehaviour(loadAgentInLedger);
 
-     LoadServiceListFromLedger loadServiceListFromLedger = new LoadServiceListFromLedger(this);
-     sequentialBehaviour.addSubBehaviour(loadServiceListFromLedger);
+     LoadFeatureListFromLedger loadFeatureListFromLedger = new LoadFeatureListFromLedger(this);
+     sequentialBehaviour.addSubBehaviour(loadFeatureListFromLedger);
 
      RefreshBcAgentGui refreshBcAgentGui = new RefreshBcAgentGui(this);
      sequentialBehaviour.addSubBehaviour(refreshBcAgentGui);
@@ -190,12 +190,12 @@ public class BCAgent extends Agent {
    * @param serviceCost
    * @param serviceTime
    */
-  public void addLeafServiceTrigger(String serviceName, String serviceDescription,
+  public void addLeafFeatureTrigger(String serviceName, String serviceDescription,
       String serviceCost,
       String serviceTime) {
-    String emptyServiceComposition = "";
+    String emptyFeatureComposition = "";
     addBehaviour(
-        new AddService(this, serviceName, serviceDescription, emptyServiceComposition, serviceCost,
+        new AddFeature(this, serviceName, serviceDescription, emptyFeatureComposition, serviceCost,
             serviceTime));
   }
 
@@ -207,9 +207,9 @@ public class BCAgent extends Agent {
    * @param serviceCost
    * @param serviceTime
    */
-  public void addCompositeServiceTrigger(String serviceName, String serviceDescription,
+  public void addCompositeFeatureTrigger(String serviceName, String serviceDescription,
       String serviceComposition, String serviceCost, String serviceTime) {
-    addBehaviour(new AddService(this, serviceName, serviceDescription, serviceComposition,
+    addBehaviour(new AddFeature(this, serviceName, serviceDescription, serviceComposition,
         serviceCost,
             serviceTime));
   }
@@ -222,31 +222,31 @@ public class BCAgent extends Agent {
    * @param serviceCost
    * @param serviceTime
    */
-  public void deleteServiceRelationAgentTrigger(String serviceId, String agentId) {
-    addBehaviour(new DeleteServiceRelationAgent(this, serviceId, agentId));
+  public void deleteFeatureRelationAgentTrigger(String serviceId, String agentId) {
+    addBehaviour(new DeleteFeatureRelationAgent(this, serviceId, agentId));
 
   }
 
-  public void updateServiceRelationAgentCostTrigger(String serviceId, String agentId,
+  public void updateFeatureRelationAgentCostTrigger(String serviceId, String agentId,
       String newCostValue) {
-    String fieldToUpdate = ServiceRelationAgent.COST;
+    String fieldToUpdate = FeatureRelationAgent.COST;
     addBehaviour(
-        new UpdateServiceRelationAgent(this, serviceId, agentId, newCostValue, fieldToUpdate));
+        new UpdateFeatureRelationAgent(this, serviceId, agentId, newCostValue, fieldToUpdate));
 
   }
 
-  public void updateServiceRelationAgentTimeTrigger(String serviceId, String agentId,
+  public void updateFeatureRelationAgentTimeTrigger(String serviceId, String agentId,
       String newTimeValue) {
-    String fieldToUpdate = ServiceRelationAgent.TIME;
+    String fieldToUpdate = FeatureRelationAgent.TIME;
     addBehaviour(
-        new UpdateServiceRelationAgent(this, serviceId, agentId, newTimeValue, fieldToUpdate));
+        new UpdateFeatureRelationAgent(this, serviceId, agentId, newTimeValue, fieldToUpdate));
   }
 
-  public void updateServiceRelationAgentDescriptionTrigger(String serviceId, String agentId,
+  public void updateFeatureRelationAgentDescriptionTrigger(String serviceId, String agentId,
       String newTimeValue) {
-    String fieldToUpdate = ServiceRelationAgent.DESCRIPTION;
+    String fieldToUpdate = FeatureRelationAgent.DESCRIPTION;
     addBehaviour(
-        new UpdateServiceRelationAgent(this, serviceId, agentId, newTimeValue, fieldToUpdate));
+        new UpdateFeatureRelationAgent(this, serviceId, agentId, newTimeValue, fieldToUpdate));
   }
 
 
@@ -268,8 +268,8 @@ public class BCAgent extends Agent {
    * @param serviceName
    * @param heuristic
    */
-  public void getServicesListTrigger(String serviceName, String heuristic) {
-    addBehaviour(new GetServicesList(this, serviceName, heuristic));
+  public void getFeaturesListTrigger(String serviceName, String heuristic) {
+    addBehaviour(new GetFeaturesList(this, serviceName, heuristic));
   }
 
   /**
@@ -278,8 +278,8 @@ public class BCAgent extends Agent {
    * @param serviceId
    * @param demanderAgentId
    */
-  public void executeServiceTrigger(String serviceId, String demanderAgentId) {
-    addBehaviour(new ExecuteService(this, serviceId, demanderAgentId));
+  public void executeFeatureTrigger(String serviceId, String demanderAgentId) {
+    addBehaviour(new ExecuteFeature(this, serviceId, demanderAgentId));
   }
 
   /**
@@ -288,8 +288,8 @@ public class BCAgent extends Agent {
    * @param serviceId
    * @param demanderAgentId
    */
-  public void denyServiceExecutionTrigger(String serviceId, String demanderAgentId) {
-    addBehaviour(new DenyServiceExecution(this, serviceId, demanderAgentId));
+  public void denyFeatureExecutionTrigger(String serviceId, String demanderAgentId) {
+    addBehaviour(new DenyFeatureExecution(this, serviceId, demanderAgentId));
   }
 
   /**
@@ -299,9 +299,9 @@ public class BCAgent extends Agent {
    * @param serviceName
    * @param selectedStructAgent
    */
-  public void askSelectedServiceTrigger(String serviceId, String serviceName,
-      StructServiceRequest selectedStructAgent) {
-    addBehaviour(new AskSelectedService(this, serviceId, serviceName, selectedStructAgent));
+  public void askSelectedFeatureTrigger(String serviceId, String serviceName,
+      StructFeatureRequest selectedStructAgent) {
+    addBehaviour(new AskSelectedFeature(this, serviceId, serviceName, selectedStructAgent));
   }
 
   /**
@@ -361,17 +361,17 @@ public class BCAgent extends Agent {
   }
 
   /**
-   * @return the channelService
+   * @return the channelFeature
    */
-  public Channel getHfServiceChannel() {
-    return hfServiceChannel;
+  public Channel getHfFeatureChannel() {
+    return hfFeatureChannel;
   }
 
   /**
-   * @param channelService the channelService to set
+   * @param channelFeature the channelFeature to set
    */
-  public void setHfServiceChannel(Channel channelService) {
-      hfServiceChannel = channelService;
+  public void setHfFeatureChannel(Channel channelFeature) {
+      hfFeatureChannel = channelFeature;
   }
 
   /**
@@ -405,14 +405,14 @@ public class BCAgent extends Agent {
   /**
    * @return the servToLoad
    */
-  private ArrayList<ServiceView> getServicesList() {
-    return servicesList;
+  private ArrayList<FeatureView> getFeaturesList() {
+    return featuresList;
   }
 
   /**
    * @param servToLoad the servToLoad to set
    */
-  public void setServicesList(ArrayList<ServiceView> servToLoad) {
-      servicesList = servToLoad;
+  public void setFeaturesList(ArrayList<FeatureView> servToLoad) {
+      featuresList = servToLoad;
   }
 }

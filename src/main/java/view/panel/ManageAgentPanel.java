@@ -1,6 +1,6 @@
 package view.panel;
 
-import model.ServiceView;
+import model.FeatureView;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -16,7 +16,7 @@ public class ManageAgentPanel extends JPanel {
   private JButton buttonDownAgent = null;
   private JButton btnEliminateAgent;
   private JList<String> agentList = null;
-  private ArrayList<ServiceView> dataEntries = new ArrayList<>();
+  private ArrayList<FeatureView> dataEntries = new ArrayList<>();
   private Object[][] data;
 
   /**
@@ -32,17 +32,17 @@ public class ManageAgentPanel extends JPanel {
         {new Boolean(false), "AGT00003", "agent3", "DOWN", "2018/10/2"},};
     //// PROVA DINAMICO (REMEMBER: JAVA È UNA MERDA)
     //
-    // StructService s1 = new StructService("123412", "service1", "descr 1", "3", "6", "8");
+    // StructFeature s1 = new StructFeature("123412", "service1", "descr 1", "3", "6", "8");
     // ArrayList<String> st1 = new ArrayList<String>();
-    // st1.add(s1.getServiceId());
+    // st1.add(s1.getFeatureId());
     // st1.add(s1.getName());
     // // dataEntries.add(st1);
-    // StructService s2 = new StructService("123672", "service2", "descr 2", "1", "3", "5");
+    // StructFeature s2 = new StructFeature("123672", "service2", "descr 2", "1", "3", "5");
     // ArrayList<String> st2 = new ArrayList<String>();
-    // st2.add(s2.getServiceId());
+    // st2.add(s2.getFeatureId());
     // st2.add(s2.getName());
     // // dataEntries.add(st2);
-    // ArrayList<StructService> services = new ArrayList<StructService>();
+    // ArrayList<StructFeature> services = new ArrayList<StructFeature>();
     // services.add(s1);
     // services.add(s2);
     //

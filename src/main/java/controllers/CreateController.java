@@ -18,31 +18,31 @@ public class CreateController {
 
 
     /**
-     * Wrapper of Create Activity called from the demander Agent using the ActivityDAO
+     * Wrapper of Create Review called from the demander Agent using the ReviewDAO
      *
      * @param bcAgent
      * @param executerAgentId
-     * @param executedServiceId
+     * @param executedFeatureId
      * @param timestamp
      * @param value
      * @return
      */
     public static boolean createDemanderWriterActivity(BCAgent bcAgent, String executerAgentId,
-        String executedServiceId, String timestamp, String value) {
+        String executedFeatureId, String timestamp, String value) {
         boolean isCreatedActivity = false;
-        ActivityDAO activityDAO = new ActivityDAO();
+        ReviewDAO reviewDAO = new ReviewDAO();
         HFClient client = bcAgent.getHfClient();
         User userHF = bcAgent.getUser();
-        Channel channelHF = bcAgent.getHfServiceChannel();
+        Channel channelHF = bcAgent.getHfTransactionChannel();
         String writerAgentId = bcAgent.getMyName();
         // String demanderAgentId = demanderAgentId.getSender().getLocalName();
         String demanderAgentId = bcAgent.getMyName();
         try {
-          Activity activityPojo =
-              setActivity(executerAgentId, executedServiceId, timestamp, value, writerAgentId,
+          Review reviewPojo =
+              setActivity(executerAgentId, executedFeatureId, timestamp, value, writerAgentId,
                   demanderAgentId);
 
-          isCreatedActivity = activityDAO.create(client, userHF, channelHF, activityPojo);
+          isCreatedActivity = reviewDAO.create(client, userHF, channelHF, reviewPojo);
 
 
         } catch (Exception e) {
@@ -55,32 +55,32 @@ public class CreateController {
 
 
   /**
-     * Wrapper of Create Activity called from the executer Agent using the ActivityDAO
+     * Wrapper of Create Review called from the executer Agent using the ReviewDAO
      *
      * @param bcAgent
      * @param demanderAgentId
-     * @param executedServiceId
+     * @param executedFeatureId
      * @param timestamp
      * @param value
      * @return
      */
     public static boolean createExecuterWriterActivity(BCAgent bcAgent, String demanderAgentId,
-        String executedServiceId, String timestamp, String value) {
+        String executedFeatureId, String timestamp, String value) {
         boolean isCreatedActivity = false;
-        ActivityDAO activityDAO = new ActivityDAO();
+        ReviewDAO reviewDAO = new ReviewDAO();
         HFClient client = bcAgent.getHfClient();
         User userHF = bcAgent.getUser();
-        Channel channelHF = bcAgent.getHfServiceChannel();
+        Channel channelHF = bcAgent.getHfTransactionChannel();
         String writerAgentId = bcAgent.getMyName();
         // String demanderAgentId = demanderAgentId.getSender().getLocalName();
         String executerAgentId = bcAgent.getMyName();
         try {
             // create service TxId
-          Activity activityPojo =
-              setActivity(executerAgentId, executedServiceId, timestamp, value, writerAgentId,
+          Review reviewPojo =
+              setActivity(executerAgentId, executedFeatureId, timestamp, value, writerAgentId,
                   demanderAgentId);
 
-          isCreatedActivity = activityDAO.create(client, userHF, channelHF, activityPojo);
+          isCreatedActivity = reviewDAO.create(client, userHF, channelHF, reviewPojo);
 
 
         } catch (Exception e) {
@@ -90,22 +90,22 @@ public class CreateController {
 
     }
 
-  private static Activity setActivity(String executerAgentId, String executedServiceId,
-      String timestamp, String value, String writerAgentId, String demanderAgentId) {
+  private static Review setActivity(String executerAgentId, String executedFeatureId,
+                                    String timestamp, String value, String writerAgentId, String demanderAgentId) {
     // create service TxId
-    String executedServiceTxId = UUID.randomUUID().toString();
-    String evaluationId = writerAgentId + demanderAgentId + executerAgentId + executedServiceTxId;
-    Activity activityPojo = new Activity();
+    String executedFeatureTxId = UUID.randomUUID().toString();
+    String evaluationId = writerAgentId + demanderAgentId + executerAgentId + executedFeatureTxId;
+    Review reviewPojo = new Review();
 
-    activityPojo.setEvaluationId(evaluationId);
-    activityPojo.setWriterAgentId(writerAgentId);
-    activityPojo.setDemanderAgentId(demanderAgentId);
-    activityPojo.setExecuterAgentId(executerAgentId);
-    activityPojo.setExecutedServiceId(executedServiceId);
-    activityPojo.setExecutedServiceTxId(executedServiceTxId);
-    activityPojo.setExecutedServiceTimestamp(timestamp);
-    activityPojo.setValue(value);
-    return activityPojo;
+    reviewPojo.setEvaluationId(evaluationId);
+    reviewPojo.setWriterAgentId(writerAgentId);
+    reviewPojo.setStartupAgentId(demanderAgentId);
+    reviewPojo.setExpertAgentId(executerAgentId);
+    reviewPojo.setReviewedFeatureId(executedFeatureId);
+    reviewPojo.setReviewedFeatureTxId(executedFeatureTxId);
+    reviewPojo.setReviewedFeatureTimestamp(timestamp);
+    reviewPojo.setValue(value);
+    return reviewPojo;
   }
 
     /**
@@ -155,15 +155,15 @@ public class CreateController {
         String stringInitialReputationValue) throws ProposalException, InvalidArgumentException {
         boolean allPeerSuccess;
         ReputationDAO reputationDAO = new ReputationDAO();
-        Reputation reputationPojo = new Reputation();
+        InnMindReputation innMindReputationPojo = new InnMindReputation();
 
-        reputationPojo.setReputationId(reputationId);
-        reputationPojo.setAgentId(agentId);
-        reputationPojo.setServiceId(serviceId);
-        reputationPojo.setAgentRole(agentRole);
-        reputationPojo.setValue(stringInitialReputationValue);
+        innMindReputationPojo.setInnMindReputationId(reputationId);
+        innMindReputationPojo.setAgentId(agentId);
+        innMindReputationPojo.setFeatureId(serviceId);
+        innMindReputationPojo.setAgentRole(agentRole);
+        innMindReputationPojo.setValue(stringInitialReputationValue);
 
-        allPeerSuccess = reputationDAO.create(clientHF, userHF, channel, reputationPojo);
+        allPeerSuccess = reputationDAO.create(clientHF, userHF, channel, innMindReputationPojo);
 
         return allPeerSuccess;
     }
@@ -180,21 +180,21 @@ public class CreateController {
      * @return
      * @throws Exception
      */
-    public static boolean createService(HFClient clientHF, User userHF, Channel channel,
+    public static boolean createFeature(HFClient clientHF, User userHF, Channel channel,
         String serviceId, String serviceName, String serviceDesc, String serviceComposition)
         throws Exception {
-        ServiceDAO serviceDAO = new ServiceDAO();
+        FeatureDAO featureDAO = new FeatureDAO();
 
-        Service servicePojo = new Service();
+        Feature featurePojo = new Feature();
 
         // TODO: Gestire creazione ID(incrementale)
-        servicePojo.setServiceId(serviceId);
-        servicePojo.setName(serviceName);
-        servicePojo.setDescription(serviceDesc);
-      servicePojo.setServiceComposition(serviceComposition);
+        featurePojo.setFeatureId(serviceId);
+        featurePojo.setName(serviceName);
+//        featurePojo.setDescription(serviceDesc);
+      featurePojo.setFeatureComposition(serviceComposition);
 
 
-        boolean allPeerSuccess = serviceDAO.create(clientHF, userHF, channel, servicePojo);
+        boolean allPeerSuccess = featureDAO.create(clientHF, userHF, channel, featurePojo);
 
         return allPeerSuccess;
 
@@ -211,26 +211,26 @@ public class CreateController {
      * @param description
      * @return
      */
-    public static boolean createServiceRelationAgent(HFClient clientHF, User userHF,
+    public static boolean createFeatureRelationAgent(HFClient clientHF, User userHF,
         Channel channel, String serviceId, String agentId, String cost, String time,
         String description)
         throws Exception {
 
-      ServiceRelationAgentDAO serviceRelationAgentDAO = new ServiceRelationAgentDAO();
+      FeatureRelationAgentDAO serviceRelationAgentDAO = new FeatureRelationAgentDAO();
 
-      ServiceRelationAgent serviceRelationAgentPojo = new ServiceRelationAgent();
+      FeatureRelationAgent featureRelationAgentPojo = new FeatureRelationAgent();
 
       String relationId = serviceId + agentId;
 
-      serviceRelationAgentPojo.setRelationId(relationId);
-      serviceRelationAgentPojo.setServiceId(serviceId);
-      serviceRelationAgentPojo.setAgentId(agentId);
-      serviceRelationAgentPojo.setCost(cost);
-      serviceRelationAgentPojo.setTime(time);
-      serviceRelationAgentPojo.setDescription(description);
+      featureRelationAgentPojo.setRelationId(relationId);
+      featureRelationAgentPojo.setFeatureId(serviceId);
+      featureRelationAgentPojo.setAgentId(agentId);
+      featureRelationAgentPojo.setCost(cost);
+      featureRelationAgentPojo.setTime(time);
+      featureRelationAgentPojo.setDescription(description);
 
       boolean allPeerSuccess =
-            serviceRelationAgentDAO.create(clientHF, userHF, channel, serviceRelationAgentPojo);
+            serviceRelationAgentDAO.create(clientHF, userHF, channel, featureRelationAgentPojo);
 
       return allPeerSuccess;
     }
@@ -247,22 +247,22 @@ public class CreateController {
      * @param description
      * @return
      */
-    public static boolean createServiceRelationAgent(HFClient clientHF, User userHF,
+    public static boolean createFeatureRelationAgent(HFClient clientHF, User userHF,
         Channel channel, String relationId, String serviceId, String agentId, String cost,
         String time, String description) throws Exception {
 
-        ServiceRelationAgentDAO serviceRelationAgentDAO = new ServiceRelationAgentDAO();
+        FeatureRelationAgentDAO serviceRelationAgentDAO = new FeatureRelationAgentDAO();
 
-        ServiceRelationAgent serviceRelationAgentPojo = new ServiceRelationAgent();
+        FeatureRelationAgent featureRelationAgentPojo = new FeatureRelationAgent();
 
-        serviceRelationAgentPojo.setRelationId(relationId);
-        serviceRelationAgentPojo.setServiceId(serviceId);
-        serviceRelationAgentPojo.setAgentId(agentId);
-        serviceRelationAgentPojo.setCost(cost);
-        serviceRelationAgentPojo.setTime(time);
+        featureRelationAgentPojo.setRelationId(relationId);
+        featureRelationAgentPojo.setFeatureId(serviceId);
+        featureRelationAgentPojo.setAgentId(agentId);
+        featureRelationAgentPojo.setCost(cost);
+        featureRelationAgentPojo.setTime(time);
 
         boolean allPeerSuccess =
-            serviceRelationAgentDAO.create(clientHF, userHF, channel, serviceRelationAgentPojo);
+            serviceRelationAgentDAO.create(clientHF, userHF, channel, featureRelationAgentPojo);
 
         return allPeerSuccess;
     }

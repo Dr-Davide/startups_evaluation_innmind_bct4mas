@@ -465,7 +465,7 @@ type ChaincodeSupportServer interface {
 }
 
 func RegisterChaincodeSupportServer(s *grpc.Server, srv ChaincodeSupportServer) {
-	s.RegisterService(&_ChaincodeSupport_serviceDesc, srv)
+	s.RegisterFeature(&_ChaincodeSupport_serviceDesc, srv)
 }
 
 func _ChaincodeSupport_Register_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -494,8 +494,8 @@ func (x *chaincodeSupportRegisterServer) Recv() (*ChaincodeMessage, error) {
 	return m, nil
 }
 
-var _ChaincodeSupport_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "protos.ChaincodeSupport",
+var _ChaincodeSupport_serviceDesc = grpc.FeatureDesc{
+	FeatureName: "protos.ChaincodeSupport",
 	HandlerType: (*ChaincodeSupportServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{

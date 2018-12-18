@@ -4,8 +4,8 @@ import agents.BCAgent;
 import controllers.ComplexWorkflowController;
 import controllers.RangeQueriesController;
 import controllers.ReadController;
-import model.pojo.Activity;
-import model.pojo.Reputation;
+import model.pojo.Review;
+import model.pojo.InnMindReputation;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
@@ -17,11 +17,11 @@ public class ReputationLogic {
     private static final Logger log = Logger.getLogger(ReputationLogic.class);
 
   private BCAgent bcAgent;
-  // TODO: Levare String e lavorare direttamente su Activity
+  // TODO: Levare String e lavorare direttamente su Review
   private String demanderAgentId;
   private String executerAgentId;
-  private Activity demanderActivity;
-  private Activity executerActivity;
+  private Review demanderReview;
+  private Review executerReview;
 
     private static String demanderRole = "DEMANDER";
     private static String executerRole = "EXECUTER";
@@ -33,13 +33,13 @@ public class ReputationLogic {
     bcAgent = bcAgentInput;
     demanderAgentId = "";
     executerAgentId = "";
-    demanderActivity = new Activity();
-    executerActivity = new Activity();
+    demanderReview = new Review();
+    executerReview = new Review();
   }
 
   public void deltaBasedWorkflow() {
-    Double demanderEvaluation = Double.parseDouble(demanderActivity.getValue().toString());
-    Double executerEvaluation = Double.parseDouble(executerActivity.getValue().toString());
+    Double demanderEvaluation = Double.parseDouble(demanderReview.getValue().toString());
+    Double executerEvaluation = Double.parseDouble(executerReview.getValue().toString());
     Double deltaEvaluations = 0.0;
     if (demanderEvaluation > executerEvaluation) {
       deltaEvaluations = demanderEvaluation - executerEvaluation;
@@ -55,7 +55,7 @@ public class ReputationLogic {
     }
     if ((demanderEvaluation < insufficientValue || executerEvaluation < insufficientValue)
         && deltaEvaluations > deltaThreshold) {
-      // TODO: Complex Reputation Algorithm
+      // TODO: Complex InnMindReputation Algorithm
     }
 
   }
@@ -65,26 +65,26 @@ public class ReputationLogic {
    *
    * meanValue = ((lastReputationValue * reputationHistoryListSize) + lastEvaluation) / (reputationHistoryListSize + 1)
    *
-   * @param reputationHistoryList
+   * @param innMindReputationHistoryList
    * @param lastEvaluation
    * @return
    */
-  private Double computeMeanValue(ArrayList<model.pojo.Reputation> reputationHistoryList,
+  private Double computeMeanValue(ArrayList<InnMindReputation> innMindReputationHistoryList,
       Double lastEvaluation) {
     Double sum = 0.0;
     Double meanValue;
 
-    Integer reputationHistorySize = reputationHistoryList.size();
+    Integer reputationHistorySize = innMindReputationHistoryList.size();
 
     if (reputationHistorySize > 0) {
 
       // correct real mean value of evaluations
       sum = Double
-          .parseDouble(reputationHistoryList.get(reputationHistorySize - 1).getValue().toString())
+          .parseDouble(innMindReputationHistoryList.get(reputationHistorySize - 1).getValue().toString())
           * reputationHistorySize;
     }
 
-    // Add the lastEvaluation in the Reputation computation
+    // Add the lastEvaluation in the InnMindReputation computation
     sum = sum + lastEvaluation;
 
     //    meanValue = sum / i;
@@ -97,10 +97,10 @@ public class ReputationLogic {
 
 
   /**
-   * Compute the Reputation of <code>agentId</code> relative of <code>serviceId</code> with the <code>agentRole</code>
+   * Compute the InnMindReputation of <code>agentId</code> relative of <code>serviceId</code> with the <code>agentRole</code>
    * now the computation of the reputation is the mean value of all the Evaluations given from the other.
-   * In other words: Executer Reputation = Mean Value of all the evaluations given by the Demanders
-   * Demander Reputation = Mean Value of all the evaluations given by the Executers (for that service)
+   * In other words: Executer InnMindReputation = Mean Value of all the evaluations given by the Demanders
+   * Demander InnMindReputation = Mean Value of all the evaluations given by the Executers (for that service)
    *
    * @param agentId
    * @param serviceId
@@ -115,36 +115,36 @@ public class ReputationLogic {
     String emptyString = "";
     Double computedReputationValue;
 
-    ArrayList<model.pojo.Reputation> reputationHistoryList;
+    ArrayList<InnMindReputation> innMindReputationHistoryList;
 
     String reputationId = agentId + serviceId + agentRole;
 
-    // Get the actual reputation
-    Reputation reputation = ReadController
-        .getReputation(bcAgent.getHfClient(), bcAgent.getHfServiceChannel(), reputationId);
+    // Get the actual innMindReputation
+    InnMindReputation innMindReputation = ReadController
+        .getReputation(bcAgent.getHfClient(), bcAgent.getHfTransactionChannel(), reputationId);
 
-    log.info("REPUTATION ACTUAL VALUE: " + reputation.getReputationId());
+    log.info("REPUTATION ACTUAL VALUE: " + innMindReputation.getInnMindReputationId());
     // UPDATE REPUTATION
 
-      // Get Reputation History
-    reputationHistoryList = RangeQueriesController.getReputationHistory(bcAgent, reputationId);
+      // Get InnMindReputation History
+    innMindReputationHistoryList = RangeQueriesController.getReputationHistory(bcAgent, reputationId);
 
-    log.info("REPUTATION HISTORY SIZE: " + reputationHistoryList.size());
+    log.info("REPUTATION HISTORY SIZE: " + innMindReputationHistoryList.size());
 
     // Get the Last Evaluation depending on the agentRole
     Double lastEvaluation =
         0.0; // put a value only to let it compile because of the if else, normally have to be assigned by the if or if else closures
     if (agentRole.equals(ReputationLogic.executerRole)) {
       // GET THE DEMANDER EVALUATION
-      lastEvaluation = Double.parseDouble(demanderActivity.getValue().toString());
+      lastEvaluation = Double.parseDouble(demanderReview.getValue().toString());
     } else if (agentRole.equals(ReputationLogic.demanderRole)) {
-      // TODO: Think of logic of Demander Reputation, for now take the value from executerActivity
+      // TODO: Think of logic of Demander InnMindReputation, for now take the value from executerReview
       // GET THE EXECUTER EVALUATION
-      lastEvaluation = Double.parseDouble(executerActivity.getValue().toString());
+      lastEvaluation = Double.parseDouble(executerReview.getValue().toString());
     }
 
     // Compute Mean Value
-    computedReputationValue = computeMeanValue(reputationHistoryList, lastEvaluation);
+    computedReputationValue = computeMeanValue(innMindReputationHistoryList, lastEvaluation);
     //    }
 
 
@@ -153,7 +153,7 @@ public class ReputationLogic {
   }
 
   /**
-   * Wrapper of computeReputation input demanderAgentId and Update (or Create) Reputation
+   * Wrapper of computeReputation input demanderAgentId and Update (or Create) InnMindReputation
    *
    * @return
    * @throws Exception
@@ -161,8 +161,8 @@ public class ReputationLogic {
   public boolean updateDemanderReputation() throws Exception {
     boolean isUpdatedDemanderReputation;
 
-    String serviceId = demanderActivity.getExecutedServiceId().toString();
-    String demanderAgentId = demanderActivity.getDemanderAgentId().toString();
+    String serviceId = demanderReview.getReviewedFeatureId().toString();
+    String demanderAgentId = demanderReview.getStartupAgentId().toString();
 
     // Compute the new Value
     Double newReputationValue =
@@ -177,7 +177,7 @@ public class ReputationLogic {
   }
 
   /**
-   * Wrapper of computeReputation input executerAgentId and Update (or Create) Reputation
+   * Wrapper of computeReputation input executerAgentId and Update (or Create) InnMindReputation
    *
    * @return
    * @throws Exception
@@ -185,8 +185,8 @@ public class ReputationLogic {
   public boolean updateExecuterReputation() throws Exception {
     boolean isUpdatedExecuterReputation;
 
-    String serviceId = executerActivity.getExecutedServiceId().toString();
-    String executerAgentId = executerActivity.getExecuterAgentId().toString();
+    String serviceId = executerReview.getReviewedFeatureId().toString();
+    String executerAgentId = executerReview.getExpertAgentId().toString();
 
     Double newReputationValue =
         computeReputation(executerAgentId, serviceId, ReputationLogic.executerRole);
@@ -198,33 +198,33 @@ public class ReputationLogic {
     return isUpdatedExecuterReputation;
   }
 
-  public void setDemanderAndExecuter(Activity firstActivity, Activity secondActivity) {
-    if (firstActivity.getWriterAgentId().toString()
-        .equals(firstActivity.getDemanderAgentId().toString())) {
+  public void setDemanderAndExecuter(Review firstReview, Review secondReview) {
+    if (firstReview.getWriterAgentId().toString()
+        .equals(firstReview.getStartupAgentId().toString())) {
       // Writer Demander
-      demanderAgentId = firstActivity.getDemanderAgentId().toString();
-      demanderActivity = firstActivity;
+      demanderAgentId = firstReview.getStartupAgentId().toString();
+      demanderReview = firstReview;
 
-    } else if (firstActivity.getWriterAgentId().toString()
-        .equals(firstActivity.getExecuterAgentId().toString())) {
+    } else if (firstReview.getWriterAgentId().toString()
+        .equals(firstReview.getExpertAgentId().toString())) {
       // Writer Executer
-        executerAgentId = firstActivity.getExecuterAgentId().toString();
-        executerActivity = firstActivity;
+        executerAgentId = firstReview.getExpertAgentId().toString();
+        executerReview = firstReview;
 
     }
 
-    if (secondActivity.getWriterAgentId().toString()
-        .equals(secondActivity.getDemanderAgentId().toString())) {
+    if (secondReview.getWriterAgentId().toString()
+        .equals(secondReview.getStartupAgentId().toString())) {
       // Writer Demander
-      demanderAgentId = secondActivity.getDemanderAgentId().toString();
-      demanderActivity = secondActivity;
+      demanderAgentId = secondReview.getStartupAgentId().toString();
+      demanderReview = secondReview;
 
-    } else if (secondActivity.getWriterAgentId().toString()
-        .equals(secondActivity.getExecuterAgentId().toString())) {
+    } else if (secondReview.getWriterAgentId().toString()
+        .equals(secondReview.getExpertAgentId().toString())) {
       // Writer Executer
 
-      executerAgentId = secondActivity.getExecuterAgentId().toString();
-      executerActivity = secondActivity;
+      executerAgentId = secondReview.getExpertAgentId().toString();
+      executerReview = secondReview;
     }
   }
 
@@ -278,30 +278,30 @@ public class ReputationLogic {
   }
 
   /**
-   * @return the demanderActivity
+   * @return the demanderReview
    */
-  public Activity getDemanderActivity() {
-    return demanderActivity;
+  public Review getDemanderReview() {
+    return demanderReview;
   }
 
   /**
-   * @param demanderActivity the demanderActivity to set
+   * @param demanderReview the demanderReview to set
    */
-  public void setDemanderActivity(Activity demanderActivity) {
-    this.demanderActivity = demanderActivity;
+  public void setDemanderReview(Review demanderReview) {
+    this.demanderReview = demanderReview;
   }
 
   /**
-   * @return the executerActivity
+   * @return the executerReview
    */
-  public Activity getExecuterActivity() {
-    return executerActivity;
+  public Review getExecuterReview() {
+    return executerReview;
   }
 
   /**
-   * @param executerActivity the executerActivity to set
+   * @param executerReview the executerReview to set
    */
-  public void setExecuterActivity(Activity executerActivity) {
-    this.executerActivity = executerActivity;
+  public void setExecuterReview(Review executerReview) {
+    this.executerReview = executerReview;
   }
 }

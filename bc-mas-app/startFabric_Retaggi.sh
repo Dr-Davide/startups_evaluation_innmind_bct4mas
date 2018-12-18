@@ -64,10 +64,10 @@ sleep 10
 # INVOKATION ON SERVICECH
 docker exec -e "CORE_PEER_LOCALMSPID=Org1MSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer0.org1.example.com peer chaincode invoke -o orderer.example.com:7050 -C $SERV_CHAN -n $CHAINCODE_SERV -v 1.0 -c '{"Args":["initAgents"]}'
 # sleep 5
-# docker exec -e "CORE_PEER_LOCALMSPID=Org1MSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer0.org1.example.com peer chaincode invoke -o orderer.example.com:7050 -C $SERV_CHAN -n $CHAINCODE_SERV -v 1.0 -c '{"Args":["queryService","service3"]}'
+# docker exec -e "CORE_PEER_LOCALMSPID=Org1MSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer0.org1.example.com peer chaincode invoke -o orderer.example.com:7050 -C $SERV_CHAN -n $CHAINCODE_SERV -v 1.0 -c '{"Args":["queryFeature","service3"]}'
 
 #sleep 5
-#docker exec -e "CORE_PEER_LOCALMSPID=Org1MSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer0.org1.example.com peer chaincode invoke -o orderer.example.com:7050 -C servicech -n bc-mas-cc -v 1.0 -c '{"Args":["createService","AGENT3","address3","service3","description3"]}'
+#docker exec -e "CORE_PEER_LOCALMSPID=Org1MSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer0.org1.example.com peer chaincode invoke -o orderer.example.com:7050 -C servicech -n bc-mas-cc -v 1.0 -c '{"Args":["createFeature","AGENT3","address3","service3","description3"]}'
 
 printf "\nTotal setup execution time : $(($(date +%s) - starttime)) secs ...\n\n\n"
 printf "If ther is no folder called node_modules, then run 'npm install'\n otherwise ignore this message\n"

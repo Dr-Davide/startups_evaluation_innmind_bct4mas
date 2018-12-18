@@ -546,7 +546,7 @@ type AtomicBroadcastServer interface {
 }
 
 func RegisterAtomicBroadcastServer(s *grpc.Server, srv AtomicBroadcastServer) {
-	s.RegisterService(&_AtomicBroadcast_serviceDesc, srv)
+	s.RegisterFeature(&_AtomicBroadcast_serviceDesc, srv)
 }
 
 func _AtomicBroadcast_Broadcast_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -601,8 +601,8 @@ func (x *atomicBroadcastDeliverServer) Recv() (*common.Envelope, error) {
 	return m, nil
 }
 
-var _AtomicBroadcast_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "orderer.AtomicBroadcast",
+var _AtomicBroadcast_serviceDesc = grpc.FeatureDesc{
+	FeatureName: "orderer.AtomicBroadcast",
 	HandlerType: (*AtomicBroadcastServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{

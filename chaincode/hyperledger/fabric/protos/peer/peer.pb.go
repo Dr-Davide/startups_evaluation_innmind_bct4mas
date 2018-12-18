@@ -100,7 +100,7 @@ type EndorserServer interface {
 }
 
 func RegisterEndorserServer(s *grpc.Server, srv EndorserServer) {
-	s.RegisterService(&_Endorser_serviceDesc, srv)
+	s.RegisterFeature(&_Endorser_serviceDesc, srv)
 }
 
 func _Endorser_ProcessProposal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -121,8 +121,8 @@ func _Endorser_ProcessProposal_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-var _Endorser_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "protos.Endorser",
+var _Endorser_serviceDesc = grpc.FeatureDesc{
+	FeatureName: "protos.Endorser",
 	HandlerType: (*EndorserServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

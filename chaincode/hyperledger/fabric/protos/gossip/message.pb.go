@@ -1948,7 +1948,7 @@ type GossipServer interface {
 }
 
 func RegisterGossipServer(s *grpc.Server, srv GossipServer) {
-	s.RegisterService(&_Gossip_serviceDesc, srv)
+	s.RegisterFeature(&_Gossip_serviceDesc, srv)
 }
 
 func _Gossip_GossipStream_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -1995,8 +1995,8 @@ func _Gossip_Ping_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
-var _Gossip_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "gossip.Gossip",
+var _Gossip_serviceDesc = grpc.FeatureDesc{
+	FeatureName: "gossip.Gossip",
 	HandlerType: (*GossipServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

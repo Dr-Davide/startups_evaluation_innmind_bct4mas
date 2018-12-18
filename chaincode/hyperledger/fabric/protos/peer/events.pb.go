@@ -963,7 +963,7 @@ type EventsServer interface {
 }
 
 func RegisterEventsServer(s *grpc.Server, srv EventsServer) {
-	s.RegisterService(&_Events_serviceDesc, srv)
+	s.RegisterFeature(&_Events_serviceDesc, srv)
 }
 
 func _Events_Chat_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -992,8 +992,8 @@ func (x *eventsChatServer) Recv() (*SignedEvent, error) {
 	return m, nil
 }
 
-var _Events_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "protos.Events",
+var _Events_serviceDesc = grpc.FeatureDesc{
+	FeatureName: "protos.Events",
 	HandlerType: (*EventsServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
@@ -1100,7 +1100,7 @@ type DeliverServer interface {
 }
 
 func RegisterDeliverServer(s *grpc.Server, srv DeliverServer) {
-	s.RegisterService(&_Deliver_serviceDesc, srv)
+	s.RegisterFeature(&_Deliver_serviceDesc, srv)
 }
 
 func _Deliver_Deliver_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -1155,8 +1155,8 @@ func (x *deliverDeliverFilteredServer) Recv() (*common.Envelope, error) {
 	return m, nil
 }
 
-var _Deliver_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "protos.Deliver",
+var _Deliver_serviceDesc = grpc.FeatureDesc{
+	FeatureName: "protos.Deliver",
 	HandlerType: (*DeliverServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{

@@ -505,12 +505,12 @@ public class SdkIntegration {
             // setup service channel
             if (i == 0) {
                 ArrayList<Peer> servicePeerList2 = createPeerList(bcHfClient);
-                bcAgent.setHfServiceChannel(generalChannel);
-                addPeersToHFChannel(bcAgent.getHfServiceChannel(), servicePeerList2);
-                bcAgent.getHfServiceChannel().addOrderer(bcHfClient
+                bcAgent.setHfFeatureChannel(generalChannel);
+                addPeersToHFChannel(bcAgent.getHfFeatureChannel(), servicePeerList2);
+                bcAgent.getHfFeatureChannel().addOrderer(bcHfClient
                     .newOrderer(hfJson2Pojo.getOrdererNames().get(0),
                         hfJson2Pojo.getOrdererGrpcURLs().get(0)));
-                bcAgent.getHfServiceChannel().initialize();
+                bcAgent.getHfFeatureChannel().initialize();
             }
 
             // setup transaction channel

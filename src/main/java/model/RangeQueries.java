@@ -2,11 +2,11 @@ package model;
 
 import com.google.protobuf.ByteString;
 import model.dao.AgentDAO;
-import model.dao.ServiceDAO;
-import model.pojo.Activity;
-import model.pojo.Reputation;
-import model.pojo.Service;
-import model.pojo.ServiceRelationAgent;
+import model.dao.FeatureDAO;
+import model.pojo.Review;
+import model.pojo.Feature;
+import model.pojo.FeatureRelationAgent;
+import model.pojo.InnMindReputation;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.*;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
@@ -24,7 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.util.*;
 
 /**
- * Functions to interact with the Service Ledger (SL) (Are wrapper of the underlying chaincode's
+ * Functions to interact with the Feature Ledger (SL) (Are wrapper of the underlying chaincode's
  * invoke functions)
  *
  *
@@ -32,12 +32,12 @@ import java.util.*;
  */
 public class RangeQueries extends GeneralLedgerInteraction {
   private static final Logger log = Logger.getLogger(RangeQueries.class);
-    private static String chaincodeName = "trustreputationledger";
+    private static String chaincodeName = "innMind";
 
     public RangeQueries() {
     }
 
-  private static ServiceDAO serviceDAO = new ServiceDAO();
+  private static FeatureDAO featureDAO = new FeatureDAO();
   private static AgentDAO agentDAO = new AgentDAO();
 
   // FIRST PART: ALL CREATE FUNCTIONS:
@@ -45,7 +45,7 @@ public class RangeQueries extends GeneralLedgerInteraction {
 
 
     /**
-   * @deprecated Couple a Service to an Agent (the underlying chaincode function already does the
+   * @deprecated Couple a Feature to an Agent (the underlying chaincode function already does the
    *             reference integrity check)
    * 
    * @param clientHF
@@ -60,12 +60,12 @@ public class RangeQueries extends GeneralLedgerInteraction {
    * @throws Exception
    */
   @Deprecated
-  public static boolean coupleServiceWithAgent(HFClient clientHF, User userHF, Channel channel,
+  public static boolean coupleFeatureWithAgent(HFClient clientHF, User userHF, Channel channel,
       String serviceId, String agentId, String cost, String time, Float agentReputation)
       throws Exception {
 
     // TODO: SISTEMARE CHIAMATA AL CHAINCODE
-    String chaincodeFunctionName = "CreateServiceAgentRelation";
+    String chaincodeFunctionName = "CreateFeatureAgentRelation";
     // TODO: Gestire creazione ID(incrementale)
 
     String[] chaincodeArguments =
@@ -88,7 +88,7 @@ public class RangeQueries extends GeneralLedgerInteraction {
   }
 
   /**
-   * Couple a Service to an Agent, if the service doesn't already exist it will create the service
+   * Couple a Feature to an Agent, if the service doesn't already exist it will create the service
    * (and relative indexes) first with the standard value of reputation defined inside the
    * chaincode's function
    * 
@@ -104,13 +104,13 @@ public class RangeQueries extends GeneralLedgerInteraction {
    * @return
    * @throws Exception
    */
-  public static boolean createServiceAndCoupleWithAgentWithStandardValue(HFClient clientHF,
+  public static boolean createFeatureAndCoupleWithAgentWithStandardValue(HFClient clientHF,
       User userHF, Channel channel, String serviceId, String serviceName, String serviceDescription,
       String agentId, String cost, String time) throws Exception {
 
     // Chaincode function that initialize reputation with standard value
-    // Standard Reputation Value ("6.0") Controlled by the chaincode itself
-    String chaincodeFunctionName = "CreateServiceAndServiceAgentRelationWithStandardValue";
+    // Standard InnMindReputation Value ("6.0") Controlled by the chaincode itself
+    String chaincodeFunctionName = "CreateFeatureAndFeatureAgentRelationWithStandardValue";
     // TODO: Gestire creazione ID(incrementale)
 
     String[] chaincodeArguments =
@@ -133,7 +133,7 @@ public class RangeQueries extends GeneralLedgerInteraction {
   }
 
   /**
-   * Couple a Service to an Agent, if the service doesn't already exist it will create the service
+   * Couple a Feature to an Agent, if the service doesn't already exist it will create the service
    * (and relative indexes) first
    * 
    * @param clientHF
@@ -149,12 +149,12 @@ public class RangeQueries extends GeneralLedgerInteraction {
    * @return
    * @throws Exception
    */
-  public static boolean createServiceAndCoupleWithAgent(HFClient clientHF, User userHF,
+  public static boolean createFeatureAndCoupleWithAgent(HFClient clientHF, User userHF,
       Channel channel, String serviceId, String serviceName, String serviceDescription,
       String agentId, String cost, String time, String initReputationValue) throws Exception {
 
 
-    String chaincodeFunctionName = "CreateServiceAndServiceAgentRelation";
+    String chaincodeFunctionName = "CreateFeatureAndFeatureAgentRelation";
     // TODO: Gestire creazione ID(incrementale)
 
     String[] chaincodeArguments = new String[] {serviceId, serviceName, serviceDescription, agentId,
@@ -243,14 +243,14 @@ public class RangeQueries extends GeneralLedgerInteraction {
    * @throws InvalidArgumentException
    * @throws ProposalException
    */
-  public static Service getServiceNotFoundError(HFClient hfClient, Channel channel,
-      String serviceId) throws ProposalException, InvalidArgumentException {
-    String chaincodeFunction = "GetServiceNotFoundError";
+  public static Feature getFeatureNotFoundError(HFClient hfClient, Channel channel,
+                                                String serviceId) throws ProposalException, InvalidArgumentException {
+    String chaincodeFunction = "GetFeatureNotFoundError";
 
     String[] chaincodeArguments = new String[] {serviceId};
 
 
-    Service servicePojo = new Service();
+    Feature featurePojo = new Feature();
 
     log.info("Querying for " + serviceId);
     Collection<ProposalResponse> proposalResponseCollection = null;
@@ -268,11 +268,10 @@ public class RangeQueries extends GeneralLedgerInteraction {
       if (isFailureResponse(proposalResponse)) {
         // Empty string first list element (usually the key(id)) is my "not found asset in ledger"
         String emptyString = "";
-        servicePojo.setServiceId(emptyString);
-        servicePojo.setName(emptyString);
-        servicePojo.setDescription(emptyString);
+        featurePojo.setFeatureId(emptyString);
+        featurePojo.setName(emptyString);
         firstPeerAnswer = true;
-        return servicePojo;
+        return featurePojo;
       }
 
       String payload = null;
@@ -288,16 +287,15 @@ public class RangeQueries extends GeneralLedgerInteraction {
       // aggiunge alla lista solo la prima risposta (suppone che siano tutte uguali)
       // TODO: Aggiungere controllo uguaglianza risposte peer?
       if (!firstPeerAnswer) {
-        servicePojo.setServiceId(jsonObject.get("ServiceId"));
-        servicePojo.setName(jsonObject.get("Name"));
-        servicePojo.setDescription(jsonObject.get("Description"));
+        featurePojo.setFeatureId(jsonObject.get("FeatureId"));
+        featurePojo.setName(jsonObject.get("Name"));
         firstPeerAnswer = true;
       }
       System.out
           .println("response from peer: " + proposalResponse.getPeer().getName() + ": " + payload);
       i++;
     }
-    return servicePojo;
+    return featurePojo;
   }
 
   /**
@@ -377,14 +375,14 @@ public class RangeQueries extends GeneralLedgerInteraction {
    * @throws InvalidArgumentException
    * @throws ProposalException
    */
-  public static ServiceRelationAgent getServiceRelationAgent(HFClient hfClient, Channel channel,
-      String relationId) throws ProposalException, InvalidArgumentException {
+  public static FeatureRelationAgent getFeatureRelationAgent(HFClient hfClient, Channel channel,
+                                                             String relationId) throws ProposalException, InvalidArgumentException {
 
-    String chaincodeFunction = "GetServiceRelationAgent";
+    String chaincodeFunction = "GetFeatureRelationAgent";
 
     String[] chaincodeArguments = new String[] {relationId};
 
-    ServiceRelationAgent serviceRelationAgentArray = new ServiceRelationAgent();
+    FeatureRelationAgent featureRelationAgentArray = new FeatureRelationAgent();
 
     log.info("Querying for " + relationId);
     Collection<ProposalResponse> proposalResponseCollection = null;
@@ -401,9 +399,9 @@ public class RangeQueries extends GeneralLedgerInteraction {
       if (isFailureResponse(proposalResponse)) {
         // Empty string first list element (usually the key(id)) is my "not found asset in ledger"
         String emptyString = "";
-        serviceRelationAgentArray.setRelationId(emptyString);
+        featureRelationAgentArray.setRelationId(emptyString);
         firstPeerAnswer = true;
-        return serviceRelationAgentArray;
+        return featureRelationAgentArray;
       }
       String payload = null;
       JSONObject jsonObject = null;
@@ -418,18 +416,18 @@ public class RangeQueries extends GeneralLedgerInteraction {
       // aggiunge alla lista solo la prima risposta (suppone che siano tutte uguali)
       // TODO: Aggiungere controllo uguaglianza risposte peer?
       if (!firstPeerAnswer) {
-        serviceRelationAgentArray.setRelationId(jsonObject.get("RelationId"));
-        serviceRelationAgentArray.setServiceId(jsonObject.get("ServiceId"));
-        serviceRelationAgentArray.setAgentId(jsonObject.get("AgentId"));
-        serviceRelationAgentArray.setCost(jsonObject.get("Cost"));
-        serviceRelationAgentArray.setTime(jsonObject.get("Time"));
+        featureRelationAgentArray.setRelationId(jsonObject.get("RelationId"));
+        featureRelationAgentArray.setFeatureId(jsonObject.get("FeatureId"));
+        featureRelationAgentArray.setAgentId(jsonObject.get("AgentId"));
+        featureRelationAgentArray.setCost(jsonObject.get("Cost"));
+        featureRelationAgentArray.setTime(jsonObject.get("Time"));
         firstPeerAnswer = true;
       }
       System.out
           .println("response from peer: " + proposalResponse.getPeer().getName() + ": " + payload);
       i++;
     }
-    return serviceRelationAgentArray;
+    return featureRelationAgentArray;
   }
 
   // THIRD PART: ALL RANGE QUERY FUNCTIONS:
@@ -443,15 +441,15 @@ public class RangeQueries extends GeneralLedgerInteraction {
    * @param serviceId
    * @return
    */
-  public static ArrayList<ServiceRelationAgent> getAgentsByService(HFClient hfClient,
-      Channel channel, String serviceId) {
+  public static ArrayList<FeatureRelationAgent> getAgentsByFeature(HFClient hfClient,
+                                                                   Channel channel, String serviceId) {
 
-    String chaincodeFunction = "GetAgentsByService";
+    String chaincodeFunction = "GetAgentsByFeature";
 
     String[] chaincodeArguments = new String[] {serviceId};
 
 
-      ArrayList<ServiceRelationAgent> serviceRelationAgentlist = new ArrayList<>();
+      ArrayList<FeatureRelationAgent> featureRelationAgentlist = new ArrayList<>();
 
     log.info("Querying for " + serviceId);
     Collection<ProposalResponse> proposalResponseCollection = null;
@@ -472,14 +470,14 @@ public class RangeQueries extends GeneralLedgerInteraction {
       if (isFailureResponse(proposalResponse)) {
         // Empty string first list element (usually the key(id)) is my "not found asset in ledger"
         String emptyString = "";
-        ServiceRelationAgent singleResult = new ServiceRelationAgent();
+        FeatureRelationAgent singleResult = new FeatureRelationAgent();
         singleResult.setAgentId(emptyString); // RelationId
-        singleResult.setServiceId(emptyString); // ServiceId
+        singleResult.setFeatureId(emptyString); // FeatureId
         singleResult.setAgentId(emptyString); // AgentId
         singleResult.setCost(emptyString); // Cost
         singleResult.setTime(emptyString); // Time
         firstPeerAnswer = true;
-        return serviceRelationAgentlist;
+        return featureRelationAgentlist;
       }
       String payload = null;
       JSONArray jsonarray = null;
@@ -498,14 +496,14 @@ public class RangeQueries extends GeneralLedgerInteraction {
           while (iterator.hasNext()) {
               jsonChildObject = iterator.next();
 
-              ServiceRelationAgent singleResult = new ServiceRelationAgent();
+              FeatureRelationAgent singleResult = new FeatureRelationAgent();
               singleResult.setRelationId(jsonChildObject.get("RelationId"));
-              singleResult.setServiceId(jsonChildObject.get("ServiceId"));
+              singleResult.setFeatureId(jsonChildObject.get("FeatureId"));
               singleResult.setAgentId(jsonChildObject.get("AgentId"));
               singleResult.setCost(jsonChildObject.get("Cost"));
               singleResult.setTime(jsonChildObject.get("Time"));
 
-              serviceRelationAgentlist.add(singleResult);
+              featureRelationAgentlist.add(singleResult);
           }
           firstPeerAnswer = true;
       }
@@ -513,7 +511,7 @@ public class RangeQueries extends GeneralLedgerInteraction {
           .println("response from peer: " + proposalResponse.getPeer().getName() + ": " + payload);
       i++;
     }
-    return serviceRelationAgentlist;
+    return featureRelationAgentlist;
   }
 
   /**
@@ -525,15 +523,15 @@ public class RangeQueries extends GeneralLedgerInteraction {
    * @param agentId
    * @return
    */
-  public static ArrayList<ServiceRelationAgent> getServicesByAgent(HFClient hfClient,
-      Channel channel, String agentId) {
+  public static ArrayList<FeatureRelationAgent> getFeaturesByAgent(HFClient hfClient,
+                                                                   Channel channel, String agentId) {
 
-    String chaincodeFunction = "GetServicesByAgent";
+    String chaincodeFunction = "GetFeaturesByAgent";
 
     String[] chaincodeArguments = new String[] {agentId};
 
 
-      ArrayList<ServiceRelationAgent> serviceRelationAgentlist = new ArrayList<>();
+      ArrayList<FeatureRelationAgent> featureRelationAgentlist = new ArrayList<>();
 
     Collection<ProposalResponse> proposalResponseCollection = null;
     try {
@@ -557,7 +555,7 @@ public class RangeQueries extends GeneralLedgerInteraction {
       // Error response (FAILURE) is the chaincode "not found asset in ledger")
       if (isFailureResponse(proposalResponse)) {
 
-        return serviceRelationAgentlist;
+        return featureRelationAgentlist;
       }
       String payload = null;
       JSONArray jsonarray = null;
@@ -575,15 +573,15 @@ public class RangeQueries extends GeneralLedgerInteraction {
       if (!firstPeerAnswer) {
           while (iterator.hasNext()) {
               jsonChildObject = iterator.next();
-              ServiceRelationAgent singleResult = new ServiceRelationAgent();
+              FeatureRelationAgent singleResult = new FeatureRelationAgent();
 
               singleResult.setRelationId(jsonChildObject.get("RelationId"));
-              singleResult.setServiceId(jsonChildObject.get("ServiceId"));
+              singleResult.setFeatureId(jsonChildObject.get("FeatureId"));
               singleResult.setAgentId(jsonChildObject.get("AgentId"));
               singleResult.setCost(jsonChildObject.get("Cost"));
               singleResult.setTime(jsonChildObject.get("Time"));
 
-              serviceRelationAgentlist.add(singleResult);
+              featureRelationAgentlist.add(singleResult);
           }
           firstPeerAnswer = true;
       }
@@ -592,18 +590,18 @@ public class RangeQueries extends GeneralLedgerInteraction {
         //      i++;
     }
 
-      return serviceRelationAgentlist;
+      return featureRelationAgentlist;
   }
 
 
-  public static ArrayList<Service> getServicesByServiceName(HFClient hfClient, Channel channel,
-      String serviceName) {
+  public static ArrayList<Feature> getFeaturesByFeatureName(HFClient hfClient, Channel channel,
+                                                            String featureName) {
 
-    String chaincodeFunction = "GetServicesByName";
+    String chaincodeFunction = "GetFeaturesByName";
 
-    String[] chaincodeArguments = new String[] {serviceName};
+    String[] chaincodeArguments = new String[] {featureName};
 
-    ArrayList<Service> servicesQueryResultList = new ArrayList<>();
+    ArrayList<Feature> servicesQueryResultList = new ArrayList<>();
 
     Collection<ProposalResponse> proposalResponseCollection = null;
     try {
@@ -646,12 +644,12 @@ public class RangeQueries extends GeneralLedgerInteraction {
               while (i < jsonArrayGetNameResult.size()) {
                 JsonObject jsonChildObject = jsonArrayGetNameResult.getJsonObject(i);
                 log.info("JSON CHILD OBJECT: " + jsonChildObject);
-                Service singleResult = new Service();
+                Feature singleResult = new Feature();
 
-                singleResult.setServiceId(jsonChildObject.getString("ServiceId"));
+                singleResult.setFeatureId(jsonChildObject.getString("FeatureId"));
                 singleResult.setName(jsonChildObject.getString("Name"));
-                singleResult.setDescription(jsonChildObject.getString("Description"));
-                singleResult.setServiceComposition(Utils.parseServiceComposition(jsonChildObject));
+//                singleResult.setDescription(jsonChildObject.getString("Description"));
+                singleResult.setFeatureComposition(Utils.parseFeatureComposition(jsonChildObject));
 
                 servicesQueryResultList.add(singleResult);
 
@@ -683,14 +681,14 @@ public class RangeQueries extends GeneralLedgerInteraction {
      * @param timestamp
      * @return
      */
-    public static ArrayList<Activity> getActivitiesByDemanderExecuterTimestamp(HFClient hfClient,
-        Channel channel, String demanderAgentId, String executerAgentId, String timestamp) {
-        String chaincodeFunction = "GetActivitiesByDemanderExecuterTimestamp";
+    public static ArrayList<Review> getActivitiesByDemanderExecuterTimestamp(HFClient hfClient,
+                                                                             Channel channel, String demanderAgentId, String executerAgentId, String timestamp) {
+        String chaincodeFunction = "GetReviewsByStartupExpertTimestamp";
 
         String[] chaincodeArguments = new String[] {demanderAgentId, executerAgentId, timestamp};
 
 
-        ArrayList<Activity> activitieslist = new ArrayList<>();
+        ArrayList<Review> activitieslist = new ArrayList<>();
 
         Collection<ProposalResponse> proposalResponseCollection = null;
         try {
@@ -711,14 +709,14 @@ public class RangeQueries extends GeneralLedgerInteraction {
             if (isFailureResponse(proposalResponse)) {
                 // Empty string first list element (usually the key(id)) is my "not found asset in ledger"
                 String emptyString = "";
-                Activity singleResult = new Activity();
+                Review singleResult = new Review();
                 singleResult.setEvaluationId(emptyString); // EvaluationId
                 singleResult.setWriterAgentId(emptyString); // WriterAgentId
-                singleResult.setDemanderAgentId(emptyString); // DemanderAgentId
-                singleResult.setExecuterAgentId(emptyString); // ExecuterAgentId
-                singleResult.setExecutedServiceId(emptyString); // ExecutedServiceId
-                singleResult.setExecutedServiceTxId(emptyString); // ExecutedServiceTxId (NULL)
-                singleResult.setExecutedServiceTimestamp(emptyString); // ExecutedServiceTimestamp
+                singleResult.setStartupAgentId(emptyString); // DemanderAgentId
+                singleResult.setExpertAgentId(emptyString); // ExecuterAgentId
+                singleResult.setReviewedFeatureId(emptyString); // ExecutedFeatureId
+                singleResult.setReviewedFeatureTxId(emptyString); // ExecutedFeatureTxId (NULL)
+                singleResult.setReviewedFeatureTimestamp(emptyString); // ExecutedFeatureTimestamp
                 singleResult.setValue(emptyString); // Value
                 activitieslist.add(singleResult);
                 firstPeerAnswer = true;
@@ -741,15 +739,15 @@ public class RangeQueries extends GeneralLedgerInteraction {
             if (!firstPeerAnswer) {
                 while (iterator.hasNext()) {
                     jsonChildObject = iterator.next();
-                    Activity singleResult = new Activity();
+                    Review singleResult = new Review();
                     singleResult.setEvaluationId(jsonChildObject.get("EvaluationId"));
                     singleResult.setWriterAgentId(jsonChildObject.get("WriterAgentId"));
-                    singleResult.setDemanderAgentId(jsonChildObject.get("DemanderAgentId"));
-                    singleResult.setExecuterAgentId(jsonChildObject.get("ExecuterAgentId"));
-                    singleResult.setExecutedServiceId(jsonChildObject.get("ExecutedServiceId"));
-                    singleResult.setExecutedServiceTxId(jsonChildObject.get("ExecutedServiceTxid"));
-                    singleResult.setExecutedServiceTimestamp(
-                        jsonChildObject.get("ExecutedServiceTimestamp"));
+                    singleResult.setStartupAgentId(jsonChildObject.get("DemanderAgentId"));
+                    singleResult.setExpertAgentId(jsonChildObject.get("ExecuterAgentId"));
+                    singleResult.setReviewedFeatureId(jsonChildObject.get("ExecutedFeatureId"));
+                    singleResult.setReviewedFeatureTxId(jsonChildObject.get("ExecutedFeatureTxid"));
+                    singleResult.setReviewedFeatureTimestamp(
+                        jsonChildObject.get("ExecutedFeatureTimestamp"));
                     singleResult.setValue(jsonChildObject.get("Value"));
                     activitieslist.add(singleResult);
                     firstPeerAnswer = true;
@@ -773,8 +771,8 @@ public class RangeQueries extends GeneralLedgerInteraction {
      * @return
      * @throws ParseException
      */
-    public static ArrayList<Reputation> getReputationHistory(HFClient hfClient, Channel channel,
-        String reputationId) {
+    public static ArrayList<InnMindReputation> getReputationHistory(HFClient hfClient, Channel channel,
+                                                                    String reputationId) {
 
         String chaincodeFunction = "GetReputationHistory";
 
@@ -782,7 +780,7 @@ public class RangeQueries extends GeneralLedgerInteraction {
 
 
         // IF WORKS, size of reputationsList will be <= 1.
-        ArrayList<Reputation> reputationHistoryList = new ArrayList<>();
+        ArrayList<InnMindReputation> innMindReputationHistoryList = new ArrayList<>();
 
         Collection<ProposalResponse> proposalResponseCollection = null;
         try {
@@ -822,15 +820,15 @@ public class RangeQueries extends GeneralLedgerInteraction {
                 while (i < jsonArrayReputationHistory.size()) {
                   JsonObject jsonChildObject = jsonArrayReputationHistory.getJsonObject(i);
                   log.info("JSON CHILD OBJECT: " + jsonChildObject);
-                    Reputation singleResult = new Reputation();
+                    InnMindReputation singleResult = new InnMindReputation();
 
-                  singleResult.setReputationId(jsonChildObject.getString("ReputationId"));
+                  singleResult.setInnMindReputationId(jsonChildObject.getString("InnMindReputationId"));
                   singleResult.setAgentId(jsonChildObject.getString("AgentId"));
-                  singleResult.setServiceId(jsonChildObject.getString("ServiceId"));
+                  singleResult.setFeatureId(jsonChildObject.getString("FeatureId"));
                   singleResult.setAgentRole(jsonChildObject.getString("AgentRole"));
                   singleResult.setValue(jsonChildObject.getString("Value"));
 
-                    reputationHistoryList.add(singleResult);
+                    innMindReputationHistoryList.add(singleResult);
 
                   i++;
                 }
@@ -847,7 +845,7 @@ public class RangeQueries extends GeneralLedgerInteraction {
           log.error("response failed. status: " + proposalResponse.getStatus().getStatus());
         }
         }
-      log.info("REPUTATION HISTORY LIST VALUE: " + reputationHistoryList);
-        return reputationHistoryList;
+      log.info("REPUTATION HISTORY LIST VALUE: " + innMindReputationHistoryList);
+        return innMindReputationHistoryList;
     }
 }

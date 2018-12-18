@@ -294,7 +294,7 @@ type AdminServer interface {
 }
 
 func RegisterAdminServer(s *grpc.Server, srv AdminServer) {
-	s.RegisterService(&_Admin_serviceDesc, srv)
+	s.RegisterFeature(&_Admin_serviceDesc, srv)
 }
 
 func _Admin_GetStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -387,8 +387,8 @@ func _Admin_RevertLogLevels_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-var _Admin_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "protos.Admin",
+var _Admin_serviceDesc = grpc.FeatureDesc{
+	FeatureName: "protos.Admin",
 	HandlerType: (*AdminServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

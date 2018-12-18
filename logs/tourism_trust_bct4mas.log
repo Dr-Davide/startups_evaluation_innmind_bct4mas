@@ -655,5 +655,5 @@ Ee3gAiBYhmsCay9hZP4aa+M4e+J98zIFQed8/x7XRnQpjZ5nyw==
 2018-12-17 12:07:06 - [DEBUG] conn.PoolingHttpClientConnectionManager:408 - Connection manager is shutting down
 2018-12-17 12:07:06 - [DEBUG] conn.DefaultManagedHttpClientConnection:79 - http-outgoing-7: Close connection
 2018-12-17 12:07:06 - [DEBUG] conn.PoolingHttpClientConnectionManager:414 - Connection manager shut down
-2018-12-17 12:07:06 - [INFO] behaviours.LoadServiceListFromLedger:37 - Agent qwer getting his services from the ledger (persistence)
-2018-12-17 12:07:06 - [INFO] behaviours.LoadServiceListFromLedger:51 - Before adding the services I verify if the agent is in the ledger
+2018-12-17 12:07:06 - [INFO] behaviours.LoadFeatureListFromLedger:37 - Agent qwer getting his features from the ledger (persistence)
+2018-12-17 12:07:06 - [INFO] behaviours.LoadFeatureListFromLedger:51 - Before adding the features I verify if the agent is in the ledger

@@ -36,7 +36,7 @@ public class LoadAgentInLedger extends OneShotBehaviour {
 
             boolean agentCreated;
             agentCreated = CreateController
-              .createAgent(bcAgent.getHfClient(), bcAgent.getUser(), bcAgent.getHfServiceChannel(),
+              .createAgent(bcAgent.getHfClient(), bcAgent.getUser(), bcAgent.getHfTransactionChannel(),
                   bcAgent.getMyName(), bcAgent.getMyAddress());
 
             log.info("Agent " + bcAgent.getMyName() + " created: " + agentCreated);

@@ -19,6 +19,8 @@
 package view;
 
 import agents.AgentHandler;
+import model.RangeQueries;
+import org.apache.log4j.Logger;
 import view.panel.AddAgentPanel;
 import view.panel.ManageAgentPanel;
 
@@ -28,6 +30,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AgentHandlerGui extends JFrame {
+  private static final Logger log = Logger.getLogger(AgentHandlerGui.class);
+
 
   private static final long serialVersionUID = -4621771106251570530L;
   private AgentHandler agentHandler;
@@ -75,7 +79,10 @@ public class AgentHandlerGui extends JFrame {
       public void actionPerformed(ActionEvent e) {
         String agentName = addAgentPanel.getPanelAgentName().getTextField().getText().trim();
         // String agentName = addAgentPanel.getComboBoxAgentNames().getSelectedItem().toString();
-        String agentType = addAgentPanel.getComboBoxAgentTypes().getSelectedItem().toString();
+//        String agentType = addAgentPanel.getComboBoxAgentTypes().getSelectedItem().toString();
+        String agentRole = addAgentPanel.getComboBoxAgentTypes().getSelectedItem().toString();
+        // TODO: Passare per decidere view
+        log.info("agent Role: " + agentRole);
         String expirationCertificate =
             addAgentPanel.getPanelExpirationCertificate().getTextField().getText().trim();
 
@@ -84,6 +91,7 @@ public class AgentHandlerGui extends JFrame {
         // in futuro gestire CA distribuite
 
         // TODO: Aggiungere controllo se agente (nome) esiste già
+        String agentType = "BCAgent";
         agentHandler.addAgentTrigger(agentName, agentType, expirationCertificate);
       }
     });

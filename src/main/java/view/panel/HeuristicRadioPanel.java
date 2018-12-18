@@ -44,7 +44,7 @@ public class HeuristicRadioPanel extends JPanel {
     add(timeHeuristicRadioButton, gbc_timeHeuristicRadioButton);
     buttonGroup.add(timeHeuristicRadioButton);
 
-    reputationHeuristicRadioButton = new JRadioButton("Reputation");
+    reputationHeuristicRadioButton = new JRadioButton("InnMindReputation");
     GridBagConstraints gbc_reputationHeuristicRadioButton = new GridBagConstraints();
     gbc_reputationHeuristicRadioButton.fill = GridBagConstraints.VERTICAL;
     gbc_reputationHeuristicRadioButton.gridx = 0;
