@@ -22,7 +22,7 @@ public class AskFeatureWithAgentInformationPanel extends JPanel {
         .createCompoundBorder(BorderFactory.createLineBorder(Color.black),
             new EmptyBorder(10, 10, 10, 10)));
 
-    agentInformationPanel.getAgentInformationLabel().setText("Feature Provider Agent Information");
+    agentInformationPanel.getAgentInformationLabel().setText("Expert Information");
     agentInformationPanel.getAgentNameLabel().setText("Selected Agent Name");
   }
 

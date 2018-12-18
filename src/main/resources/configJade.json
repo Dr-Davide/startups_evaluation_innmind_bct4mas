@@ -1,21 +1,8 @@
 {
-	"agentTypes":
-	[
-		"CAAgent",
-		"BCAgent",
-		"BCAgent",
-		"BCAgent"
-	],
-
-	"agentNames":
-	[
-		"main",
-		"a1",
-		"a2",
-		"a3"
-	],
   "port": "19816",
   "agentImagePath": "images/agentFigure.png",
+  "noAvatarExpertImagePath": "images/noAvatarExpert.jpg",
+  "noAvatarStartupImagePath": "images/noAvatarStartup.jpg",
   "evaluateImagePath": "images/evaluate.png",
 	"okIconPath":"images/okIcon.png",
   "agentImagesHotelsPath": [

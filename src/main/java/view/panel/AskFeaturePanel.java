@@ -17,7 +17,7 @@ public class AskFeaturePanel extends JPanel {
   private JLabel selectHeuristicLabel = new JLabel("Order By: ");
   private HeuristicRadioPanel selectHeuristicPanel = new HeuristicRadioPanel();
   private JButton buttonGetFeature;
-  private final JLabel lblSearchFeature = new JLabel("Get Available Experts by Feature");
+  private final JLabel lblSearchFeature = new JLabel("Find by Feature");
 
   /**
    * Create the panel.

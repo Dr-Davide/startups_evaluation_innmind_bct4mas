@@ -9,41 +9,13 @@ import java.util.List;
  */
 public class JadeJson2Pojo {
 
-  private List<String> agentTypes;
-  private List<String> agentNames;
   private String port;
   private String agentImagePath;
+  private String noAvatarExpertImagePath;
+  private String noAvatarStartupImagePath;
   private String evaluateImagePath;
   private String okIconPath;
   private List<String> agentImagesHotelsPath;
-
-  /**
-   * @return the agentType
-   */
-  public List<String> getAgentTypes() {
-    return agentTypes;
-  }
-
-  /**
-   * @param agentType the agentType to set
-   */
-  public void setAgentTypes(List<String> agentType) {
-    agentTypes = agentType;
-  }
-
-  /**
-   * @return the agentName
-   */
-  public List<String> getAgentNames() {
-    return agentNames;
-  }
-
-  /**
-   * @param agentName the agentName to set
-   */
-  public void setAgentNames(List<String> agentName) {
-    agentNames = agentName;
-  }
 
   /**
    * @return the port
@@ -73,6 +45,21 @@ public class JadeJson2Pojo {
     this.agentImagePath = agentImagePath;
   }
 
+  public String getNoAvatarExpertImagePath() {
+    return noAvatarExpertImagePath;
+  }
+
+  public void setNoAvatarExpertImagePath(String noAvatarExpertImagePath) {
+    this.noAvatarExpertImagePath = noAvatarExpertImagePath;
+  }
+
+  public String getNoAvatarStartupImagePath() {
+    return noAvatarStartupImagePath;
+  }
+
+  public void setNoAvatarStartupImagePath(String noAvatarStartupImagePath) {
+    this.noAvatarStartupImagePath = noAvatarStartupImagePath;
+  }
   /**
    * @return the evaluateImagePath
    */

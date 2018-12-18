@@ -36,8 +36,7 @@ public class StartupAgentGui extends JFrame {
     //  private ManageFeaturesTabPanel manageFeaturesTabPanel = new ManageFeaturesTabPanel();
     private AskFeatureTabPanel askFeatureTabPanel = new AskFeatureTabPanel();
     private MessagesTabPanel messagesTabPanel = new MessagesTabPanel();
-    private ManageCompositeAndLeafFeaturesTabPanel manageCompositeAndLeafFeaturesTabPanel =
-            new ManageCompositeAndLeafFeaturesTabPanel();
+    private ManageCompositeAndLeafFeaturesTabPanel manageCompositeAndLeafFeaturesTabPanel;
     private JComponent panel;
 
     /**
@@ -47,6 +46,17 @@ public class StartupAgentGui extends JFrame {
     public StartupAgentGui(BCAgent agent) {
 
         super(agent.getLocalName());
+
+        JadeJson2Pojo jadeJson2Pojo = new JadeJson2Pojo();
+
+        try {
+            jadeJson2Pojo = StartClass.getJadeJsonConfig(StartClass.JADE_CONFIG_FILE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String agentImagePath = jadeJson2Pojo.getNoAvatarStartupImagePath();
+
+        manageCompositeAndLeafFeaturesTabPanel = new ManageCompositeAndLeafFeaturesTabPanel(agentImagePath);
 
         bcAgent = agent;
 
@@ -356,10 +366,10 @@ public class StartupAgentGui extends JFrame {
                 //            .getFeatureDescriptionLabel()
                 //            .setText(table.getValueAt(table.getSelectedRow(), 5).toString());
             }
-            JadeJson2Pojo jadeJson2Pojo = new JadeJson2Pojo();
+            JadeJson2Pojo jadeJson2Pojo2 = new JadeJson2Pojo();
 
             try {
-                jadeJson2Pojo = StartClass.getJadeJsonConfig(StartClass.JADE_CONFIG_FILE);
+                jadeJson2Pojo2 = StartClass.getJadeJsonConfig(StartClass.JADE_CONFIG_FILE);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -369,15 +379,15 @@ public class StartupAgentGui extends JFrame {
             try {
                 // TODO: Temporary fix to GUI error in refresh (IndexOutOfBoundException: -1
                 if (table.getSelectedRow() == -1) {
-                    log.info("HOTEL IMAGE PATH: " + jadeJson2Pojo.getAgentImagesHotelsPath().get(0));
+                    log.info("HOTEL IMAGE PATH: " + jadeJson2Pojo2.getAgentImagesHotelsPath().get(0));
                     askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAgentInformationPanel()
                             .setAgentImage(
-                                    ImageIO.read(new File(jadeJson2Pojo.getAgentImagesHotelsPath().get(0))));
+                                    ImageIO.read(new File(jadeJson2Pojo2.getAgentImagesHotelsPath().get(0))));
                 } else {
-                    log.info("HOTEL IMAGE PATH: " + jadeJson2Pojo.getAgentImagesHotelsPath()
+                    log.info("HOTEL IMAGE PATH: " + jadeJson2Pojo2.getAgentImagesHotelsPath()
                             .get(table.getSelectedRow()));
                     InputStream inputStream = StartClass.getInputStreamPublic(
-                            jadeJson2Pojo.getAgentImagesHotelsPath().get(table.getSelectedRow()));
+                            jadeJson2Pojo2.getAgentImagesHotelsPath().get(table.getSelectedRow()));
                     BufferedImage agentImage = ImageIO.read(inputStream);
                     //          askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAgentInformationPanel()
                     //              .setAgentImage(ImageIO.read(
@@ -587,7 +597,7 @@ public class StartupAgentGui extends JFrame {
                         .getAskFeaturePanel().getLayout();
         gridBagLayout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
         gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        tabbedPane.addTab("Ask Feature", askFeatureTabPanel);
+        tabbedPane.addTab("Ask Evaluation", askFeatureTabPanel);
         tabbedPane.addTab("Messages", messagesTabPanel);
 
 

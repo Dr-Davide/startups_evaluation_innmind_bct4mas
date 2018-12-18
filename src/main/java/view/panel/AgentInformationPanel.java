@@ -29,64 +29,72 @@ public class AgentInformationPanel extends JPanel {
   private Border compoundBorder =
       BorderFactory.createCompoundBorder(raisedBevelBorder, loweredbevelBorder);
 
+  AgentInformationPanel(){
+    this("");
+  }
 
-  AgentInformationPanel() {
+  AgentInformationPanel(String imagePath){
+    {
 
-    JadeJson2Pojo jadeJson2Pojo = new JadeJson2Pojo();
+      if (imagePath.equals("")){
+        JadeJson2Pojo jadeJson2Pojo = new JadeJson2Pojo();
 
-    try {
-      jadeJson2Pojo = StartClass.getJadeJsonConfig(StartClass.JADE_CONFIG_FILE);
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
+        try {
+          jadeJson2Pojo = StartClass.getJadeJsonConfig(StartClass.JADE_CONFIG_FILE);
+        } catch (FileNotFoundException e) {
+          e.printStackTrace();
+        }
+        imagePath = jadeJson2Pojo.getAgentImagePath();
+      }
+
+
+
+      // agentImage = ImageIO.read(new File());
+      try {
+        InputStream inputStream = StartClass.getInputStreamPublic(imagePath);
+
+        agentImage = ImageIO.read(inputStream);
+        //            agentImage = ImageIO.read(new File(jadeJson2Pojo.getAgentImagePath())); // "resources/images/agentFigure.png"
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+
+      imageIcon = new ImageIcon(agentImage);
+
+
+      GridBagLayout gridBagLayout = new GridBagLayout();
+      gridBagLayout.columnWidths = new int[] {0, 0, 0, 0};
+      gridBagLayout.rowHeights = new int[] {0, 0, 0, 0};
+      gridBagLayout.columnWeights = new double[] {0.0, 1.0, 0.0, Double.MIN_VALUE};
+      gridBagLayout.rowWeights = new double[] {1.0, 1.0, 1.0, Double.MIN_VALUE};
+      setLayout(gridBagLayout);
+
+      agentInformationLabel = new JLabel("Agent Information");
+      agentInformationLabel.setFont(new Font("Dialog", Font.BOLD, 16));
+      GridBagConstraints gbc_lblAgentInformation = new GridBagConstraints();
+      gbc_lblAgentInformation.insets = new Insets(0, 0, 5, 5);
+      gbc_lblAgentInformation.gridx = 1;
+      gbc_lblAgentInformation.gridy = 0;
+      add(agentInformationLabel, gbc_lblAgentInformation);
+
+      imageLabel = new JLabel(imageIcon);
+      imageLabel.setBorder(compoundBorder);
+      // gbc_imageLabel = new GridBagConstraints();
+      gbc_imageLabel.insets = new Insets(5, 5, 5, 5);
+      gbc_imageLabel.gridx = 1;
+      gbc_imageLabel.gridy = 1;
+      add(imageLabel, gbc_imageLabel);
+
+      agentNameLabel = new JLabel("Agent Name");
+      agentNameLabel.setFont(new Font("Dialog", Font.BOLD, 12));
+      GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+      gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
+      gbc_lblNewLabel.gridx = 1;
+      gbc_lblNewLabel.gridy = 2;
+      add(agentNameLabel, gbc_lblNewLabel);
+
     }
-
-
-    // agentImage = ImageIO.read(new File());
-    try {
-      // TODO: Works on source code but not on .jar
-      InputStream inputStream = StartClass.getInputStreamPublic(jadeJson2Pojo.getAgentImagePath());
-
-      agentImage = ImageIO.read(inputStream);
-      //            agentImage = ImageIO.read(new File(jadeJson2Pojo.getAgentImagePath())); // "resources/images/agentFigure.png"
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-
-    imageIcon = new ImageIcon(agentImage);
-
-
-    GridBagLayout gridBagLayout = new GridBagLayout();
-    gridBagLayout.columnWidths = new int[] {0, 0, 0, 0};
-    gridBagLayout.rowHeights = new int[] {0, 0, 0, 0};
-    gridBagLayout.columnWeights = new double[] {0.0, 1.0, 0.0, Double.MIN_VALUE};
-    gridBagLayout.rowWeights = new double[] {1.0, 1.0, 1.0, Double.MIN_VALUE};
-    setLayout(gridBagLayout);
-
-    agentInformationLabel = new JLabel("Agent Information");
-    agentInformationLabel.setFont(new Font("Dialog", Font.BOLD, 16));
-    GridBagConstraints gbc_lblAgentInformation = new GridBagConstraints();
-    gbc_lblAgentInformation.insets = new Insets(0, 0, 5, 5);
-    gbc_lblAgentInformation.gridx = 1;
-    gbc_lblAgentInformation.gridy = 0;
-    add(agentInformationLabel, gbc_lblAgentInformation);
-
-    imageLabel = new JLabel(imageIcon);
-    imageLabel.setBorder(compoundBorder);
-    // gbc_imageLabel = new GridBagConstraints();
-    gbc_imageLabel.insets = new Insets(5, 5, 5, 5);
-    gbc_imageLabel.gridx = 1;
-    gbc_imageLabel.gridy = 1;
-    add(imageLabel, gbc_imageLabel);
-
-    agentNameLabel = new JLabel("Agent Name");
-    agentNameLabel.setFont(new Font("Dialog", Font.BOLD, 12));
-    GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-    gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
-    gbc_lblNewLabel.gridx = 1;
-    gbc_lblNewLabel.gridy = 2;
-    add(agentNameLabel, gbc_lblNewLabel);
-
   }
 
   /**
