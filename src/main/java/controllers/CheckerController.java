@@ -24,9 +24,9 @@ public class CheckerController {
     public static boolean isTimestampTwoTimesActivities(HFClient hfClient, Channel channel,
       String demanderAgentId, String executerAgentId, String timestamp) {
       ArrayList<Review> activitiesList = new ArrayList<>();
-        //    activitiesList = transactionLedgerInteraction.getActivitiesByDemanderExecuterTimestamp(hfClient,
+        //    activitiesList = transactionLedgerInteraction.GetReviewsByStartupExpertTimestamp(hfClient,
         //        channel, demanderAgentId, executerAgentId, timestamp);
-        activitiesList = RangeQueries.getActivitiesByDemanderExecuterTimestamp(hfClient,
+        activitiesList = RangeQueries.GetReviewsByStartupExpertTimestamp(hfClient,
         channel, demanderAgentId, executerAgentId, timestamp);
     if (activitiesList.size() != 2) {
       return false;

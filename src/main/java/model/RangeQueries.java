@@ -65,7 +65,7 @@ public class RangeQueries extends GeneralLedgerInteraction {
       throws Exception {
 
     // TODO: SISTEMARE CHIAMATA AL CHAINCODE
-    String chaincodeFunctionName = "CreateFeatureAgentRelation";
+    String chaincodeFunctionName = "CreateFeatureRelationAgent";
     // TODO: Gestire creazione ID(incrementale)
 
     String[] chaincodeArguments =
@@ -110,7 +110,7 @@ public class RangeQueries extends GeneralLedgerInteraction {
 
     // Chaincode function that initialize reputation with standard value
     // Standard InnMindReputation Value ("6.0") Controlled by the chaincode itself
-    String chaincodeFunctionName = "CreateFeatureAndFeatureAgentRelationWithStandardValue";
+    String chaincodeFunctionName = "CreateFeatureAndFeatureRelationAgentWithStandardValue";
     // TODO: Gestire creazione ID(incrementale)
 
     String[] chaincodeArguments =
@@ -154,7 +154,7 @@ public class RangeQueries extends GeneralLedgerInteraction {
       String agentId, String cost, String time, String initReputationValue) throws Exception {
 
 
-    String chaincodeFunctionName = "CreateFeatureAndFeatureAgentRelation";
+    String chaincodeFunctionName = "CreateFeatureAndFeatureRelationAgent";
     // TODO: Gestire creazione ID(incrementale)
 
     String[] chaincodeArguments = new String[] {serviceId, serviceName, serviceDescription, agentId,
@@ -580,6 +580,7 @@ public class RangeQueries extends GeneralLedgerInteraction {
               singleResult.setAgentId(jsonChildObject.get("AgentId"));
               singleResult.setCost(jsonChildObject.get("Cost"));
               singleResult.setTime(jsonChildObject.get("Time"));
+              singleResult.setDescription(jsonChildObject.get("Description"));
 
               featureRelationAgentlist.add(singleResult);
           }
@@ -681,8 +682,8 @@ public class RangeQueries extends GeneralLedgerInteraction {
      * @param timestamp
      * @return
      */
-    public static ArrayList<Review> getActivitiesByDemanderExecuterTimestamp(HFClient hfClient,
-                                                                             Channel channel, String demanderAgentId, String executerAgentId, String timestamp) {
+    public static ArrayList<Review> GetReviewsByStartupExpertTimestamp(HFClient hfClient,
+                                                                       Channel channel, String demanderAgentId, String executerAgentId, String timestamp) {
         String chaincodeFunction = "GetReviewsByStartupExpertTimestamp";
 
         String[] chaincodeArguments = new String[] {demanderAgentId, executerAgentId, timestamp};
@@ -740,14 +741,14 @@ public class RangeQueries extends GeneralLedgerInteraction {
                 while (iterator.hasNext()) {
                     jsonChildObject = iterator.next();
                     Review singleResult = new Review();
-                    singleResult.setEvaluationId(jsonChildObject.get("EvaluationId"));
+                    singleResult.setEvaluationId(jsonChildObject.get("ReviewId"));
                     singleResult.setWriterAgentId(jsonChildObject.get("WriterAgentId"));
-                    singleResult.setStartupAgentId(jsonChildObject.get("DemanderAgentId"));
-                    singleResult.setExpertAgentId(jsonChildObject.get("ExecuterAgentId"));
-                    singleResult.setReviewedFeatureId(jsonChildObject.get("ExecutedFeatureId"));
-                    singleResult.setReviewedFeatureTxId(jsonChildObject.get("ExecutedFeatureTxid"));
+                    singleResult.setStartupAgentId(jsonChildObject.get("StartupAgentId"));
+                    singleResult.setExpertAgentId(jsonChildObject.get("ExpertAgentId"));
+                    singleResult.setReviewedFeatureId(jsonChildObject.get("ReviewedFeatureId"));
+                    singleResult.setReviewedFeatureTxId(jsonChildObject.get("ReviewedFeatureTxid"));
                     singleResult.setReviewedFeatureTimestamp(
-                        jsonChildObject.get("ExecutedFeatureTimestamp"));
+                        jsonChildObject.get("ReviewedFeatureTimestamp"));
                     singleResult.setValue(jsonChildObject.get("Value"));
                     activitieslist.add(singleResult);
                     firstPeerAnswer = true;
@@ -774,7 +775,7 @@ public class RangeQueries extends GeneralLedgerInteraction {
     public static ArrayList<InnMindReputation> getReputationHistory(HFClient hfClient, Channel channel,
                                                                     String reputationId) {
 
-        String chaincodeFunction = "GetReputationHistory";
+        String chaincodeFunction = "GetInnMindReputationHistory";
 
         String[] chaincodeArguments = new String[] {reputationId};
 

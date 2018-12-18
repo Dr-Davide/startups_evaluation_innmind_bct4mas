@@ -38,6 +38,7 @@ public class ComputeReputation extends OneShotBehaviour {
       Review serviceFirstReview = serviceActivitiesList.get(0);
       Review serviceSecondReview = serviceActivitiesList.get(1);
 
+      log.info("serviceFirstReview: " + serviceFirstReview.getValue());
       compositeFeatureReputationLogic
           .setDemanderAndExecuter(serviceFirstReview, serviceSecondReview);
 
@@ -73,8 +74,8 @@ public class ComputeReputation extends OneShotBehaviour {
   private void updateFeatureDemanderAndExecuterReputation(ReputationLogic reputationLogic) {
     if (reputationLogic.isDemanderSet() && reputationLogic.isExecuterSet()) {
       try {
-        Boolean updatedDemanderReputation = reputationLogic.updateDemanderReputation();
-        Boolean updatedExecuterReputation = reputationLogic.updateExecuterReputation();
+        Boolean updatedDemanderReputation = reputationLogic.updateStartupReputation();
+        Boolean updatedExecuterReputation = reputationLogic.updateExpertReputation();
         log.info("Updated Demander: " + updatedDemanderReputation);
         log.info("Updated Executer: " + updatedExecuterReputation);
       } catch (Exception e) {

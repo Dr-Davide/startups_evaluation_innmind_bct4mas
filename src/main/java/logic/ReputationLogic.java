@@ -18,42 +18,42 @@ public class ReputationLogic {
 
   private BCAgent bcAgent;
   // TODO: Levare String e lavorare direttamente su Review
-  private String demanderAgentId;
-  private String executerAgentId;
-  private Review demanderReview;
-  private Review executerReview;
+  private String startupAgentId;
+  private String expertAgentId;
+  private Review startupReview;
+  private Review expertReview;
 
-    private static String demanderRole = "DEMANDER";
-    private static String executerRole = "EXECUTER";
+    private static String startupRole = "STARTUP";
+    private static String expertRole = "EXPERT";
 
   /**
    * Initialize with empty strings demander and executer
    */
   public ReputationLogic(BCAgent bcAgentInput) {
     bcAgent = bcAgentInput;
-    demanderAgentId = "";
-    executerAgentId = "";
-    demanderReview = new Review();
-    executerReview = new Review();
+    startupAgentId = "";
+    expertAgentId = "";
+    startupReview = new Review();
+    expertReview = new Review();
   }
 
   public void deltaBasedWorkflow() {
-    Double demanderEvaluation = Double.parseDouble(demanderReview.getValue().toString());
-    Double executerEvaluation = Double.parseDouble(executerReview.getValue().toString());
+    Double startupEvaluation = Double.parseDouble(startupReview.getValue().toString());
+    Double expertEvaluation = Double.parseDouble(expertReview.getValue().toString());
     Double deltaEvaluations = 0.0;
-    if (demanderEvaluation > executerEvaluation) {
-      deltaEvaluations = demanderEvaluation - executerEvaluation;
+    if (startupEvaluation > expertEvaluation) {
+      deltaEvaluations = startupEvaluation - expertEvaluation;
     } else {
-      deltaEvaluations = executerEvaluation - demanderEvaluation;
+      deltaEvaluations = expertEvaluation - startupEvaluation;
     }
     Double insufficientValue = 5.0;
     Double deltaThreshold = 2.0;
-    if ((demanderEvaluation < insufficientValue && executerEvaluation < insufficientValue)
-        || (demanderEvaluation > insufficientValue && executerEvaluation > insufficientValue)) {
+    if ((startupEvaluation < insufficientValue && expertEvaluation < insufficientValue)
+        || (startupEvaluation > insufficientValue && expertEvaluation > insufficientValue)) {
       // TODO: Calcola media reputazione con aggiunta evaluations
 
     }
-    if ((demanderEvaluation < insufficientValue || executerEvaluation < insufficientValue)
+    if ((startupEvaluation < insufficientValue || expertEvaluation < insufficientValue)
         && deltaEvaluations > deltaThreshold) {
       // TODO: Complex InnMindReputation Algorithm
     }
@@ -134,16 +134,17 @@ public class ReputationLogic {
     // Get the Last Evaluation depending on the agentRole
     Double lastEvaluation =
         0.0; // put a value only to let it compile because of the if else, normally have to be assigned by the if or if else closures
-    if (agentRole.equals(ReputationLogic.executerRole)) {
+    if (agentRole.equals(ReputationLogic.expertRole)) {
       // GET THE DEMANDER EVALUATION
-      lastEvaluation = Double.parseDouble(demanderReview.getValue().toString());
-    } else if (agentRole.equals(ReputationLogic.demanderRole)) {
-      // TODO: Think of logic of Demander InnMindReputation, for now take the value from executerReview
+      lastEvaluation = Double.parseDouble(startupReview.getValue().toString());
+    } else if (agentRole.equals(ReputationLogic.startupRole)) {
+      // TODO: Think of logic of Demander InnMindReputation, for now take the value from expertReview
       // GET THE EXECUTER EVALUATION
-      lastEvaluation = Double.parseDouble(executerReview.getValue().toString());
+      lastEvaluation = Double.parseDouble(expertReview.getValue().toString());
     }
 
     // Compute Mean Value
+    // TODO: ADD HERE DISAGREEMENT RESOLUTION
     computedReputationValue = computeMeanValue(innMindReputationHistoryList, lastEvaluation);
     //    }
 
@@ -153,85 +154,85 @@ public class ReputationLogic {
   }
 
   /**
-   * Wrapper of computeReputation input demanderAgentId and Update (or Create) InnMindReputation
+   * Wrapper of computeReputation input startupAgentId and Update (or Create) InnMindReputation
    *
    * @return
    * @throws Exception
    */
-  public boolean updateDemanderReputation() throws Exception {
-    boolean isUpdatedDemanderReputation;
+  public boolean updateStartupReputation() throws Exception {
+    boolean isUpdatedStartupReputation;
 
-    String serviceId = demanderReview.getReviewedFeatureId().toString();
-    String demanderAgentId = demanderReview.getStartupAgentId().toString();
+    String featureId = startupReview.getReviewedFeatureId().toString();
+    String startupAgentId = startupReview.getStartupAgentId().toString();
 
     // Compute the new Value
     Double newReputationValue =
-        computeReputation(demanderAgentId, serviceId, ReputationLogic.demanderRole);
+        computeReputation(startupAgentId, featureId, ReputationLogic.startupRole);
 
     // Save the new Value in the BlockChain
-    isUpdatedDemanderReputation = ComplexWorkflowController
-        .updateOrCreateReputation(bcAgent, demanderAgentId, serviceId, ReputationLogic.demanderRole,
+    isUpdatedStartupReputation = ComplexWorkflowController
+        .updateOrCreateReputation(bcAgent, startupAgentId, featureId, ReputationLogic.startupRole,
             newReputationValue);
 
-    return isUpdatedDemanderReputation;
+    return isUpdatedStartupReputation;
   }
 
   /**
-   * Wrapper of computeReputation input executerAgentId and Update (or Create) InnMindReputation
+   * Wrapper of computeReputation input expertAgentId and Update (or Create) InnMindReputation
    *
    * @return
    * @throws Exception
    */
-  public boolean updateExecuterReputation() throws Exception {
-    boolean isUpdatedExecuterReputation;
+  public boolean updateExpertReputation() throws Exception {
+    boolean isUpdatedExpertReputation;
 
-    String serviceId = executerReview.getReviewedFeatureId().toString();
-    String executerAgentId = executerReview.getExpertAgentId().toString();
+    String featureId = expertReview.getReviewedFeatureId().toString();
+    String expertAgentId = expertReview.getExpertAgentId().toString();
 
     Double newReputationValue =
-        computeReputation(executerAgentId, serviceId, ReputationLogic.executerRole);
+        computeReputation(expertAgentId, featureId, ReputationLogic.expertRole);
 
-    isUpdatedExecuterReputation = ComplexWorkflowController
-        .updateOrCreateReputation(bcAgent, executerAgentId, serviceId, ReputationLogic.executerRole,
+    isUpdatedExpertReputation = ComplexWorkflowController
+        .updateOrCreateReputation(bcAgent, expertAgentId, featureId, ReputationLogic.expertRole,
             newReputationValue);
 
-    return isUpdatedExecuterReputation;
+    return isUpdatedExpertReputation;
   }
 
   public void setDemanderAndExecuter(Review firstReview, Review secondReview) {
     if (firstReview.getWriterAgentId().toString()
         .equals(firstReview.getStartupAgentId().toString())) {
       // Writer Demander
-      demanderAgentId = firstReview.getStartupAgentId().toString();
-      demanderReview = firstReview;
+      startupAgentId = firstReview.getStartupAgentId().toString();
+      startupReview = firstReview;
 
     } else if (firstReview.getWriterAgentId().toString()
         .equals(firstReview.getExpertAgentId().toString())) {
       // Writer Executer
-        executerAgentId = firstReview.getExpertAgentId().toString();
-        executerReview = firstReview;
+        expertAgentId = firstReview.getExpertAgentId().toString();
+        expertReview = firstReview;
 
     }
 
     if (secondReview.getWriterAgentId().toString()
         .equals(secondReview.getStartupAgentId().toString())) {
       // Writer Demander
-      demanderAgentId = secondReview.getStartupAgentId().toString();
-      demanderReview = secondReview;
+      startupAgentId = secondReview.getStartupAgentId().toString();
+      startupReview = secondReview;
 
     } else if (secondReview.getWriterAgentId().toString()
         .equals(secondReview.getExpertAgentId().toString())) {
       // Writer Executer
 
-      executerAgentId = secondReview.getExpertAgentId().toString();
-      executerReview = secondReview;
+      expertAgentId = secondReview.getExpertAgentId().toString();
+      expertReview = secondReview;
     }
   }
 
 
   public boolean isDemanderSet() {
     boolean isDemanderSet = false;
-    if (demanderAgentId == "") {
+    if (startupAgentId == "") {
       isDemanderSet = false;
     } else {
       isDemanderSet = true;
@@ -241,7 +242,7 @@ public class ReputationLogic {
 
   public boolean isExecuterSet() {
     boolean isExecuterSet = false;
-    if (executerAgentId == "") {
+    if (expertAgentId == "") {
       isExecuterSet = false;
     } else {
       isExecuterSet = true;
@@ -253,55 +254,55 @@ public class ReputationLogic {
    * @return the demanderAgent
    */
   public String getDemanderAgent() {
-    return demanderAgentId;
+    return startupAgentId;
   }
 
   /**
    * @param demanderAgent the demanderAgent to set
    */
   public void setDemanderAgent(String demanderAgent) {
-      demanderAgentId = demanderAgent;
+      startupAgentId = demanderAgent;
   }
 
   /**
    * @return the executerAgent
    */
   public String getExecuterAgent() {
-    return executerAgentId;
+    return expertAgentId;
   }
 
   /**
    * @param executerAgent the executerAgent to set
    */
   public void setExecuterAgent(String executerAgent) {
-      executerAgentId = executerAgent;
+      expertAgentId = executerAgent;
   }
 
   /**
-   * @return the demanderReview
+   * @return the startupReview
    */
-  public Review getDemanderReview() {
-    return demanderReview;
+  public Review getStartupReview() {
+    return startupReview;
   }
 
   /**
-   * @param demanderReview the demanderReview to set
+   * @param startupReview the startupReview to set
    */
-  public void setDemanderReview(Review demanderReview) {
-    this.demanderReview = demanderReview;
+  public void setStartupReview(Review startupReview) {
+    this.startupReview = startupReview;
   }
 
   /**
-   * @return the executerReview
+   * @return the expertReview
    */
-  public Review getExecuterReview() {
-    return executerReview;
+  public Review getExpertReview() {
+    return expertReview;
   }
 
   /**
-   * @param executerReview the executerReview to set
+   * @param expertReview the expertReview to set
    */
-  public void setExecuterReview(Review executerReview) {
-    this.executerReview = executerReview;
+  public void setExpertReview(Review expertReview) {
+    this.expertReview = expertReview;
   }
 }

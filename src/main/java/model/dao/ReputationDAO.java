@@ -164,8 +164,8 @@ public class ReputationDAO extends GeneralLedgerInteraction implements Dao<InnMi
                     + params.length);
         }
 
-      String chaincodeFunctionName = "ModifyReputationValue";
-      String expectedEventName = "ReputationModifiedEvent";
+      String chaincodeFunctionName = "ModifyInnMindReputationValue";
+      String expectedEventName = "InnMindReputationModifiedEvent";
       Integer eventTimeout = 150;
 
       String reputationId = innMindReputationToUpdate.getInnMindReputationId().toString();

@@ -22,7 +22,6 @@ public class ReviewDAO extends GeneralLedgerInteraction implements Dao<Review> {
 
     @Override public Optional<Review> get(HFClient hfClient, Channel channel, String activityId) {
 
-//        String chaincodeFunction = "GetActivity";
         String chaincodeFunction = "GetReview";
 
         String[] chaincodeArguments = new String[] {activityId};
@@ -100,7 +99,6 @@ public class ReviewDAO extends GeneralLedgerInteraction implements Dao<Review> {
   public boolean create(HFClient clientHF, User userHF, Channel channel, Review newReview)
       throws ProposalException, InvalidArgumentException {
 
-//    String chaincodeFunctionName = "CreateActivity";
     String chaincodeFunctionName = "CreateReview";
     String expectedEventName = "ReviewCreatedEvent";
     Integer eventTimeout = 150;

@@ -120,7 +120,7 @@ public class LoadConfigFeaturesListOnSL extends OneShotBehaviour {
             if (!CheckerController.isFeatureAlreadyInLedger(serviceId, bcAgent)) {
                 log.info("SERVICE DOESN'T EXIST");
                 CreateController.createFeature(clientHF, user, channel, serviceId, serviceName,
-                    serviceDescription, serviceComposition);
+                        serviceComposition);
             }
             Feature featurePojo;
             featurePojo = ReadController.getFeature(clientHF, channel, serviceId);

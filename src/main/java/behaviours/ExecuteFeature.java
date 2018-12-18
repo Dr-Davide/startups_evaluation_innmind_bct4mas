@@ -162,10 +162,10 @@ public class ExecuteFeature extends OneShotBehaviour {
     if (isSecondWriterAgent) {
 
       ArrayList<Review> activitiesList;
-      // activitiesList = transactionLedgerInteraction.getActivitiesByDemanderExecuterTimestamp(
+      // activitiesList = transactionLedgerInteraction.GetReviewsByStartupExpertTimestamp(
       // bcAgent.getHfClient(), bcAgent.getHfTransactionChannel(), demanderAgentId,
       // bcAgent.getMyName(), executionTimestamp.toString());
-      activitiesList = RangeQueries.getActivitiesByDemanderExecuterTimestamp(bcAgent.getHfClient(),
+      activitiesList = RangeQueries.GetReviewsByStartupExpertTimestamp(bcAgent.getHfClient(),
           bcAgent.getHfTransactionChannel(), demanderAgentId, bcAgent.getMyName(), stringTimestamp);
       Utils.printActivitiesList(activitiesList);
       ArrayList<Review> leavesActivitiesList = new ArrayList<>();

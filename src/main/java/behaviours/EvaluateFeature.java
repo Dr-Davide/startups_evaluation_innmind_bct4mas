@@ -172,14 +172,14 @@ public class EvaluateFeature extends OneShotBehaviour {
 
 
         ArrayList<Review> serviceActivitiesList = new ArrayList<>();
-        //        activitiesList = transactionLedgerInteraction.getActivitiesByDemanderExecuterTimestamp(
+        //        activitiesList = transactionLedgerInteraction.GetReviewsByStartupExpertTimestamp(
         //            bcAgent.getHfClient(), bcAgent.getHfTransactionChannel(), bcAgent.getMyName(),
         //            aclMessage.getSender().getLocalName(), timestamp.toString());
 
         ArrayList<Review> leavesActivitiesList = new ArrayList<>();
 
         serviceActivitiesList = RangeQueries
-            .getActivitiesByDemanderExecuterTimestamp(bcAgent.getHfClient(),
+            .GetReviewsByStartupExpertTimestamp(bcAgent.getHfClient(),
                 bcAgent.getHfTransactionChannel(), bcAgent.getMyName(),
                 aclMessage.getSender().getLocalName(), serviceTimestamp);
 

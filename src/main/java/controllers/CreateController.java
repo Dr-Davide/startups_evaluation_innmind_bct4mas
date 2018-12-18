@@ -175,13 +175,12 @@ public class CreateController {
      * @param userHF
      * @param channel
      * @param serviceName
-     * @param serviceDesc
      * @param serviceComposition
      * @return
      * @throws Exception
      */
     public static boolean createFeature(HFClient clientHF, User userHF, Channel channel,
-        String serviceId, String serviceName, String serviceDesc, String serviceComposition)
+                                        String serviceId, String serviceName, String serviceComposition)
         throws Exception {
         FeatureDAO featureDAO = new FeatureDAO();
 
@@ -190,7 +189,6 @@ public class CreateController {
         // TODO: Gestire creazione ID(incrementale)
         featurePojo.setFeatureId(serviceId);
         featurePojo.setName(serviceName);
-//        featurePojo.setDescription(serviceDesc);
       featurePojo.setFeatureComposition(serviceComposition);
 
 

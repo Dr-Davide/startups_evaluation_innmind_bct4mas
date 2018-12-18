@@ -215,7 +215,7 @@ public class ReceiveMessage extends TickerBehaviour {
   //                  ArrayList<Review> activitiesList;
   //
   //                  activitiesList = RangeQueries
-  //                      .getActivitiesByDemanderExecuterTimestamp(bcAgent.getHfClient(),
+  //                      .GetReviewsByStartupExpertTimestamp(bcAgent.getHfClient(),
   //                          bcAgent.getHfTransactionChannel(), aclMessage.getSender().getLocalName(),
   //                          bcAgent.getMyName(), timestamp.toString());
   //

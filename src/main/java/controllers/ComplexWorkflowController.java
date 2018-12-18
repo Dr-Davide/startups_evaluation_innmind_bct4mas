@@ -63,16 +63,16 @@ public class ComplexWorkflowController {
       serviceIds.add(serviceId);
         boolean allPeerSuccess;
         if (!CheckerController.isFeatureMappedWithAgent(serviceId, bcAgent)) {
-            // MAP SERVICE WITH AGENT
+            // MAP FEATURE WITH AGENT
             log.info("SERVICE NOT MAPPED WITH AGENT");
 
             if (!CheckerController.isFeatureAlreadyInLedger(serviceId, bcAgent)) {
                 // CREATE SERVICE
                 log.info("SERVICE DOESN'T EXIST");
                 CreateController.createFeature(clientHF, user, channel, serviceId, serviceName,
-                    serviceDescription, serviceComposition);
+                        serviceComposition);
             }
-            // GET SERVICE
+            // GET FEATURE
             Feature featurePojo;
             featurePojo = ReadController.getFeature(clientHF, channel, serviceId);
 
@@ -234,7 +234,7 @@ public class ComplexWorkflowController {
     for (int i = 0; i < compositionTimestampsList.size(); i++) {
       String leafTimestamp = compositionTimestampsList.get(i);
       ArrayList<Review> leafActivitiesList = RangeQueries
-          .getActivitiesByDemanderExecuterTimestamp(hfClient, channel, demanderAgentId,
+          .GetReviewsByStartupExpertTimestamp(hfClient, channel, demanderAgentId,
               executerAgentId, leafTimestamp);
 
       leavesActivitiesList.addAll(leafActivitiesList);

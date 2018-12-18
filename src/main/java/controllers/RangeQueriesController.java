@@ -165,6 +165,7 @@ public class RangeQueriesController {
       name = featurePojo.getName().toString();
       cost = singleFeatureRelationAgent.getCost().toString();
       time = singleFeatureRelationAgent.getTime().toString();
+      description = singleFeatureRelationAgent.getDescription().toString();
 //      description = featurePojo.getDescription().toString();
       serviceComposition = featurePojo.getFeatureComposition().toString();
 
@@ -174,7 +175,7 @@ public class RangeQueriesController {
       agentFeature.setName(name);
       agentFeature.setCost(cost);
       agentFeature.setTime(time);
-//      agentFeature.setDescription(description);
+      agentFeature.setDescription(description);
       agentFeature.setFeatureComposition(serviceComposition);
       agentFeature.setReputation(reputation);
 
