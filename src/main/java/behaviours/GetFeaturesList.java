@@ -128,7 +128,7 @@ public class GetFeaturesList extends OneShotBehaviour {
       //        log.info(
       //            bcAgent.getMyName() + ": There is no agent offering the searched service: "
       //                + serviceNeededName);
-      //        JOptionPane.showMessageDialog(bcAgent.bcAgentGui,
+      //        JOptionPane.showMessageDialog(bcAgent.startupAgentGui,
       //            bcAgent.getMyName() + ": There is no agent offering the searched service: "
       //                + serviceNeededName, "No Feature Found", JOptionPane.ERROR_MESSAGE);
       //      } else {

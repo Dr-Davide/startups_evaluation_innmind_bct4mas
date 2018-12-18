@@ -80,7 +80,7 @@ public class ReceiveMessage extends TickerBehaviour {
       // nell'InBox Messages
       case ACLMessage.INFORM:
 
-        // USO bcAgent perchè devo andare a modificare la GUI (bcAgentGui)
+        // USO bcAgent perchè devo andare a modificare la GUI (startupAgentGui)
         bcAgent.addMessageTrigger(message);
         break;
 

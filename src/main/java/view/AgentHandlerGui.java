@@ -20,6 +20,7 @@ package view;
 
 import agents.AgentHandler;
 import model.RangeQueries;
+import model.pojo.InnMindReputation;
 import org.apache.log4j.Logger;
 import view.panel.AddAgentPanel;
 import view.panel.ManageAgentPanel;
@@ -91,7 +92,20 @@ public class AgentHandlerGui extends JFrame {
         // in futuro gestire CA distribuite
 
         // TODO: Aggiungere controllo se agente (nome) esiste già
-        String agentType = "BCAgent";
+        String agentType;
+        switch (agentRole) {
+          case InnMindReputation.STARTUP_ROLE :
+            agentType = "StartupAgent";
+            break;
+          case InnMindReputation.EXPERT_ROLE:
+            agentType = "ExpertAgent";
+            break;
+          default: // should be unreachable
+            IllegalStateException illegalStateException =
+                    new IllegalStateException("Wrong field to update, it's not in the expected ones");
+            log.error(illegalStateException);
+            throw illegalStateException;
+        }
         agentHandler.addAgentTrigger(agentName, agentType, expirationCertificate);
       }
     });

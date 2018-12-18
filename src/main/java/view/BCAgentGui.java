@@ -625,7 +625,7 @@ public class BCAgentGui extends JFrame {
     String showInputDialogTitle = "Feature Naming Conflict";
 
     //    newFeatureId = JOptionPane
-    //        .showInputDialog(bcAgent.bcAgentGui.getPanel(), showInputDialogMessage,
+    //        .showInputDialog(bcAgent.startupAgentGui.getPanel(), showInputDialogMessage,
     //            showInputDialogTitle, JOptionPane.QUESTION_MESSAGE);
     newFeatureId = (String) JOptionPane
         .showInputDialog(bcAgent.bcAgentGui.getPanel(), showInputDialogMessage,

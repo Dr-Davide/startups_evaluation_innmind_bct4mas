@@ -55,7 +55,7 @@ public class SearchFeatureResultPanel extends JPanel {
 
 
 
-    JLabel lblNewLabel = new JLabel("Results");
+    JLabel lblNewLabel = new JLabel("List of Available Experts");
     lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 16));
     GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
     gbc_lblNewLabel.gridwidth = 3;
