@@ -115,7 +115,8 @@ public class AgentInformationPanel extends JPanel {
     Image imageScaledInstance = agentImage.getScaledInstance((getWidth() / 10) * 7,
         (getHeight() / 10) * 7, java.awt.Image.SCALE_SMOOTH);
 
-    imageIcon = new ImageIcon(imageScaledInstance);
+//    imageIcon = new ImageIcon(imageScaledInstance);
+    imageIcon = new ImageIcon(agentImage);
 
     imageLabel = new JLabel(imageIcon);
 

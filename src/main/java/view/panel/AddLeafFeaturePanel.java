@@ -88,7 +88,6 @@ public class AddLeafFeaturePanel extends JPanel {
   }
 
   /**
-   * @param buttonAddFeature the btnAddFeature to set
    */
   public void setButtonAddFeature(JButton btnAddFeature) {
     this.buttonAddFeature = btnAddFeature;

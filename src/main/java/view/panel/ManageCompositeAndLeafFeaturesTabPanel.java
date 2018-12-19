@@ -21,9 +21,9 @@ public class ManageCompositeAndLeafFeaturesTabPanel extends JPanel {
   private AgentInformationPanel agentImagePanel;
   private ManageFeaturesPanel manageFeaturesPanel = new ManageFeaturesPanel();
 
-  public ManageCompositeAndLeafFeaturesTabPanel(String agentType) {
+  public ManageCompositeAndLeafFeaturesTabPanel(String agentImagePath) {
     // SET AGENT IMAGE
-    agentImagePanel = new AgentInformationPanel(agentType);
+    agentImagePanel = new AgentInformationPanel(agentImagePath);
 
     setLayout(new GridLayout(2, 2, 0, 0));
     add(addCompositeFeaturePanel);

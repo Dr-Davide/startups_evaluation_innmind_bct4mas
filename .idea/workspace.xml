@@ -2,23 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7352a795-b1e2-47f3-86d2-7083d6bb561a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/behaviours/LoadFeatureListFromLedgerStartup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/behaviours/VerifyStartupCanLook4Expert.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/panel/AddLeafFeatureStartupPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/panel/ManageCompositeAndLeafFeaturesStartupTabPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APDescription.txt" beforeDir="false" afterPath="$PROJECT_DIR$/APDescription.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chaincode/hyperledger/fabric/servicech.block" beforeDir="false" afterPath="$PROJECT_DIR$/chaincode/hyperledger/fabric/servicech.block" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chaincode/hyperledger/fabric/transch.block" beforeDir="false" afterPath="$PROJECT_DIR$/chaincode/hyperledger/fabric/transch.block" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chaincode/innMind/innMind.go" beforeDir="false" afterPath="$PROJECT_DIR$/chaincode/innMind/innMind.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chaincode/innMind/vendor/github.com/pavva91/assets/innMindReputation.go" beforeDir="false" afterPath="$PROJECT_DIR$/chaincode/innMind/vendor/github.com/pavva91/assets/innMindReputation.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chaincode/innMind/vendor/github.com/pavva91/invokeapi/innMindReputationInvokeCall.go" beforeDir="false" afterPath="$PROJECT_DIR$/chaincode/innMind/vendor/github.com/pavva91/invokeapi/innMindReputationInvokeCall.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/startups_evaluation_innmind_bct4mas.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/startups_evaluation_innmind_bct4mas.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agents/AgentHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agents/AgentHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup-fabric-network/temp/fabric/servicech.block" beforeDir="false" afterPath="$PROJECT_DIR$/setup-fabric-network/temp/fabric/servicech.block" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup-fabric-network/temp/fabric/transch.block" beforeDir="false" afterPath="$PROJECT_DIR$/setup-fabric-network/temp/fabric/transch.block" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/agents/BCAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agents/BCAgent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agents/ExpertAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agents/ExpertAgent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/agents/StartupAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agents/StartupAgent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/behaviours/GetFeaturesList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/behaviours/GetFeaturesList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/behaviours/ReceiveMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/behaviours/ReceiveMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/CreateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/CreateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ReadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ReadController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/UpdateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/UpdateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/ReputationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/InnMindReputationDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/AgentHandlerGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/AgentHandlerGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/BCAgentGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/BCAgentGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ExpertAgentGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ExpertAgentGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/CheckerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/CheckerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ComplexWorkflowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ComplexWorkflowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/RangeQueriesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/RangeQueriesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/RangeQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/RangeQueries.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/StartupAgentGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/StartupAgentGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/panel/AddLeafFeaturePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/panel/AddLeafFeaturePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/panel/AgentInformationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/panel/AgentInformationPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/panel/ManageCompositeAndLeafFeaturesTabPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/panel/ManageCompositeAndLeafFeaturesTabPanel.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,41 +38,87 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/agents/AgentHandler.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/model/RangeQueries.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+            <state relative-caret-position="137">
+              <caret line="596" column="59" lean-forward="true" selection-start-line="596" selection-start-column="59" selection-end-line="596" selection-end-column="59" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/AddAgent.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controllers/RangeQueriesController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-30">
-              <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+            <state relative-caret-position="1722">
+              <caret line="152" selection-start-line="152" selection-end-line="159" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/RefreshBcAgentGui.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/LoadFeatureListFromLedgerStartup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="105">
+              <caret line="22" selection-start-line="22" selection-end-line="32" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/view/StartupAgentGui.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="101">
+              <caret line="352" column="63" lean-forward="true" selection-start-line="352" selection-start-column="63" selection-end-line="352" selection-end-column="63" />
+              <folding>
+                <element signature="docComment;method#StartupAgentGui#0;class#StartupAgentGui#0" />
+                <element signature="docComment;method#buildTabbedPane#0;class#StartupAgentGui#0" />
+                <element signature="method#buildTabbedPane#0;class#StartupAgentGui#0" />
+                <element signature="method#getDifferentId#0;class#StartupAgentGui#0" />
+                <element signature="method#getExecuterEvaluation#0;class#StartupAgentGui#0" />
+                <element signature="method#getDemanderEvaluation#0;class#StartupAgentGui#0" />
+                <element signature="docComment;method#getEvaluation#0;class#StartupAgentGui#0" />
+                <element signature="method#getEvaluation#0;class#StartupAgentGui#0" />
+                <element signature="method#showOkMessage#0;class#StartupAgentGui#0" />
+                <element signature="method#getFeatureCompletedMessage#0;class#StartupAgentGui#0" />
+                <element signature="method#showGui#0;class#StartupAgentGui#0" />
+                <element signature="docComment;method#getAskFeatureTabPanel#0;class#StartupAgentGui#0" />
+                <element signature="docComment;method#setAskFeatureTabPanel#0;class#StartupAgentGui#0" />
+                <element signature="method#setAskFeatureTabPanel#0;class#StartupAgentGui#0" />
+                <element signature="docComment;method#getMessagesTabPanel#0;class#StartupAgentGui#0" />
+                <element signature="docComment;method#setMessagesTabPanel#0;class#StartupAgentGui#0" />
+                <element signature="docComment;method#getPanel#0;class#StartupAgentGui#0" />
+                <element signature="docComment;method#setPanel#0;class#StartupAgentGui#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/agents/StartupAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-285">
-              <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+            <state relative-caret-position="205">
+              <caret line="90" column="48" lean-forward="true" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
               <folding>
-                <element signature="e#12779#12780#0" expanded="true" />
-                <element signature="e#12814#12815#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controllers/UpdateController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/GetFeaturesList.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="34" column="48" lean-forward="true" selection-end-line="283" />
             </state>
           </provider>
         </entry>
@@ -72,8 +126,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/agents/BCAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+            <state relative-caret-position="199">
+              <caret line="275" selection-start-line="275" selection-end-line="275" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#6101#6102#0" expanded="true" />
@@ -115,50 +169,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/GetFeaturesList.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/VerifyStartupCanLook4Expert.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="34" column="9" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/logic/ReputationLogic.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1608">
-              <caret line="81" selection-start-line="81" selection-end-line="81" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="102" column="51" selection-start-line="102" selection-start-column="51" selection-end-line="102" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/agents/ExpertAgent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="40" selection-start-line="40" selection-end-line="40" />
+            <state relative-caret-position="213">
+              <caret line="35" lean-forward="true" selection-end-line="35" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#0#1125#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/controllers/BCAgentController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controllers/CheckerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="105" column="6" selection-start-line="105" selection-start-column="6" selection-end-line="105" selection-end-column="47" />
+            <state relative-caret-position="139">
+              <caret line="82" column="26" selection-start-line="82" selection-start-column="26" selection-end-line="82" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -174,13 +201,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Service</find>
-      <find>GetReputation</find>
-      <find>&quot;ReputationId&quot;</find>
-      <find>CreateReputation</find>
-      <find>There is no agent offering the searched service:</find>
-      <find>GetActivitiesByDemanderExecuterTimestamp</find>
-      <find>ActivityDAO</find>
       <find>&quot;ExecutedFeatureId&quot;</find>
       <find>Demander</find>
       <find>Executed</find>
@@ -204,6 +224,13 @@
       <find>protected</find>
       <find>updateManageFeaturesTableModelData</find>
       <find>private</find>
+      <find>ManageCompositeAndLeafFeaturesTabPanel</find>
+      <find>AddLeafFeaturePanel</find>
+      <find>default:</find>
+      <find>LoadFeatureListFromLedger</find>
+      <find>STARTUP VIEW WOOOW</find>
+      <find>asdf</find>
+      <find>getNoAvatarExpertImagePath</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -227,6 +254,9 @@
       <replace>ExpertAgentGui</replace>
       <replace>ExpertAgentGui.this</replace>
       <replace>protected</replace>
+      <replace>ManageCompositeAndLeafFeaturesTabPanelStartup</replace>
+      <replace>AddLeafFeatureStartupPanel</replace>
+      <replace>LoadFeatureListFromLedgerStartup</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -256,36 +286,43 @@
         <option value="$PROJECT_DIR$/src/main/java/model/dao/FeatureDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/dao/ReviewDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/controllers/CreateController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controllers/ComplexWorkflowController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controllers/RangeQueriesController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/model/RangeQueries.java" />
         <option value="$PROJECT_DIR$/src/main/java/logic/ReputationLogic.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/panel/SearchFeatureResultPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/panel/AskFeaturePanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/panel/AskFeatureWithAgentInformationPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/start/JadeJson2Pojo.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/panel/FeatureAgentInformationPanel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/view/panel/AgentInformationPanel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/view/panel/ManageCompositeAndLeafFeaturesTabPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/dao/ReputationDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/dao/InnMindReputationDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/ExpertAgentGui.java" />
-        <option value="$PROJECT_DIR$/src/main/java/view/StartupAgentGui.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/BCAgentGui.java" />
         <option value="$PROJECT_DIR$/src/main/java/agents/AgentHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/AgentHandlerGui.java" />
         <option value="$PROJECT_DIR$/src/main/java/behaviours/AddAgent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/agents/BCAgent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java" />
         <option value="$PROJECT_DIR$/src/main/java/agents/ExpertAgent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java" />
+        <option value="$PROJECT_DIR$/src/main/java/controllers/ComplexWorkflowController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/view/panel/ManageCompositeAndLeafFeaturesTabPanelStartup.java" />
+        <option value="$PROJECT_DIR$/src/main/java/view/panel/AddLeafFeaturePanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/view/panel/ManageCompositeAndLeafFeaturesStartupTabPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/view/panel/AddLeafFeatureStartupPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/agents/StartupAgent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/behaviours/LoadFeatureListFromLedgerStartup.java" />
+        <option value="$PROJECT_DIR$/src/main/java/controllers/RangeQueriesController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/view/panel/ManageCompositeAndLeafFeaturesTabPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/view/panel/AgentInformationPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/model/RangeQueries.java" />
+        <option value="$PROJECT_DIR$/src/main/java/agents/BCAgent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/controllers/CheckerController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/view/StartupAgentGui.java" />
+        <option value="$PROJECT_DIR$/src/main/java/behaviours/VerifyStartupCanLook4Expert.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1091" />
     <option name="y" value="73" />
-    <option name="width" value="607" />
+    <option name="width" value="1213" />
     <option name="height" value="695" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -296,6 +333,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -403,21 +442,29 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="startups_evaluation_innmind_bct4mas" type="b2602c69:ProjectViewProjectNode" />
+              <item name="startups_evaluation_innmind_bct4mas" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="panel" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545156751890" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545241222598" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../tourism_trust_bct4mas" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -453,18 +500,19 @@
       <workItem from="1545060874514" duration="508000" />
       <workItem from="1545070286424" duration="1144000" />
       <workItem from="1545072024322" duration="408000" />
-      <workItem from="1545079007826" duration="36675000" />
+      <workItem from="1545079007826" duration="36989000" />
+      <workItem from="1545215359818" duration="14702000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38735000" />
+    <option name="totallyTimeSpent" value="53751000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1091" y="73" width="1213" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27163666" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27677807" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -472,9 +520,9 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.5795053" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.16254418" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.11130742" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.16254418" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49957156" weight="0.1696113" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.37809187" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -482,8 +530,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.37279153" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50042844" side_tool="true" weight="0.23321554" />
+      <window_info active="true" anchor="bottom" id="Messages" order="12" visible="true" weight="0.37279153" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -491,7 +539,7 @@
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Maven" order="6" />
-      <window_info anchor="right" id="Bean Validation" order="7" />
+      <window_info anchor="right" id="Bean Validation" order="7" weight="0.32990575" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Database" order="9" />
     </layout>
@@ -515,18 +563,6 @@
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/agents/StartupAgent.java</url>
-          <line>82</line>
-          <properties />
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/agents/StartupAgent.java</url>
-          <line>380</line>
-          <properties />
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controllers/BCAgentController.java</url>
           <line>105</line>
           <properties />
@@ -538,84 +574,10 @@
           <properties />
           <option name="timeStamp" value="44" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java</url>
-          <line>102</line>
-          <properties />
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/EvaluateFeature.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="181" column="34" selection-start-line="181" selection-start-column="34" selection-end-line="181" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/UpdateController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="49">
-          <caret line="33" column="28" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/GeneralLedgerInteraction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-334">
-          <caret line="61" column="89" selection-start-line="61" selection-start-column="89" selection-end-line="61" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/dao/FeatureDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="147" column="77" selection-start-line="147" selection-start-column="77" selection-end-line="147" selection-end-column="77" />
-          <folding>
-            <element signature="method#get#0;class#FeatureDAO#0" />
-            <element signature="e#1132#1310#0" />
-            <element signature="e#1339#1383#0" />
-            <element signature="e#1419#1463#0" />
-            <element signature="e#1635#3386#1" />
-            <element signature="e#1768#3256#1" />
-            <element signature="e#2028#3146#0" />
-            <element signature="e#2216#2272#0" />
-            <element signature="e#2403#2827#1" />
-            <element signature="e#3182#3242#0" />
-            <element signature="e#3262#3376#1" />
-            <element signature="method#getAll#0;class#FeatureDAO#0" />
-            <element signature="method#create#0;class#FeatureDAO#0" />
-            <element signature="e#4127#4187#0" />
-            <element signature="method#createLeafFeature#0;class#FeatureDAO#0" />
-            <element signature="method#update#0;class#FeatureDAO#0" />
-            <element signature="method#delete#0;class#FeatureDAO#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/dao/ReviewDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4">
-          <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/fabric/SdkIntegration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="194" selection-start-line="194" selection-end-line="194" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/ReadController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="76" column="41" lean-forward="true" selection-start-line="76" selection-start-column="41" selection-end-line="76" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/jdk-11/lib/src.zip!/java.desktop/javax/swing/table/TableRowSorter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3075">
@@ -657,61 +619,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/ComplexWorkflowController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="133" column="33" selection-start-line="133" selection-start-column="33" selection-end-line="133" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/CreateController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="230" column="39" selection-start-line="230" selection-start-column="39" selection-end-line="230" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/RangeQueriesController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="184" selection-start-line="184" selection-end-line="184" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/LoadFeatureListFromLedger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/EditableTableModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
           <caret line="52" selection-start-line="52" selection-end-line="52" />
           <folding>
             <element signature="e#1229#1230#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/RangeQueries.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-81">
-          <caret line="580" column="64" selection-start-line="580" selection-start-column="64" selection-end-line="580" selection-end-column="64" />
-          <folding>
-            <element signature="docComment;class#RangeQueries#0" />
-            <element signature="method#RangeQueries#0;class#RangeQueries#0" />
-            <element signature="docComment;method#coupleFeatureWithAgent#0;class#RangeQueries#0" />
-            <element signature="docComment;method#createFeatureAndCoupleWithAgentWithStandardValue#0;class#RangeQueries#0" />
-            <element signature="docComment;method#createFeatureAndCoupleWithAgent#0;class#RangeQueries#0" />
-            <element signature="docComment;method#callHelloWorld#0;class#RangeQueries#0" />
-            <element signature="docComment;method#getFeatureNotFoundError#0;class#RangeQueries#0" />
-            <element signature="docComment;method#getAgentNotFoundError#0;class#RangeQueries#0" />
-            <element signature="docComment;method#getFeatureRelationAgent#0;class#RangeQueries#0" />
-            <element signature="docComment;method#getAgentsByFeature#0;class#RangeQueries#0" />
-            <element signature="docComment;method#getFeaturesByAgent#0;class#RangeQueries#0" />
-            <element signature="docComment;method#getReputationHistory#0;class#RangeQueries#0" />
           </folding>
         </state>
       </provider>
@@ -762,42 +675,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/UpdateFeatureRelationAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="66" selection-start-line="66" selection-end-line="70" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/AskFeatureTabPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="e#1624#1625#0" expanded="true" />
-            <element signature="e#1665#1666#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/AskFeaturePanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="19" column="62" selection-start-line="19" selection-start-column="62" selection-end-line="19" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/jdk-11/lib/src.zip!/java.desktop/javax/swing/JLabel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="79">
           <caret line="320" lean-forward="true" selection-start-line="320" selection-end-line="320" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/AskFeatureWithAgentInformationPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -808,48 +689,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/start/JadeJson2Pojo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-45">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="e#1247#1248#0" expanded="true" />
-            <element signature="e#1278#1279#0" expanded="true" />
-            <element signature="e#1014#1015#0" expanded="true" />
-            <element signature="e#1054#1055#0" expanded="true" />
-            <element signature="e#1021#1022#0" expanded="true" />
-            <element signature="e#1062#1063#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/ManageFeaturesPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-727">
           <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/AgentInformationPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="47" column="7" lean-forward="true" selection-start-line="47" selection-start-column="7" selection-end-line="47" selection-end-column="7" />
-          <folding>
-            <element signature="e#1122#1123#0" expanded="true" />
-            <element signature="e#1147#1148#0" expanded="true" />
-            <element signature="e#3565#3566#0" expanded="true" />
-            <element signature="e#4379#4380#0" expanded="true" />
-            <element signature="e#4534#4535#0" expanded="true" />
-            <element signature="e#4662#4663#0" expanded="true" />
-            <element signature="e#4838#4839#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/ManageCompositeAndLeafFeaturesTabPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="43" column="30" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -892,131 +735,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/view/ExpertAgentGui.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="47" selection-start-line="47" selection-end-line="47" />
-          <folding>
-            <element signature="docComment;method#StartupAgentGui#0;class#StartupAgentGui#0" />
-            <element signature="e#1142#1241#0" />
-            <element signature="class#2369:4009" />
-            <element signature="method#actionPerformed#0;class#2369:4009" />
-            <element signature="e#1811#2970#0" />
-            <element signature="e#3702#3969#0" />
-            <element signature="class#4257:7632" />
-            <element signature="method#actionPerformed#0;class#4257:7632" />
-            <element signature="e#4390#7304#0" />
-            <element signature="e#4593#6965#1" />
-            <element signature="e#6971#7278#1" />
-            <element signature="e#7325#7592#0" />
-            <element signature="class#7856:10573" />
-            <element signature="method#actionPerformed#0;class#7856:10573" />
-            <element signature="e#7989#10239#0" />
-            <element signature="e#8155#9968#1" />
-            <element signature="e#9302#9513#1" />
-            <element signature="e#9519#9936#1" />
-            <element signature="e#9974#10213#1" />
-            <element signature="e#10260#10533#0" />
-            <element signature="class#10795:16097" />
-            <element signature="method#actionPerformed#0;class#10795:16097" />
-            <element signature="e#10928#15763#0" />
-            <element signature="e#11094#15492#1" />
-            <element signature="e#12122#12179#0" />
-            <element signature="e#12965#15460#0" />
-            <element signature="e#15498#15737#1" />
-            <element signature="e#15784#16057#0" />
-            <element signature="class#16322:19745" />
-            <element signature="method#actionPerformed#0;class#16322:19745" />
-            <element signature="e#16465#18658#0" />
-            <element signature="e#17180#17279#1" />
-            <element signature="e#17285#18538#1" />
-            <element signature="e#17650#17757#1" />
-            <element signature="e#17763#18508#1" />
-            <element signature="e#18215#18336#1" />
-            <element signature="e#18342#18473#1" />
-            <element signature="e#18690#18969#0" />
-            <element signature="method#selectedHeuristic#0;class#16322:19745" />
-            <element signature="e#20034#20087#0" />
-            <element signature="e#20223#20430#1" />
-            <element signature="e#20436#21080#1" />
-            <element signature="e#20733#20797#0" />
-            <element signature="e#22384#22482#0" />
-            <element signature="e#22887#22990#0" />
-            <element signature="class#23161:27032" />
-            <element signature="method#actionPerformed#0;class#23161:27032" />
-            <element signature="e#23304#25743#0" />
-            <element signature="e#23419#25464#1" />
-            <element signature="e#25167#25200#0" />
-            <element signature="e#25470#25716#1" />
-            <element signature="e#25775#26062#0" />
-            <element signature="method#selectedHeuristic#0;class#23161:27032" />
-            <element signature="e#26823#26918#0" />
-            <element signature="class#27186:29415" />
-            <element signature="method#actionPerformed#0;class#27186:29415" />
-            <element signature="e#27401#29135#1" />
-            <element signature="e#28159#28185#0" />
-            <element signature="e#28511#28778#1" />
-            <element signature="e#28784#29108#1" />
-            <element signature="e#29141#29374#1" />
-            <element signature="class#29564:31861" />
-            <element signature="method#actionPerformed#0;class#29564:31861" />
-            <element signature="e#29779#31581#1" />
-            <element signature="e#30537#30563#0" />
-            <element signature="e#30875#31224#1" />
-            <element signature="e#31230#31554#1" />
-            <element signature="e#31587#31820#1" />
-            <element signature="e#31183#31231#0" />
-            <element signature="docComment;method#buildTabbedPane#0;class#StartupAgentGui#0" />
-            <element signature="method#getDifferentId#0;class#StartupAgentGui#0" />
-            <element signature="e#32875#32907#0" />
-            <element signature="method#getExecuterEvaluation#0;class#StartupAgentGui#0" />
-            <element signature="method#getDemanderEvaluation#0;class#StartupAgentGui#0" />
-            <element signature="docComment;method#getEvaluation#0;class#StartupAgentGui#0" />
-            <element signature="method#getEvaluation#0;class#StartupAgentGui#0" />
-            <element signature="e#34751#34849#0" />
-            <element signature="e#34882#34926#0" />
-            <element signature="e#35583#35678#0" />
-            <element signature="method#showOkMessage#0;class#StartupAgentGui#0" />
-            <element signature="e#36349#36447#0" />
-            <element signature="e#36480#36524#0" />
-            <element signature="method#getFeatureCompletedMessage#0;class#StartupAgentGui#0" />
-            <element signature="method#showGui#0;class#StartupAgentGui#0" />
-            <element signature="e#37881#37894#0" />
-            <element signature="e#38023#38057#0" />
-            <element signature="docComment;method#getAskFeatureTabPanel#0;class#StartupAgentGui#0" />
-            <element signature="docComment;method#setAskFeatureTabPanel#0;class#StartupAgentGui#0" />
-            <element signature="method#setAskFeatureTabPanel#0;class#StartupAgentGui#0" />
-            <element signature="docComment;method#getMessagesTabPanel#0;class#StartupAgentGui#0" />
-            <element signature="docComment;method#setMessagesTabPanel#0;class#StartupAgentGui#0" />
-            <element signature="docComment;method#getPanel#0;class#StartupAgentGui#0" />
-            <element signature="docComment;method#setPanel#0;class#StartupAgentGui#0" />
-            <element signature="docComment;method#getManageCompositeAndLeafFeaturesTabPanel#0;class#StartupAgentGui#0" />
-            <element signature="method#getManageCompositeAndLeafFeaturesTabPanel#0;class#StartupAgentGui#0" />
-            <element signature="docComment;method#setManageCompositeAndLeafFeaturesTabPanel#0;class#StartupAgentGui#0" />
-            <element signature="method#setManageCompositeAndLeafFeaturesTabPanel#0;class#StartupAgentGui#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/view/BCAgentGui.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2568#2569#0" expanded="true" />
-            <element signature="e#2607#2608#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/view/StartupAgentGui.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-330">
-          <caret line="47" column="38" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/view/AgentHandlerGui.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="131">
@@ -1026,50 +744,233 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/agents/AgentHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
+        <state relative-caret-position="495">
           <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/AddAgent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-30">
+        <state relative-caret-position="240">
           <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/logic/ReputationLogic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1608">
+        <state relative-caret-position="1050">
           <caret line="81" selection-start-line="81" selection-end-line="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/agents/ExpertAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controllers/BCAgentController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="1365">
           <caret line="105" column="6" selection-start-line="105" selection-start-column="6" selection-end-line="105" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/view/BCAgentGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9">
+          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2568#2569#0" expanded="true" />
+            <element signature="e#2605#2606#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/CreateController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="152" column="19" selection-start-line="152" selection-start-column="19" selection-end-line="152" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/ComplexWorkflowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="676">
+          <caret line="247" column="17" selection-start-line="247" selection-start-column="17" selection-end-line="247" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/AddLeafFeaturePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1215">
+          <caret line="89" column="5" selection-start-line="89" selection-start-column="5" selection-end-line="89" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/ManageCompositeAndLeafFeaturesStartupTabPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="41" column="9" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/AddLeafFeatureStartupPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/LoadFeatureListFromLedger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="27" column="9" selection-end-line="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/UpdateFeatureRelationAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="66" selection-start-line="66" selection-end-line="70" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/RefreshBcAgentGui.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
+        <state relative-caret-position="240">
           <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/start/JadeJson2Pojo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="93" column="35" selection-start-line="93" selection-start-column="35" selection-end-line="93" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/view/ExpertAgentGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="57" column="67" selection-start-line="57" selection-start-column="67" selection-end-line="57" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/ManageCompositeAndLeafFeaturesTabPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/AgentInformationPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1655">
+          <caret line="122" column="41" lean-forward="true" selection-start-line="122" selection-start-column="41" selection-end-line="122" selection-end-column="41" />
+          <folding>
+            <element signature="e#1122#1123#0" expanded="true" />
+            <element signature="e#1140#1141#0" expanded="true" />
+            <element signature="e#3538#3539#0" expanded="true" />
+            <element signature="e#3565#3566#0" expanded="true" />
+            <element signature="e#4348#4349#0" expanded="true" />
+            <element signature="e#4379#4380#0" expanded="true" />
+            <element signature="e#4496#4497#0" expanded="true" />
+            <element signature="e#4534#4535#0" expanded="true" />
+            <element signature="e#4624#4625#0" expanded="true" />
+            <element signature="e#4662#4663#0" expanded="true" />
+            <element signature="e#4793#4794#0" expanded="true" />
+            <element signature="e#4838#4839#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/AskFeatureTabPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+          <folding>
+            <element signature="e#1624#1625#0" expanded="true" />
+            <element signature="e#1665#1666#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/AskFeatureWithAgentInformationPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="8" column="14" lean-forward="true" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/view/panel/AskFeaturePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="79" column="30" lean-forward="true" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/UpdateController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/agents/StartupAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="90" column="48" lean-forward="true" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/GetFeaturesList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="34" column="9" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+        <state relative-caret-position="255">
+          <caret line="34" column="48" lean-forward="true" selection-end-line="283" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/RangeQueries.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="596" column="59" lean-forward="true" selection-start-line="596" selection-start-column="59" selection-end-line="596" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/RangeQueriesController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1722">
+          <caret line="152" selection-start-line="152" selection-end-line="159" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/LoadFeatureListFromLedgerStartup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="22" selection-start-line="22" selection-end-line="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/agents/BCAgent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+        <state relative-caret-position="199">
+          <caret line="275" selection-start-line="275" selection-end-line="275" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#6101#6102#0" expanded="true" />
@@ -1110,30 +1011,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/AddFeature.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/CheckerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="102" column="51" selection-start-line="102" selection-start-column="51" selection-end-line="102" selection-end-column="51" />
+        <state relative-caret-position="139">
+          <caret line="82" column="26" selection-start-line="82" selection-start-column="26" selection-end-line="82" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/agents/ExpertAgent.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/view/StartupAgentGui.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        <state relative-caret-position="101">
+          <caret line="352" column="63" lean-forward="true" selection-start-line="352" selection-start-column="63" selection-end-line="352" selection-end-column="63" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="docComment;method#StartupAgentGui#0;class#StartupAgentGui#0" />
+            <element signature="docComment;method#buildTabbedPane#0;class#StartupAgentGui#0" />
+            <element signature="method#buildTabbedPane#0;class#StartupAgentGui#0" />
+            <element signature="method#getDifferentId#0;class#StartupAgentGui#0" />
+            <element signature="method#getExecuterEvaluation#0;class#StartupAgentGui#0" />
+            <element signature="method#getDemanderEvaluation#0;class#StartupAgentGui#0" />
+            <element signature="docComment;method#getEvaluation#0;class#StartupAgentGui#0" />
+            <element signature="method#getEvaluation#0;class#StartupAgentGui#0" />
+            <element signature="method#showOkMessage#0;class#StartupAgentGui#0" />
+            <element signature="method#getFeatureCompletedMessage#0;class#StartupAgentGui#0" />
+            <element signature="method#showGui#0;class#StartupAgentGui#0" />
+            <element signature="docComment;method#getAskFeatureTabPanel#0;class#StartupAgentGui#0" />
+            <element signature="docComment;method#setAskFeatureTabPanel#0;class#StartupAgentGui#0" />
+            <element signature="method#setAskFeatureTabPanel#0;class#StartupAgentGui#0" />
+            <element signature="docComment;method#getMessagesTabPanel#0;class#StartupAgentGui#0" />
+            <element signature="docComment;method#setMessagesTabPanel#0;class#StartupAgentGui#0" />
+            <element signature="docComment;method#getPanel#0;class#StartupAgentGui#0" />
+            <element signature="docComment;method#setPanel#0;class#StartupAgentGui#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/agents/StartupAgent.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/behaviours/VerifyStartupCanLook4Expert.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-285">
-          <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+        <state relative-caret-position="213">
+          <caret line="35" lean-forward="true" selection-end-line="35" />
           <folding>
-            <element signature="e#12779#12780#0" expanded="true" />
-            <element signature="e#12814#12815#0" expanded="true" />
+            <element signature="e#0#1125#0" expanded="true" />
           </folding>
         </state>
       </provider>

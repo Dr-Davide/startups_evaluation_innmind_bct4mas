@@ -1,7 +1,6 @@
 package behaviours;
 
 import agents.BCAgent;
-import controllers.BCAgentController;
 import controllers.CheckerController;
 import controllers.ComplexWorkflowController;
 import controllers.ReadController;
@@ -27,6 +26,7 @@ public class AddFeature extends OneShotBehaviour {
   private String serviceWeight;
   private String serviceTime;
   private String initReputationValue = "6.0";
+  private String agentRole = "";
 
   public AddFeature(BCAgent agent) {
     super(agent);
@@ -48,6 +48,18 @@ public class AddFeature extends OneShotBehaviour {
     serviceComposition = serviceCompositionInput;
     serviceWeight = serviceWeightInput;
     serviceTime = serviceTimeInput;
+  }
+
+  public AddFeature(BCAgent agent, String serviceNameInput, String serviceDescriptionInput,
+                    String serviceCompositionInput, String serviceWeightInput, String serviceTimeInput, String agentRoleInput) {
+    super(agent);
+    bcAgent = agent;
+    serviceName = serviceNameInput;
+    serviceDescription = serviceDescriptionInput;
+    serviceComposition = serviceCompositionInput;
+    serviceWeight = serviceWeightInput;
+    serviceTime = serviceTimeInput;
+    agentRole = agentRoleInput;
   }
 
   @Override
@@ -85,15 +97,56 @@ public class AddFeature extends OneShotBehaviour {
           Channel channel = bcAgent.getHfTransactionChannel();
           User user = bcAgent.getUser();
 
-          ComplexWorkflowController
-              .createFeatureAndCoupleWithAgentAndCreateReputation(bcAgent, serviceId, serviceName,
-                  serviceDescription, serviceComposition, agentId, serviceCost, serviceTime,
-                  initReputationValue,
-                  clientHF, channel, user);
-          String reputationId = agentId + serviceId + InnMindReputation.EXPERT_ROLE;
-          String realReputationValue =
-              ReadController.getReputation(clientHF, channel, reputationId).getValue().toString();
-          newFeatureView.setReputation(realReputationValue);
+          String reputationId;
+          String realReputationValue;
+
+          switch (agentRole){
+            case InnMindReputation.STARTUP_ROLE:
+              // STARTUP CASE
+              ComplexWorkflowController
+                      .createFeatureAndCreateReputation(bcAgent, serviceId, serviceName,
+                              serviceDescription, serviceComposition, agentId, serviceCost, serviceTime,
+                              initReputationValue,
+                              clientHF, channel, user, agentRole);
+              reputationId = agentId + serviceId + InnMindReputation.EXPERT_ROLE;
+              realReputationValue =
+                      ReadController.getReputation(clientHF, channel, reputationId).getValue().toString();
+              newFeatureView.setReputation(realReputationValue);
+              break;
+            case InnMindReputation.EXPERT_ROLE:
+                // EXPERT CASE
+                ComplexWorkflowController
+                        .createFeatureAndCoupleWithAgentAndCreateReputation(bcAgent, serviceId, serviceName,
+                                serviceDescription, serviceComposition, agentId, serviceCost, serviceTime,
+                                initReputationValue,
+                                clientHF, channel, user);
+                reputationId = agentId + serviceId + InnMindReputation.EXPERT_ROLE;
+                realReputationValue =
+                        ReadController.getReputation(clientHF, channel, reputationId).getValue().toString();
+                newFeatureView.setReputation(realReputationValue);
+                break;
+              default:
+                // EXPERT CASE
+                ComplexWorkflowController
+                        .createFeatureAndCoupleWithAgentAndCreateReputation(bcAgent, serviceId, serviceName,
+                                serviceDescription, serviceComposition, agentId, serviceCost, serviceTime,
+                                initReputationValue,
+                                clientHF, channel, user);
+                reputationId = agentId + serviceId + InnMindReputation.EXPERT_ROLE;
+                realReputationValue =
+                        ReadController.getReputation(clientHF, channel, reputationId).getValue().toString();
+                newFeatureView.setReputation(realReputationValue);
+          }
+//          // EXPERT CASE
+//          ComplexWorkflowController
+//              .createFeatureAndCoupleWithAgentAndCreateReputation(bcAgent, serviceId, serviceName,
+//                  serviceDescription, serviceComposition, agentId, serviceCost, serviceTime,
+//                  initReputationValue,
+//                  clientHF, channel, user);
+//          reputationId = agentId + serviceId + InnMindReputation.EXPERT_ROLE;
+//          realReputationValue =
+//              ReadController.getReputation(clientHF, channel, reputationId).getValue().toString();
+//          newFeatureView.setReputation(realReputationValue);
 
           // TODO: Refresh the serviceId
 

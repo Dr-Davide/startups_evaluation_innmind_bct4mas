@@ -1,13 +1,17 @@
 package view;
 
 import agents.BCAgent;
+import controllers.CheckerController;
+import controllers.RangeQueriesController;
 import logic.Heuristic;
 import messages.BCMessage;
 import model.StructFeatureRequest;
+import model.pojo.InnMindReputation;
 import org.apache.log4j.Logger;
 import start.JadeJson2Pojo;
 import start.StartClass;
 import view.panel.AskFeatureTabPanel;
+import view.panel.ManageCompositeAndLeafFeaturesStartupTabPanel;
 import view.panel.ManageCompositeAndLeafFeaturesTabPanel;
 import view.panel.MessagesTabPanel;
 
@@ -36,7 +40,7 @@ public class StartupAgentGui extends BCAgentGui {
     //  private ManageFeaturesTabPanel manageFeaturesTabPanel = new ManageFeaturesTabPanel();
     private AskFeatureTabPanel askFeatureTabPanel = new AskFeatureTabPanel();
     private MessagesTabPanel messagesTabPanel = new MessagesTabPanel();
-    private ManageCompositeAndLeafFeaturesTabPanel manageCompositeAndLeafFeaturesTabPanel;
+    private ManageCompositeAndLeafFeaturesStartupTabPanel manageCompositeAndLeafFeaturesTabPanel;
     private JComponent panel;
 
     /**
@@ -57,7 +61,7 @@ public class StartupAgentGui extends BCAgentGui {
         }
         String agentImagePath = jadeJson2Pojo.getNoAvatarStartupImagePath();
 
-        manageCompositeAndLeafFeaturesTabPanel = new ManageCompositeAndLeafFeaturesTabPanel(agentImagePath);
+        manageCompositeAndLeafFeaturesTabPanel = new ManageCompositeAndLeafFeaturesStartupTabPanel(agentImagePath);
 
         bcAgent = agent;
 
@@ -83,14 +87,17 @@ public class StartupAgentGui extends BCAgentGui {
                             // GET FORM DATA
                             String serviceName = manageCompositeAndLeafFeaturesTabPanel.getAddLeafFeaturePanel()
                                     .getPanelFeatureName().getTextField().getText().trim();
-                            String serviceDescription =
-                                    manageCompositeAndLeafFeaturesTabPanel.getAddLeafFeaturePanel()
-                                            .getPanelFeatureDescription().getTextField().getText().trim();
-                            String serviceCost = manageCompositeAndLeafFeaturesTabPanel.getAddLeafFeaturePanel()
-                                    .getPanelFeatureCost().getTextField().getText().trim();
-                            String serviceTime = manageCompositeAndLeafFeaturesTabPanel.getAddLeafFeaturePanel()
-                                    .getPanelFeatureTime().getTextField().getText().trim();
+//                            String serviceDescription =
+//                                    manageCompositeAndLeafFeaturesTabPanel.getAddLeafFeaturePanel()
+//                                            .getPanelFeatureDescription().getTextField().getText().trim();
+//                            String serviceCost = manageCompositeAndLeafFeaturesTabPanel.getAddLeafFeaturePanel()
+//                                    .getPanelFeatureCost().getTextField().getText().trim();
+//                            String serviceTime = manageCompositeAndLeafFeaturesTabPanel.getAddLeafFeaturePanel()
+//                                    .getPanelFeatureTime().getTextField().getText().trim();
 
+                            String serviceDescription = "";
+                            String serviceCost = "";
+                            String serviceTime = "";
                             // TRIGGER the Behaviour
                             bcAgent
                                     .addLeafFeatureTrigger(serviceName, serviceDescription, serviceCost, serviceTime);
@@ -326,7 +333,19 @@ public class StartupAgentGui extends BCAgentGui {
                                 }
                             }
 
-                            bcAgent.getFeaturesListTrigger(serviceName, selectedHeuristic);
+                            // TODO: Aggiungere verifica se Startup agent ha reputazione per il servizio
+                            // TODO: Uso name as ID
+                            String agentId = bcAgent.getMyName();
+                            String featureId = serviceName;
+
+                            if (CheckerController.isReputationAlreadyInLedger(bcAgent,agentId, featureId, InnMindReputation.STARTUP_ROLE)) {
+                                bcAgent.getFeaturesListTrigger(serviceName, selectedHeuristic);
+                            } else {
+                                JOptionPane.showMessageDialog(StartupAgentGui.this,
+                                        "The Startup can't look for this feature: " + featureId, "403: the client is not authorized",
+                                        JOptionPane.ERROR_MESSAGE);
+                            }
+//                            bcAgent.getFeaturesListTrigger(serviceName, selectedHeuristic);
 
                         } catch (Exception getException) {
                             JOptionPane.showMessageDialog(StartupAgentGui.this,
@@ -387,8 +406,10 @@ public class StartupAgentGui extends BCAgentGui {
                 } else {
                     log.info("HOTEL IMAGE PATH: " + jadeJson2Pojo2.getAgentImagesHotelsPath()
                             .get(table.getSelectedRow()));
+//                    InputStream inputStream = StartClass.getInputStreamPublic(
+//                            jadeJson2Pojo2.getAgentImagesHotelsPath().get(table.getSelectedRow()));
                     InputStream inputStream = StartClass.getInputStreamPublic(
-                            jadeJson2Pojo2.getAgentImagesHotelsPath().get(table.getSelectedRow()));
+                            jadeJson2Pojo2.getNoAvatarExpertImagePath());
                     BufferedImage agentImage = ImageIO.read(inputStream);
                     //          askFeatureTabPanel.getAskFeatureWithAgentInformationPanel().getAgentInformationPanel()
                     //              .setAgentImage(ImageIO.read(
@@ -780,15 +801,15 @@ public class StartupAgentGui extends BCAgentGui {
     /**
      * @return the manageCompositeAndLeafFeaturesTabPanel
      */
-    public ManageCompositeAndLeafFeaturesTabPanel getManageCompositeAndLeafFeaturesTabPanel() {
+    public ManageCompositeAndLeafFeaturesStartupTabPanel getManageCompositeAndLeafFeaturesStartupTabPanel() {
         return manageCompositeAndLeafFeaturesTabPanel;
     }
 
     /**
      * @param manageCompositeAndLeafFeaturesTabPanel the manageCompositeAndLeafFeaturesTabPanel to set
      */
-    public void setManageCompositeAndLeafFeaturesTabPanel(
-            ManageCompositeAndLeafFeaturesTabPanel manageCompositeAndLeafFeaturesTabPanel) {
+    public void setManageCompositeAndLeafFeaturesStartupTabPanel(
+            ManageCompositeAndLeafFeaturesStartupTabPanel manageCompositeAndLeafFeaturesTabPanel) {
         this.manageCompositeAndLeafFeaturesTabPanel = manageCompositeAndLeafFeaturesTabPanel;
     }
 }

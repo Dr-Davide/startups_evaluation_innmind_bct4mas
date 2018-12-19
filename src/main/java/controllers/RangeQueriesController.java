@@ -124,6 +124,45 @@ public class RangeQueriesController {
 
   }
 
+  public static ArrayList<FeatureView> getStructFeatureListProvidedByAgent(HFClient hfClient,
+                                                                           Channel channel, String agentId, String agentRole) throws ProposalException, InvalidArgumentException {
+    ArrayList<FeatureView> servicesProvidedByAgentList = new ArrayList<>();
+    switch (agentRole) {
+      case InnMindReputation.EXPERT_ROLE:
+        servicesProvidedByAgentList = getStructFeatureListProvidedByAgent(hfClient,channel, agentId);
+        break;
+      case InnMindReputation.STARTUP_ROLE:
+        servicesProvidedByAgentList = getStructFeatureListProvidedByStartupAgent(hfClient,channel, agentId);
+        break;
+      default: // should be unreachable
+        IllegalStateException illegalStateException =
+                new IllegalStateException("Wrong field to update, it's not in the expected ones");
+        log.error(illegalStateException);
+        throw illegalStateException;
+    }
+
+    return servicesProvidedByAgentList;
+
+  }
+
+  private static ArrayList<FeatureView> getStructFeatureListProvidedByStartupAgent(HFClient hfClient,
+                                                                           Channel channel, String agentId) throws ProposalException, InvalidArgumentException {
+
+    ArrayList<FeatureView> servicesProvidedByAgentList = new ArrayList<>();
+
+    ArrayList<InnMindReputation> innMindReputationArrayList = RangeQueries.getInnMindReputationsByRoleAgentFeature(hfClient, channel, InnMindReputation.STARTUP_ROLE, agentId);
+    if (CheckerController.isRangeQueryResultEmpty(innMindReputationArrayList)) {
+      log.info("Features offered by agent " + agentId + ": not present in the ledger");
+    } else {
+      servicesProvidedByAgentList =
+              RangeQueriesController.getStructFeatureListFromInnMindReputation(hfClient,
+                      channel, innMindReputationArrayList);
+    }
+
+    return servicesProvidedByAgentList;
+
+  }
+
   /**
    * Get the ArrayList<StructFeature> of services provided by the agent
    * 
@@ -172,6 +211,57 @@ public class RangeQueriesController {
       reputation = innMindReputationPojo.getValue().toString();
 
       agentFeature.setFeatureId(serviceId);
+      agentFeature.setName(name);
+      agentFeature.setCost(cost);
+      agentFeature.setTime(time);
+      agentFeature.setDescription(description);
+      agentFeature.setFeatureComposition(serviceComposition);
+      agentFeature.setReputation(reputation);
+
+      agentFeaturesList.add(agentFeature);
+      i++;
+    }
+    return agentFeaturesList;
+  }
+
+  private static ArrayList<FeatureView> getStructFeatureListFromInnMindReputation(
+          HFClient hfClient, Channel channel, ArrayList<InnMindReputation> innMindReputationArrayList)
+          throws ProposalException, InvalidArgumentException {
+    ArrayList<FeatureView> agentFeaturesList = new ArrayList<>();
+    //    String serviceId;
+    String name;
+    String cost;
+    String time;
+    String description;
+    String serviceComposition;
+    String reputation;
+
+    int i = 0;
+    // CYCLE ALL THE SERVICERELATIONAGENT RECORDS
+    for (InnMindReputation singleInnMindReputation : innMindReputationArrayList) {
+      String agentId = singleInnMindReputation.getAgentId().toString();
+      String featureId = singleInnMindReputation.getFeatureId().toString();
+      String agentRole = singleInnMindReputation.getAgentRole().toString();
+      FeatureView agentFeature = new FeatureView();
+      Feature featurePojo;
+      InnMindReputation innMindReputationPojo;
+      // GET THE SERVICE RECORD
+      featurePojo = ReadController.getFeature(hfClient, channel, featureId);
+      // TODO: GET THE REPUTATION RECORD
+      String reputationId = agentId + featureId + agentRole;
+      innMindReputationPojo = ReadController.getReputation(hfClient, channel, reputationId);
+
+      //      serviceId = featurePojo.getFeatureId().toString();
+      name = featurePojo.getName().toString();
+      // TODO: better handling cost, time, description
+      cost = "";
+      time = "";
+      description = "";
+      serviceComposition = featurePojo.getFeatureComposition().toString();
+
+      reputation = innMindReputationPojo.getValue().toString();
+
+      agentFeature.setFeatureId(featureId);
       agentFeature.setName(name);
       agentFeature.setCost(cost);
       agentFeature.setTime(time);

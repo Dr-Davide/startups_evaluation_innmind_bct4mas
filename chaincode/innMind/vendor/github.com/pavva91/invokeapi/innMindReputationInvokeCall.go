@@ -294,21 +294,94 @@ func QueryByAgentFeatureRole(stub shim.ChaincodeStubInterface, args []string) pb
 			return shim.Error(err.Error())
 		}
 	case 1:
-		byAgentFeatureRoleQuery, err = a.GetByAgentOnly(agentId, stub)
+		byAgentFeatureRoleQuery, err = a.GetByAgentOnlyInnMind(agentId, stub)
 		if err != nil {
 			reputationInnMindInvokeCallLog.Info("Failed to get reputationInnMind for this agent: " + agentId)
 			return shim.Error(err.Error())
 		}
 	}
 
-	// ==== Print the byFeature query result ====
-	err = a.PrintByAgentFeatureRoleInnMindReputationResultsIterator(byAgentFeatureRoleQuery, stub)
+	// ==== Get the FeatureReviews for the byRoleAgentFeatureQuery query result ====
+	innMindReputations, err := a.GetInnMindReputationSliceFromRangeQuery(byAgentFeatureRoleQuery, stub)
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 
-	return shim.Success(nil)
+	// ==== Marshal the byFeatureTxId query result ====
+	innMindReputationsAsJSON, err := json.Marshal(innMindReputations)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	reputationInnMindInvokeCallLog.Info(innMindReputationsAsJSON)
+
+	return shim.Success(innMindReputationsAsJSON)
 }
+
+// ========================================================================================================================
+// QueryByAgentFeatureRole - wrapper of GetByAgentFeatureRole called from chiancode's Invoke
+// TODO: Per come è impostato l'id ora è "inutile", però in vista di refactor ID sarà utile
+// ========================================================================================================================
+func QueryByRoleAgentFeature(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	//   0           1            2
+	// "agentRole", "agentId", "featureId",
+	argumentSizeError := arglib.ArgumentSizeLimitVerification(args, 3)
+	if argumentSizeError != nil {
+		return shim.Error("Argument Size Error: " + argumentSizeError.Error())
+	}
+
+	// ==== Input sanitation ====
+	sanitizeError := arglib.SanitizeArguments(args)
+	if sanitizeError != nil {
+		fmt.Print(sanitizeError)
+		return shim.Error("Sanitize error: " + sanitizeError.Error())
+	}
+
+	agentRole := args[0]
+
+	var byRoleAgentFeatureQuery shim.StateQueryIteratorInterface
+	var err error
+
+	// ==== Run the byAgentFeatureRole query ====
+	switch len(args) {
+	case 3:
+		agentId:= args[1]
+		featureId := args[2]
+		byRoleAgentFeatureQuery, err = a.GetByRoleAgentFeature(agentRole, agentId, featureId,  stub)
+		if err != nil {
+			reputationInnMindInvokeCallLog.Info("Failed to get reputationInnMind for this role: " + agentRole + ", in this agent: " + agentId + ", in this role: " + featureId)
+			return shim.Error(err.Error())
+		}
+	case 2:
+		agentId := args[1]
+		byRoleAgentFeatureQuery, err = a.GetByRoleAgent(agentRole, agentId, stub)
+		if err != nil {
+			reputationInnMindInvokeCallLog.Info("Failed to get reputationInnMind for this role: " + agentRole + ", in this agent: " + agentId)
+			return shim.Error(err.Error())
+		}
+	case 1:
+		byRoleAgentFeatureQuery, err = a.GetByRoleOnlyInnMind(agentRole, stub)
+		if err != nil {
+			reputationInnMindInvokeCallLog.Info("Failed to get reputationInnMind for this role: " + agentRole)
+			return shim.Error(err.Error())
+		}
+	}
+
+	// ==== Get the FeatureReviews for the byRoleAgentFeatureQuery query result ====
+	innMindReputations, err := a.GetInnMindReputationSliceFromRangeQuery(byRoleAgentFeatureQuery, stub)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	// ==== Marshal the byFeatureTxId query result ====
+	innMindReputationsAsJSON, err := json.Marshal(innMindReputations)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	return shim.Success(innMindReputationsAsJSON)
+}
+
 
 // =====================================================================================================================
 // GetInnMindReputationsByAgentFeatureRole - wrapper of GetByAgentFeatureRole called from chiancode's Invoke,

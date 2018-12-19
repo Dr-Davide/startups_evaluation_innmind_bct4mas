@@ -207,6 +207,7 @@ public class ComplexWorkflowController {
         boolean serviceCreationSuccess;
 
 
+
         // MAP SERVICE WITH AGENT
         serviceCreationSuccess =
             createFeatureAndCoupleWithAgent(bcAgent, serviceId, serviceName, serviceDescription,
@@ -224,6 +225,150 @@ public class ComplexWorkflowController {
             allPeerSuccess = false;
         }
 
+        return allPeerSuccess;
+    }
+
+    public static boolean createFeatureAndCreateReputation(BCAgent bcAgent,
+                                                           String serviceId, String serviceName, String serviceDescription, String serviceComposition,
+                                                           String agentId, String cost, String time, String initialReputationValue, HFClient clientHF,
+                                                           Channel channel,
+                                                           User user, String agentRole) throws Exception {
+//        String agentRole = InnMindReputation.STARTUP_ROLE;
+        boolean allPeerSuccess;
+        boolean serviceCreationSuccess;
+
+        ArrayList<String> serviceIds = new ArrayList<>();
+        serviceCreationSuccess =
+                createFeature(bcAgent, serviceId, serviceName, serviceDescription,
+                        serviceComposition, agentId, cost, time, clientHF, channel, user, serviceIds);
+        log.info("SERVICE ID TRIED LIST SIZE: " + serviceIds.size());
+
+        // GET FEATURE
+        Feature featurePojo;
+        featurePojo = ReadController.getFeature(clientHF, channel, serviceId);
+
+        log.info("SERVICE ID TRIED LIST SIZE: " + serviceIds.size());
+        for (String singleId : serviceIds) {
+            log.info("SINGLE SERVICE ID TRIED: " + singleId);
+        }
+        // REFRESH ID
+        serviceId = serviceIds.get(serviceIds.size() - 1);
+
+        // TODO: Check if reputation already exist
+
+        if (serviceCreationSuccess) {
+            String reputationId = agentId + serviceId + agentRole;
+
+
+            if (!CheckerController
+                    .isReputationAlreadyInLedger(bcAgent, agentId, serviceId, agentRole)) {
+                // CREATE REPUTATION
+
+                log.info("CREATION OF REPUTATION");
+                // CREATE REPUTATION of VALUE 6
+
+                allPeerSuccess = CreateController
+                        .createReputation(agentId, serviceId, agentRole, reputationId, clientHF, user,
+                                channel, initialReputationValue);
+            } else {
+                // REPUTATION ALREADY IN LEDGER
+                allPeerSuccess = true;
+            }
+
+
+            log.info("CREATION REPUTATION LOG: " + allPeerSuccess);
+        } else {
+            log.error("PROBLEM IN SERVICE CREATION AND MAPPING WITH AGENT");
+            allPeerSuccess = false;
+        }
+
+        return allPeerSuccess;
+    }
+
+    private static boolean createFeature(BCAgent bcAgent, String serviceId,
+                                                           String serviceName, String serviceDescription, String serviceComposition, String agentId,
+                                                           String cost, String time, HFClient clientHF, Channel channel, User user,
+                                                           ArrayList<String> serviceIds) throws Exception {
+        serviceIds.add(serviceId);
+        boolean allPeerSuccess;
+        if (!CheckerController.isFeatureMappedWithAgent(serviceId, bcAgent)) {
+            // MAP FEATURE WITH AGENT
+            log.info("SERVICE NOT MAPPED WITH AGENT");
+
+            if (!CheckerController.isFeatureAlreadyInLedger(serviceId, bcAgent)) {
+                // CREATE SERVICE
+                log.info("SERVICE DOESN'T EXIST");
+                CreateController.createFeature(clientHF, user, channel, serviceId, serviceName,
+                        serviceComposition);
+            }
+            // GET FEATURE
+            Feature featurePojo;
+            featurePojo = ReadController.getFeature(clientHF, channel, serviceId);
+
+            String newlyCreatedFeatureId = featurePojo.getFeatureId().toString();
+
+            // TODO: ADD CONTROLLO SE IL SERVIZIO COMPOSTO GIA ESISTENTE CORRISPONDE CON QUELLO CHE VOGLIO CREARE ORA
+            String serviceCompositionString = featurePojo.getFeatureComposition().toString();
+            String[] ledgerFeatureCompositonPartsRaw = serviceCompositionString.split(",");
+            ArrayList<String> ledgerFeatureCompositionParts = new ArrayList<>();
+            for (int i = 0; i < ledgerFeatureCompositonPartsRaw.length; i++) {
+                String leafFeatureId = ledgerFeatureCompositonPartsRaw[i].replace("\"", "");
+                ledgerFeatureCompositionParts.add(leafFeatureId);
+            }
+
+            String[] userFeatureCompositionPartsRaw = serviceComposition.split(",");
+            ArrayList<String> userFeatureCompositionParts = new ArrayList<>();
+            for (int i = 0; i < userFeatureCompositionPartsRaw.length; i++) {
+                String leafFeatureId = userFeatureCompositionPartsRaw[i];
+                userFeatureCompositionParts.add(leafFeatureId);
+            }
+
+            log.info("LEDGER SERVICE COMPOSITION: " + ledgerFeatureCompositionParts);
+            log.info("USER SERVICE COMPOSITION: " + userFeatureCompositionParts);
+
+            log.info("SIZE: " + userFeatureCompositionParts.size());
+
+            Boolean differentValue = false;
+            if (ledgerFeatureCompositionParts.size() == userFeatureCompositionParts.size()) {
+                for (int i = 0; i < userFeatureCompositionParts.size() && !differentValue; i++) {
+                    Boolean notAlreadyFound = true;
+                    for (int j = 0; j < ledgerFeatureCompositionParts.size() && notAlreadyFound; j++) {
+                        if (userFeatureCompositionParts.get(i)
+                                .equals(ledgerFeatureCompositionParts.get(j))) {
+                            notAlreadyFound = false;
+                        }
+                    }
+                    if (notAlreadyFound) {
+                        differentValue = true;
+                    }
+                }
+            } else {
+                // NAMING CONFLICT BETWEEN COMPOSITE SERVICE AND LEAF SERVICE
+                differentValue = true;
+            }
+
+            if (differentValue) {
+                log.info("SONO DIFFERENTI COMPOSITE SERVICES CON STESSO ID");
+                String newFeatureId = bcAgent.bcAgentGui.getDifferentId(serviceId);
+                // TODO: Far inserire stesso nome con diverso id per creare nuovo servizio e mapparlo all'agente
+                // Ricorsione con newFeatureId
+                allPeerSuccess = createFeature(bcAgent, newFeatureId, serviceName,
+                        serviceDescription, serviceComposition, agentId, cost, time, clientHF, channel,
+                        user, serviceIds);
+            } else {
+                log.info("SONO UGUALI COMPOSITE SERVICES");
+                allPeerSuccess = true;
+                // OK MAP SERVICE WITH AGENT
+                // MAP SERVICE WITH AGENT
+//                allPeerSuccess = CreateController
+//                        .createFeatureRelationAgent(clientHF, user, channel, newlyCreatedFeatureId, agentId,
+//                                cost, time, serviceDescription);
+            }
+
+        } else {
+            allPeerSuccess = false;
+            log.info("SERVICE ALREADY MAPPED WITH AGENT");
+        }
         return allPeerSuccess;
     }
 

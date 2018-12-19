@@ -57,6 +57,7 @@ const (
 	GetInnMindReputationNotFoundError                     = "GetInnMindReputationNotFoundError"
 	ByAgentFeatureRole                                    = "byAgentFeatureRole"
 	GetInnMindReputationsByAgentFeatureRole               = "GetInnMindReputationsByAgentFeatureRole"
+	GetInnMindReputationsByRoleAgentFeature 		      = "GetInnMindReputationsByRoleAgentFeature"
 	Write                                                 = "Write"
 	Read                                                  = "Read"
 	ReadEverything                                        = "ReadEverything"
@@ -180,6 +181,7 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		// GET:
 	case GetReview:
 		return in.QueryReview(stub, args)
+
 		// RANGE QUERY:
 	case ByReviewedFeatureTxId:
 		return in.QueryByReviewedFeatureTx(stub, args)
@@ -207,12 +209,16 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		return in.QueryInnMindReputation(stub, args)
 	case GetInnMindReputationNotFoundError:
 		return in.QueryInnMindReputationNotFoundError(stub, args)
+
 		// RANGE QUERY:
 	case ByAgentFeatureRole:
 		return in.QueryByAgentFeatureRole(stub, args)
 	case GetInnMindReputationsByAgentFeatureRole:
 		// also with only one record result return always a JSONArray
 		return in.GetInnMindReputationsByAgentFeatureRole(stub, args)
+	case GetInnMindReputationsByRoleAgentFeature:
+		// also with only one record result return always a JSONArray
+		return in.QueryByRoleAgentFeature(stub, args)
 
 		// GENERAL INVOKES
 	case Write:

@@ -273,6 +273,10 @@ public class BCAgent extends Agent {
     addBehaviour(new GetFeaturesList(this, serviceName, heuristic));
   }
 
+  public void verifyStartupAgentCanLookForExpert(String serviceName, String heuristic) {
+    addBehaviour(new GetFeaturesList(this, serviceName, heuristic));
+  }
+
   /**
    * Trigger used from the agent's related GUI to completely separate it from the agent's behaviours
    *

@@ -12,7 +12,6 @@ import model.pojo.InnMindReputation;
 import org.hyperledger.fabric.sdk.Channel;
 import org.hyperledger.fabric.sdk.HFClient;
 import org.hyperledger.fabric.sdk.User;
-import view.BCAgentGui;
 import view.StartupAgentGui;
 
 import javax.swing.*;
@@ -37,6 +36,8 @@ public class StartupAgent extends BCAgent {
     private Channel hfTransactionChannel;
 
     private String configurationType = null;
+
+    private String agentRole = InnMindReputation.STARTUP_ROLE;
 
 //    public ArrayList<FeatureView> featuresList = new ArrayList<>();
 
@@ -80,9 +81,9 @@ public class StartupAgent extends BCAgent {
     public void updateManageFeaturesTableModelData() {
 
         // NEW
-        startupAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getManageFeaturesPanel()
+        startupAgentGui.getManageCompositeAndLeafFeaturesStartupTabPanel().getManageFeaturesPanel()
                 .setAgentFeatureList(getFeaturesList());
-        startupAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getManageFeaturesPanel()
+        startupAgentGui.getManageCompositeAndLeafFeaturesStartupTabPanel().getManageFeaturesPanel()
                 .updateTableModelData();
     }
 
@@ -92,9 +93,9 @@ public class StartupAgent extends BCAgent {
     public void updateSelectLeafFeaturesTableModelData() {
 
         // NEW
-        startupAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getAddCompositeFeaturePanel()
+        startupAgentGui.getManageCompositeAndLeafFeaturesStartupTabPanel().getAddCompositeFeaturePanel()
                 .getSelectLeafFeaturesPanel().setAgentFeatureList(getFeaturesList());
-        startupAgentGui.getManageCompositeAndLeafFeaturesTabPanel().getAddCompositeFeaturePanel()
+        startupAgentGui.getManageCompositeAndLeafFeaturesStartupTabPanel().getAddCompositeFeaturePanel()
                 .getSelectLeafFeaturesPanel().updateTableModelData();
     }
 
@@ -141,7 +142,7 @@ public class StartupAgent extends BCAgent {
         LoadAgentInLedger loadAgentInLedger = new LoadAgentInLedger(this);
         sequentialBehaviour.addSubBehaviour(loadAgentInLedger);
 
-        LoadFeatureListFromLedger loadFeatureListFromLedger = new LoadFeatureListFromLedger(this);
+        LoadFeatureListFromLedgerStartup loadFeatureListFromLedger = new LoadFeatureListFromLedgerStartup(this);
         sequentialBehaviour.addSubBehaviour(loadFeatureListFromLedger);
 
         RefreshBcAgentGui refreshBcAgentGui = new RefreshBcAgentGui(this);
@@ -180,7 +181,7 @@ public class StartupAgent extends BCAgent {
         String emptyFeatureComposition = "";
         addBehaviour(
                 new AddFeature(this, serviceName, serviceDescription, emptyFeatureComposition, serviceCost,
-                        serviceTime));
+                        serviceTime, agentRole));
     }
 
     /**

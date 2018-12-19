@@ -594,6 +594,82 @@ public class RangeQueries extends GeneralLedgerInteraction {
       return featureRelationAgentlist;
   }
 
+  public static ArrayList<InnMindReputation> getInnMindReputationsByRoleAgentFeature(HFClient hfClient,
+                                                                   Channel channel, String agentRole, String agentId) {
+
+    String chaincodeFunction = "GetInnMindReputationsByRoleAgentFeature";
+
+    String[] chaincodeArguments = new String[] {agentRole, agentId};
+
+
+    ArrayList<InnMindReputation> innMindReputationArrayList = new ArrayList<>();
+
+    Collection<ProposalResponse> proposalResponseCollection = null;
+    try {
+      // proposalResponseCollection contiene le risposte dei 3 peer
+      // se agente non ha servizi il chaincode ritorna errore (500) che diventa
+      // proposalResponseCollection = [], quindi anche se male, funziona il codice
+      proposalResponseCollection =
+              queryBlockChain(hfClient, channel, chaincodeName, chaincodeFunction, chaincodeArguments);
+      log.info(proposalResponseCollection);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    boolean firstPeerAnswer = false;
+    JSONParser parser = new JSONParser();
+    //    int i = 0;
+    // prendo ognuna (itero) delle risposte dai peer
+    for (ProposalResponse proposalResponse : proposalResponseCollection) {
+      //        if (proposalResponse.isVerified()
+      //            && proposalResponse.getStatus() == ChaincodeResponse.Status.SUCCESS) {
+      // Error response (FAILURE) is the chaincode "not found asset in ledger")
+      if (isFailureResponse(proposalResponse)) {
+
+        return innMindReputationArrayList;
+      }
+      String payload = null;
+      JSONArray jsonarray = null;
+      try {
+        payload = new String(proposalResponse.getChaincodeActionResponsePayload());
+        jsonarray = (JSONArray) parser.parse(payload);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      Iterator<JSONObject> iterator;
+      try {
+        iterator = jsonarray.iterator();
+      } catch (NullPointerException e){
+        // if iterator is null means that we have empty query result
+        return innMindReputationArrayList;
+      }
+      JSONObject jsonChildObject;
+
+      // aggiunge alla lista solo la prima risposta (suppone che siano tutte uguali)
+      // TODO: Aggiungere controllo uguaglianza risposte peer?
+      if (!firstPeerAnswer) {
+        while (iterator.hasNext()) {
+          jsonChildObject = iterator.next();
+          InnMindReputation singleResult = new InnMindReputation();
+
+          singleResult.setInnMindReputationId(jsonChildObject.get("InnMindReputationId"));
+          singleResult.setAgentId(jsonChildObject.get("AgentId"));
+          singleResult.setFeatureId(jsonChildObject.get("FeatureId"));
+          singleResult.setAgentRole(jsonChildObject.get("AgentRole"));
+          singleResult.setValue(jsonChildObject.get("Value"));
+
+          innMindReputationArrayList.add(singleResult);
+        }
+        firstPeerAnswer = true;
+      }
+      System.out
+              .println("response from peer: " + proposalResponse.getPeer().getName() + ": " + payload);
+      //      i++;
+    }
+
+    return innMindReputationArrayList;
+  }
+
 
   public static ArrayList<Feature> getFeaturesByFeatureName(HFClient hfClient, Channel channel,
                                                             String featureName) {

@@ -80,7 +80,7 @@ public class CheckerController {
      * @param agentRole
      * @return
      */
-    static boolean isReputationAlreadyInLedger(BCAgent bcAgent, String agentId, String serviceId,
+    public static boolean isReputationAlreadyInLedger(BCAgent bcAgent, String agentId, String serviceId,
         String agentRole) {
         HFClient clientHF = bcAgent.getHfClient();
         Channel channel = bcAgent.getHfTransactionChannel();
