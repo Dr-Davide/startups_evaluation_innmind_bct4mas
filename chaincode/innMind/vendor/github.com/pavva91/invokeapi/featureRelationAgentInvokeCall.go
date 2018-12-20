@@ -497,10 +497,13 @@ func GetFeatureRelationAgentByFeatureWithCostAndTime(stub shim.ChaincodeStubInte
 
 	stringOut := string(agentsByFeatureAsBytes)
 	featureRelationAgentInvokeCallLog.Info(stringOut)
-	if stringOut == "null" {
-		featureRelationAgentInvokeCallLog.Info("Feature exists but has no existing relationships with agents")
-		return shim.Error("Feature exists but has no existing relationships with agents")
-	}
+
+	// TODO: Let the null go in the payload
+	// null = empty query result
+	//if stringOut == "null" {
+	//	featureRelationAgentInvokeCallLog.Info("Feature exists but has no existing relationships with agents")
+	//	return shim.Error("Feature exists but has no existing relationships with agents")
+	//}
 
 	// ==== Return success with agentsByFeatureSliceAsBytes as payload ====
 	return shim.Success(agentsByFeatureAsBytes)

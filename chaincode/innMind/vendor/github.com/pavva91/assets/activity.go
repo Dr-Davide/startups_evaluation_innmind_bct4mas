@@ -26,7 +26,7 @@ var activityLog = shim.NewLogger("activity")
 // - IsFinalEvaluation
 // UNIVOCAL: WriterAgentId, DemanderAgentId, ExecuterAgentId, ExecutedServiceTxId
 type Activity struct {
-	// 	evaluationId := writerAgentId + demanderAgentId + executerAgentId + executedServiceTxId
+	// 	evaluationId := writerAgentId + expertAgentId + executerAgentId + executedServiceTxId
 	EvaluationId             string `json:"EvaluationId"`
 	WriterAgentId            string `json:"WriterAgentId"` // WriterAgentId = DemanderAgentId || ExecuterAgentId
 	DemanderAgentId          string `json:"DemanderAgentId"`
@@ -40,9 +40,9 @@ type Activity struct {
 // ============================================================
 // Create Service Evaluation - create a new service evaluation
 // ============================================================
-func CreateActivity(evaluationId string, writerAgentId string, demanderAgentId string, executerAgentId string, executedServiceId string, executedServiceTxId string, timestamp string, value string, stub shim.ChaincodeStubInterface) (*Activity, error) {
+func CreateActivity(evaluationId string, writerAgentId string, expertAgentId string, executerAgentId string, executedServiceId string, executedServiceTxId string, timestamp string, value string, stub shim.ChaincodeStubInterface) (*Activity, error) {
 	// ==== Create marble object and marshal to JSON ====
-	serviceEvaluation := &Activity{evaluationId, writerAgentId, demanderAgentId, executerAgentId, executedServiceId, executedServiceTxId, timestamp, value}
+	serviceEvaluation := &Activity{evaluationId, writerAgentId, expertAgentId, executerAgentId, executedServiceId, executedServiceTxId, timestamp, value}
 	serviceEvaluationJSONAsBytes, _ := json.Marshal(serviceEvaluation)
 
 	// === Save Service Evaluation to state ===
@@ -80,10 +80,10 @@ func CreateDemanderExecuterTimestampIndex(activity *Activity, stub shim.Chaincod
 	return agentServiceIndex, nil
 }
 
-func CheckingCreatingIndexingActivity(writerAgentId string, demanderAgentId string, executerAgentId string, executedServiceId string, executedServiceTxId string, timestamp string, value string, stub shim.ChaincodeStubInterface) (*Activity, error) {
+func CheckingCreatingIndexingActivity(writerAgentId string, expertAgentId string, executerAgentId string, executedServiceId string, executedServiceTxId string, timestamp string, value string, stub shim.ChaincodeStubInterface) (*Activity, error) {
 	// ==== Check if serviceEvaluation already exists ====
-	// TODO: Definire come creare evaluationId, per ora è composto dai due ID (writerAgentId + demanderAgentId + executerAgentId + ExecutedServiceTxId)
-	evaluationId := writerAgentId + demanderAgentId + executerAgentId + executedServiceTxId
+	// TODO: Definire come creare evaluationId, per ora è composto dai due ID (writerAgentId + expertAgentId + executerAgentId + ExecutedServiceTxId)
+	evaluationId := writerAgentId + expertAgentId + executerAgentId + executedServiceTxId
 	serviceEvaluationAsBytes, err := stub.GetState(evaluationId)
 	if err != nil {
 		newError := errors.New("Failed to get executedService demanderAgent relation: " + err.Error())
@@ -96,7 +96,7 @@ func CheckingCreatingIndexingActivity(writerAgentId string, demanderAgentId stri
 	}
 
 	// ==== Actual creation of Service Evaluation  ====
-	serviceEvaluation, err := CreateActivity(evaluationId, writerAgentId, demanderAgentId, executerAgentId, executedServiceId, executedServiceTxId, timestamp, value, stub)
+	serviceEvaluation, err := CreateActivity(evaluationId, writerAgentId, expertAgentId, executerAgentId, executedServiceId, executedServiceTxId, timestamp, value, stub)
 	if err != nil {
 		newError := errors.New("Failed to create executedService demanderAgent relation of executedService " + executedServiceId + " with demanderAgent " + executedServiceId)
 		activityLog.Error(newError)
@@ -204,11 +204,11 @@ func GetByExecutedServiceTx(executedServiceTxId string, stub shim.ChaincodeStubI
 // =====================================================================================================================
 // Get the agent query on ServiceRelationAgent - Execute the query based on agent composite index
 // =====================================================================================================================
-func GetByDemanderExecuterTimestamp(demanderAgentId string, executerAgentId string, timestamp string, stub shim.ChaincodeStubInterface) (shim.StateQueryIteratorInterface, error) {
+func GetByDemanderExecuterTimestamp(expertAgentId string, executerAgentId string, timestamp string, stub shim.ChaincodeStubInterface) (shim.StateQueryIteratorInterface, error) {
 	// Query the service~agent~relation index by service
 	// This will execute a key range query on all keys starting with 'service'
 	indexName := "demander~executer~timestamp~evaluation"
-	demanderExecuterResultsIterator, err := stub.GetStateByPartialCompositeKey(indexName, []string{demanderAgentId, executerAgentId, timestamp})
+	demanderExecuterResultsIterator, err := stub.GetStateByPartialCompositeKey(indexName, []string{expertAgentId, executerAgentId, timestamp})
 	if err != nil {
 		activityLog.Error(err)
 		return demanderExecuterResultsIterator, err
@@ -254,13 +254,13 @@ func DeleteExecutedServiceTxIndex(stub shim.ChaincodeStubInterface, executedServ
 // =====================================================================================================================
 // Delete Agent Service Relation - delete from state and from marble index Shows Off DelState() - "removing"" a key/value from the ledger
 // =====================================================================================================================
-func DeleteDemanderExecuterIndex(stub shim.ChaincodeStubInterface, demanderAgentId string, executerAgentId string, evaluationId string) error {
+func DeleteDemanderExecuterIndex(stub shim.ChaincodeStubInterface, expertAgentId string, executerAgentId string, evaluationId string) error {
 
 	// indexName
 	indexName := "demander~executer~evaluation"
 
 	// create the composite key
-	agentServiceIndex, err := stub.CreateCompositeKey(indexName, []string{demanderAgentId, executerAgentId, evaluationId})
+	agentServiceIndex, err := stub.CreateCompositeKey(indexName, []string{expertAgentId, executerAgentId, evaluationId})
 	if err != nil {
 		activityLog.Error(err.Error())
 		return err
@@ -272,7 +272,7 @@ func DeleteDemanderExecuterIndex(stub shim.ChaincodeStubInterface, demanderAgent
 		activityLog.Error(err.Error())
 		return err
 	}
-	activityLog.Info("DeleteDemanderExecuterIndex: DELETED - indexName: " + indexName + " , demanderAgentId: " + demanderAgentId + ", executerAgentId: " + executerAgentId + ", evaluationId: " + evaluationId)
+	activityLog.Info("DeleteDemanderExecuterIndex: DELETED - indexName: " + indexName + " , expertAgentId: " + expertAgentId + ", executerAgentId: " + executerAgentId + ", evaluationId: " + evaluationId)
 	return nil
 }
 
@@ -373,7 +373,7 @@ func PrintByDemanderExecuterTimestampResultsIterator(queryIterator shim.StateQue
 		}
 		indexName, compositeKeyParts, err := stub.SplitCompositeKey(responseRange.Key)
 
-		demanderAgentId := compositeKeyParts[0]
+		expertAgentId := compositeKeyParts[0]
 		executerAgentId := compositeKeyParts[1]
 		evaluationId := compositeKeyParts[3]
 
@@ -381,7 +381,7 @@ func PrintByDemanderExecuterTimestampResultsIterator(queryIterator shim.StateQue
 			activityLog.Error(err.Error())
 			return err
 		}
-		activityLog.Info("- found a relation from OBJECT_TYPE:%s Demander AGENT ID:%s Executer AGENT ID:%s  EVALUATION ID: %s\n", indexName, demanderAgentId, executerAgentId, evaluationId)
+		activityLog.Info("- found a relation from OBJECT_TYPE:%s Demander AGENT ID:%s Executer AGENT ID:%s  EVALUATION ID: %s\n", indexName, expertAgentId, executerAgentId, evaluationId)
 	}
 	return nil
 }

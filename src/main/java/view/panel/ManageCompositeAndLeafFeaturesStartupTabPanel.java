@@ -16,10 +16,10 @@ import javax.swing.border.EmptyBorder;
 
 public class ManageCompositeAndLeafFeaturesStartupTabPanel extends JPanel {
 
-    private AddCompositeFeaturePanel addCompositeFeaturePanel = new AddCompositeFeaturePanel();
+    private AddCompositeFeatureStartupPanel addCompositeFeaturePanel = new AddCompositeFeatureStartupPanel();
     private AddLeafFeatureStartupPanel addLeafFeaturePanel = new AddLeafFeatureStartupPanel();
     private AgentInformationPanel agentImagePanel;
-    private ManageFeaturesPanel manageFeaturesPanel = new ManageFeaturesPanel();
+    private ManageFeaturesStartupPanel manageFeaturesPanel = new ManageFeaturesStartupPanel();
 
     public ManageCompositeAndLeafFeaturesStartupTabPanel(String agentType) {
         // SET AGENT IMAGE
@@ -62,14 +62,14 @@ public class ManageCompositeAndLeafFeaturesStartupTabPanel extends JPanel {
     /**
      * @return the addCompositeFeaturePanel
      */
-    public AddCompositeFeaturePanel getAddCompositeFeaturePanel() {
+    public AddCompositeFeatureStartupPanel getAddCompositeFeaturePanel() {
         return addCompositeFeaturePanel;
     }
 
     /**
      * @param addCompositeFeaturePanel the addCompositeFeaturePanel to set
      */
-    public void setAddCompositeFeaturePanel(AddCompositeFeaturePanel addCompositeFeaturePanel) {
+    public void setAddCompositeFeaturePanel(AddCompositeFeatureStartupPanel addCompositeFeaturePanel) {
         this.addCompositeFeaturePanel = addCompositeFeaturePanel;
     }
 
@@ -104,14 +104,14 @@ public class ManageCompositeAndLeafFeaturesStartupTabPanel extends JPanel {
     /**
      * @return the manageFeaturesPanel
      */
-    public ManageFeaturesPanel getManageFeaturesPanel() {
+    public ManageFeaturesStartupPanel getManageFeaturesPanel() {
         return manageFeaturesPanel;
     }
 
     /**
      * @param manageFeaturesPanel the manageFeaturesPanel to set
      */
-    public void setManageFeaturesPanel(ManageFeaturesPanel manageFeaturesPanel) {
+    public void setManageFeaturesPanel(ManageFeaturesStartupPanel manageFeaturesPanel) {
         this.manageFeaturesPanel = manageFeaturesPanel;
     }
 }

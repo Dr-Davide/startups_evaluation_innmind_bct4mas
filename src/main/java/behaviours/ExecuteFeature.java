@@ -28,14 +28,14 @@ public class ExecuteFeature extends OneShotBehaviour {
   private static final long serialVersionUID = -4389566785150237984L;
   private BCAgent bcAgent;
   private String serviceId;
-  private String demanderAgentId;
+  private String expertAgentId;
 
-  public ExecuteFeature(BCAgent agent, String serviceId, String demanderAgentId) {
+  public ExecuteFeature(BCAgent agent, String serviceId, String expertAgentId) {
     super(agent);
     bcAgent = agent;
     // TODO: Andare a prendere veramente id service (per ora nome==id)
     this.serviceId = serviceId;
-    this.demanderAgentId = demanderAgentId;
+    this.expertAgentId = expertAgentId;
   }
 
   public ExecuteFeature(BCAgent agent) {
@@ -45,7 +45,8 @@ public class ExecuteFeature extends OneShotBehaviour {
 
   @Override
   public void action() {
-    String executerEvaluation = null;
+    String startupAgentId = bcAgent.getMyName();
+    String startupReview = null;
 
     Double serviceExecutionDouble = 0.0;
 
@@ -56,9 +57,6 @@ public class ExecuteFeature extends OneShotBehaviour {
     // TODO: Integrare esecuzione di servizi compositi come successione di esecuzione di servizi foglia e di conseguenza triggerare le rispettive valutazioni
 
     try {
-      // Simulate Feature Execution
-      log.info("SERVICE EXECUTION: serviceId: " + serviceId + ", executer Agent: "
-          + bcAgent.getLocalName() + ", demander agentId: " + demanderAgentId);
       Feature featurePojo = ReadController
           .getFeature(bcAgent.getHfClient(), bcAgent.getHfTransactionChannel(), serviceId);
       String serviceCompositionString = featurePojo.getFeatureComposition().toString();
@@ -73,13 +71,14 @@ public class ExecuteFeature extends OneShotBehaviour {
         TimeUnit.SECONDS.sleep(1);
         // TODO: behaviour Evaluate Feature
         //        bcAgent.addBehaviour(new EvaluateFeature(bcAgent, 0));
-        bcAgent.bcAgentGui.getFeatureCompletedMessage(bcAgent.getMyName(), serviceId);
-        executerEvaluation = bcAgent.bcAgentGui.getExecuterEvaluation(serviceId);
+//        bcAgent.bcAgentGui.getFeatureCompletedMessage(bcAgent.getMyName(), serviceId);
+        startupReview = bcAgent.bcAgentGui.getStartupReview(serviceId, bcAgent.getLocalName());
       } else {
         // COMPOSITE SERVICE
         log.info("EXECUTION COMPOSITE SERVICE");
         Double sum = 0.0;
         int numberLeaves = 0;
+        // TODO: Levare completed message
         bcAgent.bcAgentGui.getFeatureCompletedMessage(bcAgent.getMyName(), serviceId);
         for (int i = 0; i < serviceCompositonParts.length; i++) {
           String leafFeatureId = serviceCompositonParts[i].replace("\"", "");
@@ -88,7 +87,7 @@ public class ExecuteFeature extends OneShotBehaviour {
 
           // TODO: behaviour Evaluate Feature
           //          bcAgent.addBehaviour(new EvaluateFeature(bcAgent, i));
-          String executerLeafEvaluation = bcAgent.bcAgentGui.getExecuterEvaluation(leafFeatureId);
+          String executerLeafEvaluation = bcAgent.bcAgentGui.getStartupReview(leafFeatureId,bcAgent.getLocalName() );
           double executerLeafEvaluationDouble = Double.parseDouble(executerLeafEvaluation);
           log.info("DOUBLE VALUE: " + executerLeafEvaluationDouble);
 
@@ -103,9 +102,13 @@ public class ExecuteFeature extends OneShotBehaviour {
           log.info("LEAF SERVICE ID: " + leafFeatureId);
 
           // BUG:  Failed to find executedFeature by id Feature non found, FeatureId: "asdfff"
+          // TODO: Provo semplicemente ad invertire i create
+//          boolean isCreatedActivity = CreateController
+//              .createExecuterWriterActivity(bcAgent, expertAgentId, leafFeatureId,
+//                  stringLeafTimestamp, executerLeafEvaluation);
           boolean isCreatedActivity = CreateController
-              .createExecuterWriterActivity(bcAgent, demanderAgentId, leafFeatureId,
-                  stringLeafTimestamp, executerLeafEvaluation);
+                  .createDemanderWriterActivity(bcAgent, expertAgentId, leafFeatureId,
+                          stringLeafTimestamp, executerLeafEvaluation);
           if (isCreatedActivity) {
             sum = sum + executerLeafEvaluationDouble;
             numberLeaves = i + 1;
@@ -119,7 +122,7 @@ public class ExecuteFeature extends OneShotBehaviour {
 
         log.info("MEAN VALUE: " + serviceExecutionDouble);
 
-        executerEvaluation = String.valueOf(serviceExecutionDouble);
+        startupReview = String.valueOf(serviceExecutionDouble);
 
         // TODO: Calcolare media leaf evaluations per creare composite evaluation
 
@@ -135,19 +138,19 @@ public class ExecuteFeature extends OneShotBehaviour {
     // TODO: Get executer Evaluation of leaf service that compose the composite service in case is a composite service
 
 
-    log.info("STRING EVALUATION TOTAL: " + executerEvaluation);
+    log.info("STRING EVALUATION TOTAL: " + startupReview);
     //    executerEvaluation = getExecuterEvaluation();
 
 
 
     // ---------------------------------------------------------------
 
-    log.info("Executer Evaluation: " + executerEvaluation);
+    log.info("Executer Evaluation: " + startupReview);
     String stringTimestamp = serviceTimestamp.toString();
-    boolean isCreatedActivity = CreateController.createExecuterWriterActivity(bcAgent,
-        demanderAgentId, serviceId, stringTimestamp, executerEvaluation);
+    boolean isCreatedActivity = CreateController.createDemanderWriterActivity(bcAgent,
+            expertAgentId, serviceId, stringTimestamp, startupReview);
     if (isCreatedActivity) {
-      sendCreatedActivityMessage(serviceId, demanderAgentId, bcAgent.getMyName(), serviceTimestamp,
+      sendCreatedActivityMessage(serviceId, expertAgentId, startupAgentId, serviceTimestamp,
           compositionTimestamps);
     } else {
       log.info("Not Created Review by the executer");
@@ -156,22 +159,23 @@ public class ExecuteFeature extends OneShotBehaviour {
     // TODO: Aggiungere verifica se è secondo (EXECUTER)
     boolean isSecondWriterAgent;
     isSecondWriterAgent = CheckerController.isTimestampTwoTimesActivities(bcAgent.getHfClient(),
-        bcAgent.getHfTransactionChannel(), demanderAgentId, bcAgent.getMyName(), stringTimestamp);
+        bcAgent.getHfTransactionChannel(), startupAgentId, expertAgentId,  stringTimestamp);
 
     // // TODO: Trigger Algoritmo Calcolo Reputazione
     if (isSecondWriterAgent) {
 
       ArrayList<Review> activitiesList;
       // activitiesList = transactionLedgerInteraction.GetReviewsByStartupExpertTimestamp(
-      // bcAgent.getHfClient(), bcAgent.getHfTransactionChannel(), demanderAgentId,
+      // bcAgent.getHfClient(), bcAgent.getHfTransactionChannel(), expertAgentId,
       // bcAgent.getMyName(), executionTimestamp.toString());
       activitiesList = RangeQueries.GetReviewsByStartupExpertTimestamp(bcAgent.getHfClient(),
-          bcAgent.getHfTransactionChannel(), demanderAgentId, bcAgent.getMyName(), stringTimestamp);
+          bcAgent.getHfTransactionChannel(), expertAgentId, bcAgent.getMyName(), stringTimestamp);
+
       Utils.printActivitiesList(activitiesList);
       ArrayList<Review> leavesActivitiesList = new ArrayList<>();
       leavesActivitiesList = ComplexWorkflowController
           .getLeavesActivitiesList(compositionTimestampsList, leavesActivitiesList,
-              bcAgent.getHfClient(), bcAgent.getHfTransactionChannel(), demanderAgentId,
+              bcAgent.getHfClient(), bcAgent.getHfTransactionChannel(), expertAgentId,
               bcAgent.getMyName());
       bcAgent.addBehaviour(new ComputeReputation(bcAgent, activitiesList, leavesActivitiesList));
     } else {
@@ -197,12 +201,12 @@ public class ExecuteFeature extends OneShotBehaviour {
    * sendCreatedActivityMessage - Run from the service executer agent after creating the activity in
    * the ledger to inform the demander of the service being done
    *  @param serviceId TODO
-   * @param demanderAgentId TODO
-   * @param myName
+   * @param receiverAgentId TODO
+   * @param senderAgentId
    * @param FeatureTimestamp
    * @param CompositionTimestamps
    */
-  private void sendCreatedActivityMessage(String serviceId, String demanderAgentId, String myName,
+  private void sendCreatedActivityMessage(String serviceId, String receiverAgentId, String senderAgentId,
       Timestamp FeatureTimestamp, ArrayList<Timestamp> CompositionTimestamps) {
     // TODO: AGGIUNGERE TIMESTAMP LEAVES SERVICES
     String executedFeatureTxId = UUID.randomUUID().toString();
@@ -210,9 +214,9 @@ public class ExecuteFeature extends OneShotBehaviour {
     replyAclMessage.setContent(
         "serviceDone%" + executedFeatureTxId + "%" + serviceId + "%" + FeatureTimestamp + "%"
             + CompositionTimestamps);
-    replyAclMessage.addReceiver(new AID(demanderAgentId, AID.ISLOCALNAME));
+    replyAclMessage.addReceiver(new AID(receiverAgentId, AID.ISLOCALNAME));
 
-    log.info(myName + " :inserting transaction at timestamp " + FeatureTimestamp + " and txid "
+    log.info(senderAgentId + " :inserting transaction at timestamp " + FeatureTimestamp + " and txid "
         + executedFeatureTxId + "ACL MESSAGE: " + serviceId);
 
     bcAgent.send(replyAclMessage);

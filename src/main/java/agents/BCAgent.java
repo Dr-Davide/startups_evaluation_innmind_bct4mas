@@ -120,9 +120,9 @@ public class BCAgent extends Agent {
     String denialExecuterAgent = parsedMessage[1];
     // expertAgentGui.getMessagesTabPanel().getInBoxMessagesPanel().addMessageInTableModel(message);
     JOptionPane.showMessageDialog(bcAgentGui.getAskFeatureTabPanel(),
-        "Demander: " + getLocalName() + ": Your request has been denied. Denial Agent: "
-            + denialExecuterAgent + ", for the service: " + serviceId + ", retry the ask",
-        getLocalName() + " Request Denied", JOptionPane.INFORMATION_MESSAGE);
+        "Demander: " + getLocalName() + "\nyour request has been denied.\nDenial Agent: "
+            + denialExecuterAgent + "\nfor the service: " + serviceId + "\n retry the ask",
+        "401: Request Denied", JOptionPane.INFORMATION_MESSAGE);
   }
 
 
@@ -273,8 +273,8 @@ public class BCAgent extends Agent {
     addBehaviour(new GetFeaturesList(this, serviceName, heuristic));
   }
 
-  public void verifyStartupAgentCanLookForExpert(String serviceName, String heuristic) {
-    addBehaviour(new GetFeaturesList(this, serviceName, heuristic));
+  public void getFeaturesListStartupTrigger(String serviceName, String heuristic) {
+    addBehaviour(new GetFeaturesListStartup(this, serviceName, heuristic));
   }
 
   /**
@@ -285,6 +285,10 @@ public class BCAgent extends Agent {
    */
   public void executeFeatureTrigger(String serviceId, String demanderAgentId) {
     addBehaviour(new ExecuteFeature(this, serviceId, demanderAgentId));
+  }
+
+  public void acceptReviewFeatureTrigger(String serviceId, String demanderAgentId) {
+    addBehaviour(new AcceptReviewFeature(this, serviceId, demanderAgentId));
   }
 
   /**

@@ -15,6 +15,7 @@ public class JadeJson2Pojo {
   private String noAvatarStartupImagePath;
   private String evaluateImagePath;
   private String okIconPath;
+  private String messageIconPath;
   private List<String> agentImagesHotelsPath;
 
   /**
@@ -86,6 +87,14 @@ public class JadeJson2Pojo {
    */
   public void setOkIconPath(String okIconPath) {
     this.okIconPath = okIconPath;
+  }
+
+  public String getMessageIconPath() {
+    return messageIconPath;
+  }
+
+  public void setMessageIconPath(String messageIconPath) {
+    this.messageIconPath = messageIconPath;
   }
 
   /**

@@ -20,3 +20,6 @@
 // peer chaincode invoke -C transch -n innMind -c '{"function": "DeleteService", "Args":["half_boardambassador"]}'
 // peer chaincode invoke -C transch -n innMind -c '{"function": "DeleteServiceRelationAgent", "Args":["dambassador"]}'
 // peer chaincode invoke -C transch -n innMind -c '{"function": "GetActivitiesByDemanderExecuterTimestamp", "Args":["a3","a1","2018-07-23 16:51:01.2"]}'
+// peer chaincode invoke -C transch -n innMind -c '{"function": "GetInnMindReputationsByRoleAgentFeature", "Args":["STARTUP","asdf"]}'
+// peer chaincode invoke -C transch -n innMind -c '{"function": "GetInnMindReputationsByAgentFeatureRole", "Args":["asdf","IT","STARTUP"]}'
+// peer chaincode invoke -C transch -n innMind -c '{"function": "byAgentFeatureRole", "Args":["asdf"]}'

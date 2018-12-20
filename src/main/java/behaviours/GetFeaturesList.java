@@ -50,15 +50,6 @@ public class GetFeaturesList extends OneShotBehaviour {
       log.info("SERVICES QUERY LIST: " + servicesQueryResultList);
       log.info("SERVICES QUERY LIST SIZE: " + servicesQueryResultList.size());
 
-      if (servicesQueryResultList.size() == 0) {
-        log.info(
-            bcAgent.getMyName() + ": There is no agent offering the searched service: "
-                + serviceNeededName);
-        JOptionPane.showMessageDialog(bcAgent.bcAgentGui,
-            bcAgent.getMyName() + ": There is no agent offering the searched service: "
-                + serviceNeededName, "No Feature Found", JOptionPane.ERROR_MESSAGE);
-      } else {
-
         for (Feature singleFeature : servicesQueryResultList) {
           String singleFeatureNeededId = singleFeature.getFeatureId().toString();
           ArrayList<FeatureRelationAgent> agentsMappedWithSingleFeature = RangeQueries
@@ -67,6 +58,17 @@ public class GetFeaturesList extends OneShotBehaviour {
 
           agentsMappedWithFeature.addAll(agentsMappedWithSingleFeature);
         }
+
+        if (agentsMappedWithFeature.size() == 0){
+          log.info(
+                  bcAgent.getMyName() + ": There is no agent offering the searched service: "
+                          + serviceNeededName);
+          String showInputDialogMessage =
+                  bcAgent.getMyName() + ": There is no agent offering the searched service: ";
+          String showInputDialogTitle = "404: No Expert Found";
+
+          bcAgent.bcAgentGui.getErrorMessage(showInputDialogMessage,showInputDialogTitle);
+        } else {
 
         ArrayList<model.pojo.Agent> agentList = new ArrayList<>();
         ArrayList<Feature> serviceList = new ArrayList<>();

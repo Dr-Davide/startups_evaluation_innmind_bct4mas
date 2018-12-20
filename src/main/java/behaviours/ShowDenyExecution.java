@@ -23,7 +23,15 @@ public class ShowDenyExecution extends OneShotBehaviour {
   public void action() {
     // TODO Auto-generated method stub
     String[] parsedMessage = parseMessageContent(message.getContent());
-    bcAgent.showDenyExecution(parsedMessage);
+      String serviceId = parsedMessage[0];
+      String denialExecuterAgent = parsedMessage[1];
+      String showInputDialogMessage ="Demander: " + bcAgent.getLocalName() + "\nyour request has been denied\n"+
+              "Denial Agent: "
+              + denialExecuterAgent + "\nfor the service: " + serviceId + "\nretry the ask";
+      String showInputDialogTitle = "401: Request Denied";
+
+
+    bcAgent.bcAgentGui.showDenyExecution(showInputDialogMessage ,showInputDialogTitle );
   }
 
   /**

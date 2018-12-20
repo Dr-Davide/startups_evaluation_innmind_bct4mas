@@ -229,18 +229,17 @@ public class ComplexWorkflowController {
     }
 
     public static boolean createFeatureAndCreateReputation(BCAgent bcAgent,
-                                                           String serviceId, String serviceName, String serviceDescription, String serviceComposition,
-                                                           String agentId, String cost, String time, String initialReputationValue, HFClient clientHF,
+                                                           String serviceId, String serviceName, String serviceComposition,
+                                                           String agentId, String initialReputationValue, HFClient clientHF,
                                                            Channel channel,
                                                            User user, String agentRole) throws Exception {
-//        String agentRole = InnMindReputation.STARTUP_ROLE;
         boolean allPeerSuccess;
         boolean serviceCreationSuccess;
 
         ArrayList<String> serviceIds = new ArrayList<>();
         serviceCreationSuccess =
-                createFeature(bcAgent, serviceId, serviceName, serviceDescription,
-                        serviceComposition, agentId, cost, time, clientHF, channel, user, serviceIds);
+                createFeature(bcAgent, serviceId, serviceName,
+                        serviceComposition, agentId, clientHF, channel, user, serviceIds);
         log.info("SERVICE ID TRIED LIST SIZE: " + serviceIds.size());
 
         // GET FEATURE
@@ -286,9 +285,9 @@ public class ComplexWorkflowController {
     }
 
     private static boolean createFeature(BCAgent bcAgent, String serviceId,
-                                                           String serviceName, String serviceDescription, String serviceComposition, String agentId,
-                                                           String cost, String time, HFClient clientHF, Channel channel, User user,
-                                                           ArrayList<String> serviceIds) throws Exception {
+                                         String serviceName, String serviceComposition, String agentId,
+                                         HFClient clientHF, Channel channel, User user,
+                                         ArrayList<String> serviceIds) throws Exception {
         serviceIds.add(serviceId);
         boolean allPeerSuccess;
         if (!CheckerController.isFeatureMappedWithAgent(serviceId, bcAgent)) {
@@ -353,7 +352,7 @@ public class ComplexWorkflowController {
                 // TODO: Far inserire stesso nome con diverso id per creare nuovo servizio e mapparlo all'agente
                 // Ricorsione con newFeatureId
                 allPeerSuccess = createFeature(bcAgent, newFeatureId, serviceName,
-                        serviceDescription, serviceComposition, agentId, cost, time, clientHF, channel,
+                        serviceComposition, agentId, clientHF, channel,
                         user, serviceIds);
             } else {
                 log.info("SONO UGUALI COMPOSITE SERVICES");

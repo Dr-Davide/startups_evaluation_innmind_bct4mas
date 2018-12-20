@@ -487,7 +487,13 @@ public class RangeQueries extends GeneralLedgerInteraction {
       } catch (Exception e) {
         e.printStackTrace();
       }
-      Iterator<JSONObject> iterator = jsonarray.iterator();
+      Iterator<JSONObject> iterator;
+      try {
+        iterator = jsonarray.iterator();
+      } catch (NullPointerException e){
+        // if iterator is null means that we have empty query result
+        return featureRelationAgentlist;
+      }
       JSONObject jsonChildObject;
 
       // aggiunge alla lista solo la prima risposta (suppone che siano tutte uguali)
@@ -753,16 +759,16 @@ public class RangeQueries extends GeneralLedgerInteraction {
      *
      * @param hfClient
      * @param channel
-     * @param demanderAgentId
-     * @param executerAgentId
+     * @param startupAgentId
+     * @param expertAgentId
      * @param timestamp
      * @return
      */
     public static ArrayList<Review> GetReviewsByStartupExpertTimestamp(HFClient hfClient,
-                                                                       Channel channel, String demanderAgentId, String executerAgentId, String timestamp) {
+                                                                       Channel channel, String startupAgentId, String expertAgentId, String timestamp) {
         String chaincodeFunction = "GetReviewsByStartupExpertTimestamp";
 
-        String[] chaincodeArguments = new String[] {demanderAgentId, executerAgentId, timestamp};
+        String[] chaincodeArguments = new String[] {startupAgentId, expertAgentId, timestamp};
 
 
         ArrayList<Review> activitieslist = new ArrayList<>();

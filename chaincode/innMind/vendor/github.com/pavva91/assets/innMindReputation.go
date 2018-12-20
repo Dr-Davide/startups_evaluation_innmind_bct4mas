@@ -63,7 +63,7 @@ func CreateAgentFeatureRoleIndex(innMinReputation *InnMindReputation, stub shim.
 	//  The key is a composite key, with the elements that you want to range query on listed first.
 	//  In our case, the composite key is based on agent~service~relation.
 	//  This will enable very efficient state range queries based on composite keys matching agent~service~relation
-	indexName := "agent~service~agentRole~innMinReputation"
+	indexName := "agent~service~agentRole~innMindReputation"
 	agentFeatureRoleIndex, err = stub.CreateCompositeKey(indexName, []string{innMinReputation.AgentId, innMinReputation.FeatureId, innMinReputation.AgentRole, innMinReputation.InnMindReputationId})
 	if err != nil {
 		return agentFeatureRoleIndex, err
@@ -80,7 +80,7 @@ func CreateRoleAgentFeatureIndex(innMinReputation *InnMindReputation, stub shim.
 	//  The key is a composite key, with the elements that you want to range query on listed first.
 	//  In our case, the composite key is based on agent~service~relation.
 	//  This will enable very efficient state range queries based on composite keys matching agent~service~relation
-	indexName := "agentRole~agent~service~innMinReputation"
+	indexName := "agentRole~agent~service~innMindReputation"
 	agentFeatureRoleIndex, err = stub.CreateCompositeKey(indexName, []string{innMinReputation.AgentRole, innMinReputation.AgentId, innMinReputation.FeatureId, innMinReputation.InnMindReputationId})
 	if err != nil {
 		return agentFeatureRoleIndex, err
@@ -284,7 +284,7 @@ func GetInnMindReputationNotFoundError(stub shim.ChaincodeStubInterface, innMinR
 func GetByAgentFeatureRole(agentId string, serviceId string, agentRole string, stub shim.ChaincodeStubInterface) (shim.StateQueryIteratorInterface, error) {
 	// Query the service~agent~relation index by service
 	// This will execute a key range query on all keys starting with 'service'
-	indexName := "agent~service~agentRole~innMinReputation"
+	indexName := "agent~service~agentRole~innMindReputation"
 
 	serviceAgentResultsIterator, err := stub.GetStateByPartialCompositeKey(indexName, []string{agentId, serviceId, agentRole})
 	if err != nil {
@@ -299,7 +299,7 @@ func GetByAgentFeatureRole(agentId string, serviceId string, agentRole string, s
 func GetByAgentFeature(agentId string, serviceId string, stub shim.ChaincodeStubInterface) (shim.StateQueryIteratorInterface, error) {
 	// Query the service~agent~relation index by service
 	// This will execute a key range query on all keys starting with 'service'
-	indexName := "agent~service~agentRole~innMinReputation"
+	indexName := "agent~service~agentRole~innMindReputation"
 
 	serviceAgentResultsIterator, err := stub.GetStateByPartialCompositeKey(indexName, []string{agentId, serviceId})
 	if err != nil {
@@ -314,7 +314,7 @@ func GetByAgentFeature(agentId string, serviceId string, stub shim.ChaincodeStub
 func GetByAgentOnlyInnMind(agentId string, stub shim.ChaincodeStubInterface) (shim.StateQueryIteratorInterface, error) {
 	// Query the service~agent~relation index by service
 	// This will execute a key range query on all keys starting with 'service'
-	indexName := "agent~service~agentRole~innMinReputation"
+	indexName := "agent~service~agentRole~innMindReputation"
 
 	serviceAgentResultsIterator, err := stub.GetStateByPartialCompositeKey(indexName, []string{agentId})
 	if err != nil {
@@ -329,7 +329,7 @@ func GetByAgentOnlyInnMind(agentId string, stub shim.ChaincodeStubInterface) (sh
 func GetByRoleAgentFeature(agentRole string, agentId string, featureId string, stub shim.ChaincodeStubInterface) (shim.StateQueryIteratorInterface, error) {
 	// Query the service~agent~relation index by service
 	// This will execute a key range query on all keys starting with 'service'
-	indexName := "agentRole~agent~service~innMinReputation"
+	indexName := "agentRole~agent~service~innMindReputation"
 
 	serviceAgentResultsIterator, err := stub.GetStateByPartialCompositeKey(indexName, []string{agentRole, agentId,  featureId})
 	if err != nil {
@@ -344,7 +344,7 @@ func GetByRoleAgentFeature(agentRole string, agentId string, featureId string, s
 func GetByRoleAgent(agentRole string, featureId string, stub shim.ChaincodeStubInterface) (shim.StateQueryIteratorInterface, error) {
 	// Query the service~agent~relation index by service
 	// This will execute a key range query on all keys starting with 'service'
-	indexName := "agentRole~agent~service~innMinReputation"
+	indexName := "agentRole~agent~service~innMindReputation"
 
 	serviceAgentResultsIterator, err := stub.GetStateByPartialCompositeKey(indexName, []string{agentRole, featureId})
 	if err != nil {
@@ -359,7 +359,7 @@ func GetByRoleAgent(agentRole string, featureId string, stub shim.ChaincodeStubI
 func GetByRoleOnlyInnMind(agentRole string, stub shim.ChaincodeStubInterface) (shim.StateQueryIteratorInterface, error) {
 	// Query the service~agent~relation index by service
 	// This will execute a key range query on all keys starting with 'service'
-	indexName := "agentRole~agent~service~innMinReputation"
+	indexName := "agentRole~agent~service~innMindReputation"
 
 	serviceAgentResultsIterator, err := stub.GetStateByPartialCompositeKey(indexName, []string{agentRole})
 	if err != nil {

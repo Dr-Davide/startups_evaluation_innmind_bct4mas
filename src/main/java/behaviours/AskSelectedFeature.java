@@ -47,8 +47,8 @@ public class AskSelectedFeature extends OneShotBehaviour {
     // ACLMessage requestFeatureExecution = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
     ACLMessage requestFeatureExecution = new BCMessage(ACLMessage.INFORM);
 
-    String messageType = BCMessage.SERVICE_EXECUTION;
-    // TODO: For now in a SERVICE_EXECUTION the Object is the same of the body of the message
+    String messageType = BCMessage.REQUEST_FEATURE_REVIEW;
+    // TODO: For now in a REQUEST_FEATURE_REVIEW the Object is the same of the body of the message
     // (service name)
     //    String messageObject = selectedFeatureName;
     //    String messageBody = selectedFeatureName;

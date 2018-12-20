@@ -514,7 +514,7 @@ public class BCAgentGui extends JFrame {
               String serviceId = messageBody;
               String demanderAgentId = agentName;
 
-              if (messageType.equals(BCMessage.SERVICE_EXECUTION)) {
+              if (messageType.equals(BCMessage.REQUEST_FEATURE_REVIEW)) {
                 bcAgent.executeFeatureTrigger(serviceId, demanderAgentId);
                 // Cancellare Record dalla lista
                 bcAgent.deleteMessageTrigger(selectedRowIndex);
@@ -559,7 +559,7 @@ public class BCAgentGui extends JFrame {
               String serviceId = messageBody;
               String demanderAgentId = agentName;
 
-              if (messageType.equals(BCMessage.SERVICE_EXECUTION)) {
+              if (messageType.equals(BCMessage.REQUEST_FEATURE_REVIEW)) {
                 // TODO: Informare il Demander del diniego
                 bcAgent.denyFeatureExecutionTrigger(serviceId, demanderAgentId);
 
@@ -640,8 +640,8 @@ public class BCAgentGui extends JFrame {
   public String getExecuterEvaluation(String serviceId) {
     String executerEvaluation;
     String showInputDialogMessage =
-        "Agent " + bcAgent.getLocalName() + ", please evaluate the QoS of service: " + serviceId
-            + " as the Feature Executer Role in the transaction";
+        "Agent " + bcAgent.getLocalName() + "\n please evaluate the QoS of service: " + serviceId
+            + "\n as the Feature Executer Role in the transaction";
     String showInputDialogTitle = "Executer Feature Evaluation";
 
     executerEvaluation = getEvaluation(showInputDialogMessage, showInputDialogTitle);
@@ -652,9 +652,32 @@ public class BCAgentGui extends JFrame {
   public String getDemanderEvaluation(String serviceId) {
     String demanderEvaluation;
     String showInputDialogMessage =
-        "Agent " + bcAgent.getLocalName().toString() + ", please evaluate the QoS of service: "
-            + serviceId + " as the Feature Demander Role in the transaction";
+        "Agent " + bcAgent.getLocalName() + ",\nplease evaluate the QoS of service: "
+            + serviceId + "\n as the Feature Demander Role in the transaction";
     String showInputDialogTitle = "Demander Feature Evaluation";
+
+    demanderEvaluation = getEvaluation(showInputDialogMessage, showInputDialogTitle);
+
+    return demanderEvaluation;
+  }
+
+  public String getExpertReview(String featureId, String expertName) {
+    String expertReview;
+    String showInputDialogMessage =
+            "Agent " + expertName + ",\nplease give a review of the feature: " + featureId;
+    String showInputDialogTitle = "Expert Feature Review";
+
+    expertReview = getEvaluation(showInputDialogMessage, showInputDialogTitle);
+
+    return expertReview;
+  }
+
+  public String getStartupReview(String featureId, String startupName) {
+    String demanderEvaluation;
+    String showInputDialogMessage =
+            "Agent " + startupName + ",\nplease give a review of the feature: "
+                    + featureId;
+    String showInputDialogTitle = "Startup Feature Review";
 
     demanderEvaluation = getEvaluation(showInputDialogMessage, showInputDialogTitle);
 
@@ -722,8 +745,35 @@ public class BCAgentGui extends JFrame {
     g.drawImage(img, 0, 0, newWidth, newHeight, null);
     ImageIcon newIcon = new ImageIcon(bi);
 
-    JOptionPane.showMessageDialog(bcAgent.bcAgentGui.getPanel(), showInputDialogMessage,
+    JOptionPane.showMessageDialog(this.getPanel(), showInputDialogMessage,
         showInputDialogTitle, JOptionPane.INFORMATION_MESSAGE, newIcon);
+  }
+
+  private void showNewInnBoxMessageAlert(String showInputDialogMessage, String showInputDialogTitle) {
+    JadeJson2Pojo jadeJson2Pojo = new JadeJson2Pojo();
+    try {
+      jadeJson2Pojo = StartClass.getJadeJsonConfig(StartClass.JADE_CONFIG_FILE);
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+
+    URL imageURL = StartClass.getURLPublic(jadeJson2Pojo.getMessageIconPath());
+    //    BufferedImage agentImage = ImageIO.read(inputStream);
+    ImageIcon icon = new ImageIcon(imageURL);
+    //    ImageIcon icon = new ImageIcon(jadeJson2Pojo.getOkIconPath());
+    log.info(jadeJson2Pojo.getMessageIconPath());
+
+    Image img = icon.getImage();
+    Integer newWidth = img.getWidth(null) / 6;
+    Integer newHeight = img.getHeight(null) / 6;
+    BufferedImage bi = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+    Graphics g = bi.createGraphics();
+    // g.drawImage(img, 0, 0, null);
+    g.drawImage(img, 0, 0, newWidth, newHeight, null);
+    ImageIcon newIcon = new ImageIcon(bi);
+
+    JOptionPane.showMessageDialog(this.getPanel(), showInputDialogMessage,
+            showInputDialogTitle, JOptionPane.INFORMATION_MESSAGE, newIcon);
   }
 
   public void getFeatureCompletedMessage(String executerAgentId, String executedFeatureId) {
@@ -731,6 +781,34 @@ public class BCAgentGui extends JFrame {
         "Feature: " + executedFeatureId + " by executer Agent: " + executerAgentId + " Completed";
     String showInputDialogTitle = "Feature Execution Completed";
     showOkMessage(showInputDialogMessage, showInputDialogTitle);
+  }
+
+  public void getNewInBoxMessageAlert(String agentId) {
+    String showInputDialogMessage =
+            agentId + " You have a new message\ncheck your InBox in the Messages Tab";
+    String showInputDialogTitle = "New Message Arrival";
+    showNewInnBoxMessageAlert(showInputDialogMessage, showInputDialogTitle);
+  }
+
+  public void getDeniedAccessMessage(String deniedAgent, String deniedFeatureId, String agentRole) {
+    String showInputDialogMessage =
+            "The Agent: " + deniedAgent + "\nof role: " + agentRole + "\ncan't look for this feature: " + deniedFeatureId;
+    String showInputDialogTitle = "403: Agent Not Authorized";
+
+    JOptionPane.showMessageDialog(this.getPanel(), showInputDialogMessage,
+            showInputDialogTitle, JOptionPane.ERROR_MESSAGE);
+  }
+
+  public void showDenyExecution(String message, String title) {
+    JOptionPane.showMessageDialog(this.getPanel(),
+            message, title, JOptionPane.INFORMATION_MESSAGE);
+  }
+
+  public void getErrorMessage(String showInputDialogMessage, String showInputDialogTitle) {
+
+
+    JOptionPane.showMessageDialog(this.getPanel(), showInputDialogMessage,
+            showInputDialogTitle, JOptionPane.ERROR_MESSAGE);
   }
 
   public void showGui() {

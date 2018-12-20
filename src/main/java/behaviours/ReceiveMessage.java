@@ -17,7 +17,7 @@ public class ReceiveMessage extends TickerBehaviour {
 
 
     private static final long serialVersionUID = -6252545494077833820L;
-    BCAgent bcAgent = new BCAgent();
+    BCAgent bcAgent;
   private ACLMessage replyMessage;
 
   public ReceiveMessage(BCAgent agent) {
@@ -57,15 +57,11 @@ public class ReceiveMessage extends TickerBehaviour {
 
         break;
 
-      // ACLMessage.ACCEPT_PROPOSAL
-      // DEPRECATO (Uso ExecuteFeature Behaviour)
-      // TODO: ELIMINARE DEFINITIVAMENTE
       case ACLMessage.ACCEPT_PROPOSAL:
-        // case 0:
+        // triggero evaluation feature della startup
+        bcAgent.bcAgentGui.getNewInBoxMessageAlert(bcAgent.getMyName());
 
-        // Receive the OK to erogate the service from the demander agent
-
-        //        executeFeature(message);
+        bcAgent.addMessageTrigger(message);
 
         break;
 
@@ -81,6 +77,7 @@ public class ReceiveMessage extends TickerBehaviour {
       case ACLMessage.INFORM:
 
         // USO bcAgent perchè devo andare a modificare la GUI (expertAgentGui)
+        bcAgent.bcAgentGui.getNewInBoxMessageAlert(bcAgent.getMyName());
         bcAgent.addMessageTrigger(message);
         break;
 

@@ -68,8 +68,6 @@ public class AddFeature extends OneShotBehaviour {
 
 
     try {
-      log.info(bcAgent.getLocalName() + " add composite service " + serviceName + " of weight "
-          + serviceWeight.toString());
 
       FeatureView newFeatureView;
 
@@ -105,10 +103,10 @@ public class AddFeature extends OneShotBehaviour {
               // STARTUP CASE
               ComplexWorkflowController
                       .createFeatureAndCreateReputation(bcAgent, serviceId, serviceName,
-                              serviceDescription, serviceComposition, agentId, serviceCost, serviceTime,
+                              serviceComposition, agentId,
                               initReputationValue,
                               clientHF, channel, user, agentRole);
-              reputationId = agentId + serviceId + InnMindReputation.EXPERT_ROLE;
+              reputationId = agentId + serviceId + InnMindReputation.STARTUP_ROLE;
               realReputationValue =
                       ReadController.getReputation(clientHF, channel, reputationId).getValue().toString();
               newFeatureView.setReputation(realReputationValue);

@@ -1,18 +1,14 @@
 package view;
 
 import agents.BCAgent;
-import controllers.CheckerController;
-import controllers.RangeQueriesController;
 import logic.Heuristic;
 import messages.BCMessage;
 import model.StructFeatureRequest;
-import model.pojo.InnMindReputation;
 import org.apache.log4j.Logger;
 import start.JadeJson2Pojo;
 import start.StartClass;
 import view.panel.AskFeatureTabPanel;
 import view.panel.ManageCompositeAndLeafFeaturesStartupTabPanel;
-import view.panel.ManageCompositeAndLeafFeaturesTabPanel;
 import view.panel.MessagesTabPanel;
 
 import javax.imageio.ImageIO;
@@ -124,12 +120,8 @@ public class StartupAgentGui extends BCAgentGui {
                                 log.info("SELECTED ROW INDEXES SIZE: " + selectedRowIndexes.size());
 
                                 // GET FORM DATA
-                                String serviceName =
-                                        manageCompositeAndLeafFeaturesTabPanel.getAddCompositeFeaturePanel()
-                                                .getPanelFeatureName().getTextField().getText().trim();
-                                String serviceDescription =
-                                        manageCompositeAndLeafFeaturesTabPanel.getAddCompositeFeaturePanel()
-                                                .getPanelFeatureDescription().getTextField().getText().trim();
+                                String serviceName = manageCompositeAndLeafFeaturesTabPanel.getAddCompositeFeaturePanel()
+                                        .getPanelFeatureName().getTextField().getText().trim();
 
                                 String serviceComposition =
                                         manageCompositeAndLeafFeaturesTabPanel.getAddCompositeFeaturePanel()
@@ -137,12 +129,10 @@ public class StartupAgentGui extends BCAgentGui {
                                                 .getFeatureCompositionString(selectedRowIndexes);
                                 //                String serviceComposition = "s1,s2";
                                 log.info("SERVICE COMPOSITION: " + serviceComposition);
-                                String serviceCost =
-                                        manageCompositeAndLeafFeaturesTabPanel.getAddCompositeFeaturePanel()
-                                                .getPanelFeatureCost().getTextField().getText().trim();
-                                String serviceTime =
-                                        manageCompositeAndLeafFeaturesTabPanel.getAddCompositeFeaturePanel()
-                                                .getPanelFeatureTime().getTextField().getText().trim();
+
+                                String serviceDescription ="";
+                                String serviceCost = "";
+                                String serviceTime = "";
 
                                 // TRIGGER the Behaviour
                                 bcAgent
@@ -162,135 +152,135 @@ public class StartupAgentGui extends BCAgentGui {
                 });
 
         // DELETE SERVICE from the List of my Features (Delete FeatureRelationAgent)
-        manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel().getBtnDeleteSelection()
-                .addActionListener(new ActionListener() {
-
-                    @Override public void actionPerformed(ActionEvent actionEvent) {
-                        try {
-                            if (manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
-                                    .onlyOneSelectedInTableModel()) {
-
-                                ArrayList<Integer> selectedRowIndexes =
-                                        manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
-                                                .getRowIndexesSelectedInTableModel();
-
-                                // GET TABLE DATA (hidden service id)
-                                String selectedFeatureId =
-                                        manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
-                                                .getFeatureId(selectedRowIndexes);
-
-                                String agentId = bcAgent.getMyName();
-
-                                int deleteConfirmation = JOptionPane.showConfirmDialog(StartupAgentGui.this,
-                                        "Are you sure that you want to delete the service ID: " + selectedFeatureId
-                                                + " of the agent ID: " + agentId + "?", "Confirm Deletion of Feature",
-                                        JOptionPane.YES_NO_OPTION);
-                                if (deleteConfirmation == JOptionPane.YES_OPTION) {
-                                    // TRIGGER the Delete Behaviour
-                                    bcAgent.deleteFeatureRelationAgentTrigger(selectedFeatureId, agentId);
-
-                                } else {
-                                    JOptionPane.showMessageDialog(StartupAgentGui.this,
-                                            "Aborted the deletion of  the service ID: " + selectedFeatureId
-                                                    + " of the agent ID: " + agentId, "Abort Delete Action",
-                                            JOptionPane.INFORMATION_MESSAGE);
-                                }
-
-
-                            } else {
-                                JOptionPane.showMessageDialog(StartupAgentGui.this, "Select only one record to Delete",
-                                        "Selection Error", JOptionPane.WARNING_MESSAGE);
-                            }
-                        } catch (Exception e) {
-                            JOptionPane.showMessageDialog(StartupAgentGui.this,
-                                    "Failed deleting the service : " + e.getMessage(), "Delete Error",
-                                    JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-                });
+//        manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel().getBtnDeleteSelection()
+//                .addActionListener(new ActionListener() {
+//
+//                    @Override public void actionPerformed(ActionEvent actionEvent) {
+//                        try {
+//                            if (manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
+//                                    .onlyOneSelectedInTableModel()) {
+//
+//                                ArrayList<Integer> selectedRowIndexes =
+//                                        manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
+//                                                .getRowIndexesSelectedInTableModel();
+//
+//                                // GET TABLE DATA (hidden service id)
+//                                String selectedFeatureId =
+//                                        manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
+//                                                .getFeatureId(selectedRowIndexes);
+//
+//                                String agentId = bcAgent.getMyName();
+//
+//                                int deleteConfirmation = JOptionPane.showConfirmDialog(StartupAgentGui.this,
+//                                        "Are you sure that you want to delete the service ID: " + selectedFeatureId
+//                                                + " of the agent ID: " + agentId + "?", "Confirm Deletion of Feature",
+//                                        JOptionPane.YES_NO_OPTION);
+//                                if (deleteConfirmation == JOptionPane.YES_OPTION) {
+//                                    // TRIGGER the Delete Behaviour
+//                                    bcAgent.deleteFeatureRelationAgentTrigger(selectedFeatureId, agentId);
+//
+//                                } else {
+//                                    JOptionPane.showMessageDialog(StartupAgentGui.this,
+//                                            "Aborted the deletion of  the service ID: " + selectedFeatureId
+//                                                    + " of the agent ID: " + agentId, "Abort Delete Action",
+//                                            JOptionPane.INFORMATION_MESSAGE);
+//                                }
+//
+//
+//                            } else {
+//                                JOptionPane.showMessageDialog(StartupAgentGui.this, "Select only one record to Delete",
+//                                        "Selection Error", JOptionPane.WARNING_MESSAGE);
+//                            }
+//                        } catch (Exception e) {
+//                            JOptionPane.showMessageDialog(StartupAgentGui.this,
+//                                    "Failed deleting the service : " + e.getMessage(), "Delete Error",
+//                                    JOptionPane.ERROR_MESSAGE);
+//                        }
+//                    }
+//                });
 
         // UPDATE SERVICE from the List of my Features (Update FeatureRelationAgent)
-        manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel().getBtnModifyFeature()
-                .addActionListener(new ActionListener() {
-
-                    @Override public void actionPerformed(ActionEvent actionEvent) {
-                        try {
-                            if (manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
-                                    .onlyOneSelectedInTableModel()) {
-
-                                ArrayList<Integer> selectedRowIndexes =
-                                        manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
-                                                .getRowIndexesSelectedInTableModel();
-                                log.info("SELECTED ROW INDEXES SIZE: " + selectedRowIndexes.size());
-
-                                // GET TABLE DATA (hidden service id)
-                                String selectedFeatureId =
-                                        manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
-                                                .getFeatureId(selectedRowIndexes);
-
-                                String agentId = bcAgent.getMyName();
-                                //                String serviceComposition = "s1,s2";
-                                log.info("SELECTED SERVICE ID: " + selectedFeatureId);
-
-
-                                String[] options = new String[3];
-                                //                options[0] = FeatureRelationAgent.COST;
-                                //                options[1] = FeatureRelationAgent.TIME;
-                                //                options[2] = FeatureRelationAgent.DESCRIPTION;
-
-                                options[0] = "Cost";
-                                options[1] = "Time";
-                                options[2] = "Description";
-
-                                int modifyConfirmation = JOptionPane
-                                        .showOptionDialog(StartupAgentGui.this, "Select which field you want to modifiy",
-                                                "Select Field to Modify", 0, JOptionPane.INFORMATION_MESSAGE, null, options,
-                                                null);
-                                switch (modifyConfirmation) {
-                                    case 0:
-                                        // TRIGGER the Modify Cost Behaviour
-                                        String newCostValue = JOptionPane
-                                                .showInputDialog(StartupAgentGui.this, "Please insert the new Cost Value",
-                                                        "Modify Cost",
-                                                        JOptionPane.INFORMATION_MESSAGE);
-                                        bcAgent.updateFeatureRelationAgentCostTrigger(selectedFeatureId, agentId,
-                                                newCostValue);
-                                        break;
-                                    case 1:
-                                        // TRIGGER the Modify Time Behaviour
-                                        String newTimeValue = JOptionPane
-                                                .showInputDialog(StartupAgentGui.this, "Please insert the new Time Value",
-                                                        "Modify Time", JOptionPane.INFORMATION_MESSAGE);
-                                        bcAgent.updateFeatureRelationAgentTimeTrigger(selectedFeatureId, agentId,
-                                                newTimeValue);
-                                        break;
-                                    case 2:
-                                        // TRIGGER the Modify Time Behaviour
-                                        String newDescriptionValue = JOptionPane
-                                                .showInputDialog(StartupAgentGui.this, "Please insert the new Description Value",
-                                                        "Modify Description", JOptionPane.INFORMATION_MESSAGE);
-                                        bcAgent.updateFeatureRelationAgentDescriptionTrigger(selectedFeatureId, agentId,
-                                                newDescriptionValue);
-                                        break;
-                                    default: // should be unreachable
-                                        IllegalStateException illegalStateException = new IllegalStateException(
-                                                "Wrong field to update, it's not in the expected ones");
-                                        log.error(illegalStateException);
-                                        throw illegalStateException;
-                                }
-
-
-                            } else {
-                                JOptionPane.showMessageDialog(StartupAgentGui.this, "Select only one record to Delete",
-                                        "Selection Error", JOptionPane.WARNING_MESSAGE);
-                            }
-                        } catch (Exception e) {
-                            JOptionPane.showMessageDialog(StartupAgentGui.this,
-                                    "Failed deleting the service : " + e.getMessage(), "Delete Error",
-                                    JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-                });
+//        manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel().getBtnModifyFeature()
+//                .addActionListener(new ActionListener() {
+//
+//                    @Override public void actionPerformed(ActionEvent actionEvent) {
+//                        try {
+//                            if (manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
+//                                    .onlyOneSelectedInTableModel()) {
+//
+//                                ArrayList<Integer> selectedRowIndexes =
+//                                        manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
+//                                                .getRowIndexesSelectedInTableModel();
+//                                log.info("SELECTED ROW INDEXES SIZE: " + selectedRowIndexes.size());
+//
+//                                // GET TABLE DATA (hidden service id)
+//                                String selectedFeatureId =
+//                                        manageCompositeAndLeafFeaturesTabPanel.getManageFeaturesPanel()
+//                                                .getFeatureId(selectedRowIndexes);
+//
+//                                String agentId = bcAgent.getMyName();
+//                                //                String serviceComposition = "s1,s2";
+//                                log.info("SELECTED SERVICE ID: " + selectedFeatureId);
+//
+//
+//                                String[] options = new String[3];
+//                                //                options[0] = FeatureRelationAgent.COST;
+//                                //                options[1] = FeatureRelationAgent.TIME;
+//                                //                options[2] = FeatureRelationAgent.DESCRIPTION;
+//
+//                                options[0] = "Cost";
+//                                options[1] = "Time";
+//                                options[2] = "Description";
+//
+//                                int modifyConfirmation = JOptionPane
+//                                        .showOptionDialog(StartupAgentGui.this, "Select which field you want to modifiy",
+//                                                "Select Field to Modify", 0, JOptionPane.INFORMATION_MESSAGE, null, options,
+//                                                null);
+//                                switch (modifyConfirmation) {
+//                                    case 0:
+//                                        // TRIGGER the Modify Cost Behaviour
+//                                        String newCostValue = JOptionPane
+//                                                .showInputDialog(StartupAgentGui.this, "Please insert the new Cost Value",
+//                                                        "Modify Cost",
+//                                                        JOptionPane.INFORMATION_MESSAGE);
+//                                        bcAgent.updateFeatureRelationAgentCostTrigger(selectedFeatureId, agentId,
+//                                                newCostValue);
+//                                        break;
+//                                    case 1:
+//                                        // TRIGGER the Modify Time Behaviour
+//                                        String newTimeValue = JOptionPane
+//                                                .showInputDialog(StartupAgentGui.this, "Please insert the new Time Value",
+//                                                        "Modify Time", JOptionPane.INFORMATION_MESSAGE);
+//                                        bcAgent.updateFeatureRelationAgentTimeTrigger(selectedFeatureId, agentId,
+//                                                newTimeValue);
+//                                        break;
+//                                    case 2:
+//                                        // TRIGGER the Modify Time Behaviour
+//                                        String newDescriptionValue = JOptionPane
+//                                                .showInputDialog(StartupAgentGui.this, "Please insert the new Description Value",
+//                                                        "Modify Description", JOptionPane.INFORMATION_MESSAGE);
+//                                        bcAgent.updateFeatureRelationAgentDescriptionTrigger(selectedFeatureId, agentId,
+//                                                newDescriptionValue);
+//                                        break;
+//                                    default: // should be unreachable
+//                                        IllegalStateException illegalStateException = new IllegalStateException(
+//                                                "Wrong field to update, it's not in the expected ones");
+//                                        log.error(illegalStateException);
+//                                        throw illegalStateException;
+//                                }
+//
+//
+//                            } else {
+//                                JOptionPane.showMessageDialog(StartupAgentGui.this, "Select only one record to Delete",
+//                                        "Selection Error", JOptionPane.WARNING_MESSAGE);
+//                            }
+//                        } catch (Exception e) {
+//                            JOptionPane.showMessageDialog(StartupAgentGui.this,
+//                                    "Failed deleting the service : " + e.getMessage(), "Delete Error",
+//                                    JOptionPane.ERROR_MESSAGE);
+//                        }
+//                    }
+//                });
 
 
 
@@ -333,19 +323,20 @@ public class StartupAgentGui extends BCAgentGui {
                                 }
                             }
 
-                            // TODO: Aggiungere verifica se Startup agent ha reputazione per il servizio
-                            // TODO: Uso name as ID
-                            String agentId = bcAgent.getMyName();
-                            String featureId = serviceName;
 
-                            if (CheckerController.isReputationAlreadyInLedger(bcAgent,agentId, featureId, InnMindReputation.STARTUP_ROLE)) {
-                                bcAgent.getFeaturesListTrigger(serviceName, selectedHeuristic);
-                            } else {
-                                JOptionPane.showMessageDialog(StartupAgentGui.this,
-                                        "The Startup can't look for this feature: " + featureId, "403: the client is not authorized",
-                                        JOptionPane.ERROR_MESSAGE);
-                            }
-//                            bcAgent.getFeaturesListTrigger(serviceName, selectedHeuristic);
+                            bcAgent.getFeaturesListStartupTrigger(serviceName, selectedHeuristic);
+
+
+//                            String agentId = bcAgent.getMyName();
+//
+//                            if (CheckerController.isReputationAlreadyInLedger(bcAgent,agentId, featureId, InnMindReputation.STARTUP_ROLE)) {
+//                                bcAgent.getFeaturesListTrigger(serviceName, selectedHeuristic);
+//                            } else {
+//                                JOptionPane.showMessageDialog(StartupAgentGui.this,
+//                                        "The Startup can't look for this feature: " + featureId, "403: the client is not authorized",
+//                                        JOptionPane.ERROR_MESSAGE);
+//                            }
+////                            bcAgent.getFeaturesListTrigger(serviceName, selectedHeuristic);
 
                         } catch (Exception getException) {
                             JOptionPane.showMessageDialog(StartupAgentGui.this,
@@ -521,7 +512,7 @@ public class StartupAgentGui extends BCAgentGui {
                             String serviceId = messageBody;
                             String demanderAgentId = agentName;
 
-                            if (messageType.equals(BCMessage.SERVICE_EXECUTION)) {
+                            if (messageType.equals(BCMessage.REQUEST_FEATURE_REVIEW)||messageType.equals(BCMessage.REQUEST_FEATURE_REVIEW_ACCEPT)) {
                                 bcAgent.executeFeatureTrigger(serviceId, demanderAgentId);
                                 // Cancellare Record dalla lista
                                 bcAgent.deleteMessageTrigger(selectedRowIndex);
@@ -566,7 +557,7 @@ public class StartupAgentGui extends BCAgentGui {
                             String serviceId = messageBody;
                             String demanderAgentId = agentName;
 
-                            if (messageType.equals(BCMessage.SERVICE_EXECUTION)) {
+                            if ((messageType.equals(BCMessage.REQUEST_FEATURE_REVIEW)) || (messageType.equals(BCMessage.REQUEST_FEATURE_REVIEW_ACCEPT))){
                                 // TODO: Informare il Demander del diniego
                                 bcAgent.denyFeatureExecutionTrigger(serviceId, demanderAgentId);
 
@@ -644,29 +635,8 @@ public class StartupAgentGui extends BCAgentGui {
         return newFeatureId;
     }
 
-    public String getExecuterEvaluation(String serviceId) {
-        String executerEvaluation;
-        String showInputDialogMessage =
-                "Agent " + bcAgent.getLocalName() + ", please evaluate the QoS of service: " + serviceId
-                        + " as the Feature Executer Role in the transaction";
-        String showInputDialogTitle = "Executer Feature Evaluation";
 
-        executerEvaluation = getEvaluation(showInputDialogMessage, showInputDialogTitle);
 
-        return executerEvaluation;
-    }
-
-    public String getDemanderEvaluation(String serviceId) {
-        String demanderEvaluation;
-        String showInputDialogMessage =
-                "Agent " + bcAgent.getLocalName().toString() + ", please evaluate the QoS of service: "
-                        + serviceId + " as the Feature Demander Role in the transaction";
-        String showInputDialogTitle = "Demander Feature Evaluation";
-
-        demanderEvaluation = getEvaluation(showInputDialogMessage, showInputDialogTitle);
-
-        return demanderEvaluation;
-    }
 
     /**
      * Show the Input Dialog to permit the user to insert the evaluation
@@ -733,9 +703,9 @@ public class StartupAgentGui extends BCAgentGui {
                 showInputDialogTitle, JOptionPane.INFORMATION_MESSAGE, newIcon);
     }
 
-    public void getFeatureCompletedMessage(String executerAgentId, String executedFeatureId) {
+    public void getFeatureCompletedMessage(String deniedAgent, String deniedFeatureId) {
         String showInputDialogMessage =
-                "Feature: " + executedFeatureId + " by executer Agent: " + executerAgentId + " Completed";
+                "Feature: " + deniedFeatureId + " by executer Agent: " + deniedAgent + " Completed";
         String showInputDialogTitle = "Feature Execution Completed";
         showOkMessage(showInputDialogMessage, showInputDialogTitle);
     }

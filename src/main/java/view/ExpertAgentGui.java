@@ -498,8 +498,11 @@ public class ExpertAgentGui extends BCAgentGui {
                             String serviceId = messageBody;
                             String demanderAgentId = agentName;
 
-                            if (messageType.equals(BCMessage.SERVICE_EXECUTION)) {
-                                bcAgent.executeFeatureTrigger(serviceId, demanderAgentId);
+                            if (messageType.equals(BCMessage.REQUEST_FEATURE_REVIEW)) {
+                                // TODO: Rimbalzare alla Startup
+//                                bcAgent.executeFeatureTrigger(serviceId, demanderAgentId);
+                                bcAgent.acceptReviewFeatureTrigger(serviceId, demanderAgentId);
+
                                 // Cancellare Record dalla lista
                                 bcAgent.deleteMessageTrigger(selectedRowIndex);
                             } else {
@@ -543,7 +546,7 @@ public class ExpertAgentGui extends BCAgentGui {
                             String serviceId = messageBody;
                             String demanderAgentId = agentName;
 
-                            if (messageType.equals(BCMessage.SERVICE_EXECUTION)) {
+                            if (messageType.equals(BCMessage.REQUEST_FEATURE_REVIEW)) {
                                 // TODO: Informare il Demander del diniego
                                 bcAgent.denyFeatureExecutionTrigger(serviceId, demanderAgentId);
 
@@ -621,29 +624,9 @@ public class ExpertAgentGui extends BCAgentGui {
         return newFeatureId;
     }
 
-    public String getExecuterEvaluation(String serviceId) {
-        String executerEvaluation;
-        String showInputDialogMessage =
-                "Agent " + bcAgent.getLocalName() + ", please evaluate the QoS of service: " + serviceId
-                        + " as the Feature Executer Role in the transaction";
-        String showInputDialogTitle = "Executer Feature Evaluation";
 
-        executerEvaluation = getEvaluation(showInputDialogMessage, showInputDialogTitle);
 
-        return executerEvaluation;
-    }
 
-    public String getDemanderEvaluation(String serviceId) {
-        String demanderEvaluation;
-        String showInputDialogMessage =
-                "Agent " + bcAgent.getLocalName().toString() + ", please evaluate the QoS of service: "
-                        + serviceId + " as the Feature Demander Role in the transaction";
-        String showInputDialogTitle = "Demander Feature Evaluation";
-
-        demanderEvaluation = getEvaluation(showInputDialogMessage, showInputDialogTitle);
-
-        return demanderEvaluation;
-    }
 
     /**
      * Show the Input Dialog to permit the user to insert the evaluation
@@ -710,9 +693,9 @@ public class ExpertAgentGui extends BCAgentGui {
                 showInputDialogTitle, JOptionPane.INFORMATION_MESSAGE, newIcon);
     }
 
-    public void getFeatureCompletedMessage(String executerAgentId, String executedFeatureId) {
+    public void getFeatureCompletedMessage(String deniedAgent, String deniedFeatureId) {
         String showInputDialogMessage =
-                "Feature: " + executedFeatureId + " by executer Agent: " + executerAgentId + " Completed";
+                "Feature: " + deniedFeatureId + " by executer Agent: " + deniedAgent + " Completed";
         String showInputDialogTitle = "Feature Execution Completed";
         showOkMessage(showInputDialogMessage, showInputDialogTitle);
     }

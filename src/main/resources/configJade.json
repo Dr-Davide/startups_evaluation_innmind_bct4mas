@@ -4,7 +4,8 @@
   "noAvatarExpertImagePath": "images/noAvatarExpert.jpg",
   "noAvatarStartupImagePath": "images/noAvatarStartup.jpg",
   "evaluateImagePath": "images/evaluate.png",
-	"okIconPath":"images/okIcon.png",
+  "okIconPath":"images/okIcon.png",
+  "messageIconPath":"images/messageIcon.png",
   "agentImagesHotelsPath": [
     "images/hotels/ambassadorCrans.jpg",
     "images/hotels/parcHotelCrans.jpg",

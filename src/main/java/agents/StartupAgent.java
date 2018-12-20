@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class StartupAgent extends BCAgent {
 
     private static final long serialVersionUID = 5801630293298208379L;
-    // private BCAgentGui expertAgentGui;
     public StartupAgentGui startupAgentGui; // TODO: Temporary Public to permit evaluation, after evaluation
     // Refactoring as a distinct behaviour we can go bakc to private
     // expertAgentGui
@@ -192,7 +191,7 @@ public class StartupAgent extends BCAgent {
                                            String serviceComposition, String serviceCost, String serviceTime) {
         addBehaviour(new AddFeature(this, serviceName, serviceDescription, serviceComposition,
                 serviceCost,
-                serviceTime));
+                serviceTime, agentRole));
     }
 
     /**

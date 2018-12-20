@@ -11,7 +11,8 @@ import jade.lang.acl.ACLMessage;
 public class BCMessage extends ACLMessage {
 
   public static final String STANDARD_MESSAGE = "MSG";
-  public static final String SERVICE_EXECUTION = "REQ";
+  public static final String REQUEST_FEATURE_REVIEW = "REQ";
+  public static final String REQUEST_FEATURE_REVIEW_ACCEPT = "ACCEPT";
 
   public BCMessage(int perf) {
     super(perf);
