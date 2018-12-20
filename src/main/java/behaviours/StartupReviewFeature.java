@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-public class ExecuteFeature extends OneShotBehaviour {
-  private static final Logger log = Logger.getLogger(ExecuteFeature.class);
+public class StartupReviewFeature extends OneShotBehaviour {
+  private static final Logger log = Logger.getLogger(StartupReviewFeature.class);
 
 
 
@@ -30,7 +30,7 @@ public class ExecuteFeature extends OneShotBehaviour {
   private String serviceId;
   private String expertAgentId;
 
-  public ExecuteFeature(BCAgent agent, String serviceId, String expertAgentId) {
+  public StartupReviewFeature(BCAgent agent, String serviceId, String expertAgentId) {
     super(agent);
     bcAgent = agent;
     // TODO: Andare a prendere veramente id service (per ora nome==id)
@@ -38,7 +38,7 @@ public class ExecuteFeature extends OneShotBehaviour {
     this.expertAgentId = expertAgentId;
   }
 
-  public ExecuteFeature(BCAgent agent) {
+  public StartupReviewFeature(BCAgent agent) {
     super(agent);
     bcAgent = agent;
   }
@@ -70,7 +70,7 @@ public class ExecuteFeature extends OneShotBehaviour {
         log.info("EXECUTION LEAF SERVICE");
         TimeUnit.SECONDS.sleep(1);
         // TODO: behaviour Evaluate Feature
-        //        bcAgent.addBehaviour(new EvaluateFeature(bcAgent, 0));
+        //        bcAgent.addBehaviour(new ExpertEvaluateFeature(bcAgent, 0));
 //        bcAgent.bcAgentGui.getFeatureCompletedMessage(bcAgent.getMyName(), serviceId);
         startupReview = bcAgent.bcAgentGui.getStartupReview(serviceId, bcAgent.getLocalName());
       } else {
@@ -86,7 +86,7 @@ public class ExecuteFeature extends OneShotBehaviour {
           TimeUnit.SECONDS.sleep(1);
 
           // TODO: behaviour Evaluate Feature
-          //          bcAgent.addBehaviour(new EvaluateFeature(bcAgent, i));
+          //          bcAgent.addBehaviour(new ExpertEvaluateFeature(bcAgent, i));
           String executerLeafEvaluation = bcAgent.bcAgentGui.getStartupReview(leafFeatureId,bcAgent.getLocalName() );
           double executerLeafEvaluationDouble = Double.parseDouble(executerLeafEvaluation);
           log.info("DOUBLE VALUE: " + executerLeafEvaluationDouble);

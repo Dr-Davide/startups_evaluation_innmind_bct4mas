@@ -87,7 +87,7 @@ public class ReceiveMessage extends TickerBehaviour {
 
         // agent that insert, whoffer, whorequest, whichservice, txid (random code),
         // timestamp, outcome (ok or no), rating
-        bcAgent.addBehaviour(new EvaluateFeature(bcAgent, message));
+        bcAgent.addBehaviour(new ExpertEvaluateFeature(bcAgent, message));
 
         //        serviceCompleted(message);
 

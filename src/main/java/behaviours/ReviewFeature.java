@@ -76,7 +76,7 @@
 //                log.info("EXECUTION LEAF SERVICE");
 //                TimeUnit.SECONDS.sleep(1);
 //                // TODO: behaviour Evaluate Feature
-//                //        bcAgent.addBehaviour(new EvaluateFeature(bcAgent, 0));
+//                //        bcAgent.addBehaviour(new ExpertEvaluateFeature(bcAgent, 0));
 //                bcAgent.bcAgentGui.getFeatureCompletedMessage(bcAgent.getMyName(), serviceId);
 //                switch (agentRole) {
 //                    case InnMindReputation.EXPERT_ROLE:
@@ -106,7 +106,7 @@
 //                    TimeUnit.SECONDS.sleep(1);
 //
 //                    // TODO: behaviour Evaluate Feature
-//                    //          bcAgent.addBehaviour(new EvaluateFeature(bcAgent, i));
+//                    //          bcAgent.addBehaviour(new ExpertEvaluateFeature(bcAgent, i));
 //
 ////                    String executerLeafEvaluation;
 ////                    String demanderLeafEvaluation;

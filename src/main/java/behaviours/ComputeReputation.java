@@ -39,10 +39,12 @@ public class ComputeReputation extends OneShotBehaviour {
       Review serviceSecondReview = serviceActivitiesList.get(1);
 
       log.info("serviceFirstReview: " + serviceFirstReview.getValue());
+
       compositeFeatureReputationLogic
           .setDemanderAndExecuter(serviceFirstReview, serviceSecondReview);
 
-      updateFeatureDemanderAndExecuterReputation(compositeFeatureReputationLogic);
+//      updateFeatureDemanderAndExecuterReputation(compositeFeatureReputationLogic);
+      updateFeatureDemanderAndExecuterReputationWithDisagreementResolution(compositeFeatureReputationLogic);
     }
 
 
@@ -59,7 +61,8 @@ public class ComputeReputation extends OneShotBehaviour {
       leafFeatureReputationLogic
           .setDemanderAndExecuter(serviceFirstReview, serviceSecondReview);
 
-      updateFeatureDemanderAndExecuterReputation(leafFeatureReputationLogic);
+//      updateFeatureDemanderAndExecuterReputation(leafFeatureReputationLogic);
+      updateFeatureDemanderAndExecuterReputationWithDisagreementResolution(leafFeatureReputationLogic);
     }
 
 
@@ -82,6 +85,56 @@ public class ComputeReputation extends OneShotBehaviour {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
+    }
+  }
+
+  private void casePerfectExpert(ReputationLogic reputationLogic) {
+    if (reputationLogic.isDemanderSet() && reputationLogic.isExecuterSet()) {
+      try {
+        Boolean updatedDemanderReputation = reputationLogic.updateStartupReputation();
+        Boolean updatedExecuterReputation = reputationLogic.updatePerfectExpertReputation();
+        log.info("Updated Demander: " + updatedDemanderReputation);
+        log.info("Updated Executer: " + updatedExecuterReputation);
+      } catch (Exception e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+  }
+
+  private void caseGoodExpert(ReputationLogic reputationLogic) {
+    if (reputationLogic.isDemanderSet() && reputationLogic.isExecuterSet()) {
+      try {
+        Boolean updatedDemanderReputation = reputationLogic.updateStartupReputation();
+        Boolean updatedExecuterReputation = reputationLogic.updateGoodExpertReputation();
+        log.info("Updated Demander: " + updatedDemanderReputation);
+        log.info("Updated Executer: " + updatedExecuterReputation);
+      } catch (Exception e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+  }
+
+  private void updateFeatureDemanderAndExecuterReputationWithDisagreementResolution(ReputationLogic reputationLogic) {
+    if (reputationLogic.isDemanderSet() && reputationLogic.isExecuterSet()) {
+      int deltaBasedWorkflow = reputationLogic.deltaBasedWorkflow();
+        switch (deltaBasedWorkflow){
+          case 1: // PERFECT EXPERT
+            casePerfectExpert(reputationLogic);
+            break;
+          case 2: // GOOD EXPERT
+            caseGoodExpert(reputationLogic);
+            break;
+          case 3:
+            // TODO: Disagreement Resolution
+            // FOR NOW ONLY SHOW MESSAGE
+            // don't update reputation
+            String message = "DISAGREEMENT RESOLUTION CASE";
+            String title = "Disagreement Resolution Alert";
+            bcAgent.bcAgentGui.getErrorMessage(message,title);
+            break;
+        }
     }
   }
 

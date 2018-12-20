@@ -37,7 +37,18 @@ public class ReputationLogic {
     expertReview = new Review();
   }
 
-  public void deltaBasedWorkflow() {
+  public boolean isDisagreementResolution(Double deltaEvaluations){
+return true;
+  }
+
+  /**
+   * Return Values:
+   * 1 - Perfect Expert
+   * 2 - Good Expert
+   * 3 - Disagreement Resolution
+   * @return
+   */
+  public int deltaBasedWorkflow() {
     Double startupEvaluation = Double.parseDouble(startupReview.getValue().toString());
     Double expertEvaluation = Double.parseDouble(expertReview.getValue().toString());
     Double deltaEvaluations = 0.0;
@@ -48,15 +59,37 @@ public class ReputationLogic {
     }
     Double insufficientValue = 5.0;
     Double deltaThreshold = 2.0;
-    if ((startupEvaluation < insufficientValue && expertEvaluation < insufficientValue)
-        || (startupEvaluation > insufficientValue && expertEvaluation > insufficientValue)) {
-      // TODO: Calcola media reputazione con aggiunta evaluations
+    if (((startupEvaluation < insufficientValue && expertEvaluation < insufficientValue)
+        || (startupEvaluation > insufficientValue && expertEvaluation > insufficientValue))&&deltaEvaluations<deltaThreshold) {
+      return 1;
 
     }
-    if ((startupEvaluation < insufficientValue || expertEvaluation < insufficientValue)
+    if ((startupEvaluation < insufficientValue && expertEvaluation > insufficientValue) || (startupEvaluation > insufficientValue && expertEvaluation < insufficientValue)
         && deltaEvaluations > deltaThreshold) {
-      // TODO: Complex InnMindReputation Algorithm
+      return 3;
+    }else{
+      return 2;
     }
+
+  }
+
+  public boolean case1(){
+
+    boolean updatedDemanderReputation = false;
+    boolean updatedExecuterReputation = false;
+    // TODO: Normal Reputation (Give 10 to Expert, and Expert Review to Startup)
+    try {
+
+      updatedDemanderReputation = updateStartupReputation();
+      updatedExecuterReputation = updatePerfectExpertReputation();
+      log.info("Updated Demander: " + updatedDemanderReputation);
+      log.info("Updated Executer: " + updatedExecuterReputation);
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+    return updatedDemanderReputation && updatedExecuterReputation;
 
   }
 
@@ -110,7 +143,7 @@ public class ReputationLogic {
    * @throws InvalidArgumentException
    * @throws ParseException
    */
-  private Double computeReputation(String agentId, String serviceId, String agentRole)
+  private Double computeReputationTourism(String agentId, String serviceId, String agentRole)
       throws ProposalException, InvalidArgumentException, ParseException {
     String emptyString = "";
     Double computedReputationValue;
@@ -153,8 +186,128 @@ public class ReputationLogic {
     return computedReputationValue;
   }
 
+  private Double computeReputationStartup(String agentId, String serviceId)
+          throws ProposalException, InvalidArgumentException, ParseException {
+    String emptyString = "";
+    Double computedReputationValue;
+    String agentRole = InnMindReputation.STARTUP_ROLE;
+
+    ArrayList<InnMindReputation> innMindReputationHistoryList;
+
+    String reputationId = agentId + serviceId + agentRole;
+
+    // Get the actual innMindReputation
+    InnMindReputation innMindReputation = ReadController
+            .getReputation(bcAgent.getHfClient(), bcAgent.getHfTransactionChannel(), reputationId);
+
+    log.info("REPUTATION ACTUAL VALUE: " + innMindReputation.getInnMindReputationId());
+    // UPDATE REPUTATION
+
+    // Get InnMindReputation History
+    innMindReputationHistoryList = RangeQueriesController.getReputationHistory(bcAgent, reputationId);
+
+    log.info("REPUTATION HISTORY SIZE: " + innMindReputationHistoryList.size());
+
+    // Get the Last Evaluation depending on the agentRole
+    // put a value only to let it compile because of the if else, normally have to be assigned by the if or if else closures
+      // TODO: Think of logic of Demander InnMindReputation, for now take the value from expertReview
+      // GET THE EXECUTER EVALUATION
+    Double lastEvaluation = Double.parseDouble(expertReview.getValue().toString());
+
+
+    // Compute Mean Value
+    // TODO: ADD HERE DISAGREEMENT RESOLUTION
+    computedReputationValue = computeMeanValue(innMindReputationHistoryList, lastEvaluation);
+    //    }
+
+
+
+    return computedReputationValue;
+  }
+
+  private Double computeReputationExpertCustom(String agentId, String serviceId, Double expertEvaluation)
+          throws ProposalException, InvalidArgumentException, ParseException {
+    String agentRole = InnMindReputation.EXPERT_ROLE;
+    Double computedReputationValue;
+
+    ArrayList<InnMindReputation> innMindReputationHistoryList;
+
+    String reputationId = agentId + serviceId + agentRole;
+
+    // Get the actual innMindReputation
+    InnMindReputation innMindReputation = ReadController
+            .getReputation(bcAgent.getHfClient(), bcAgent.getHfTransactionChannel(), reputationId);
+
+    log.info("REPUTATION ACTUAL VALUE: " + innMindReputation.getInnMindReputationId());
+    // UPDATE REPUTATION
+
+    // Get InnMindReputation History
+    innMindReputationHistoryList = RangeQueriesController.getReputationHistory(bcAgent, reputationId);
+
+    log.info("REPUTATION HISTORY SIZE: " + innMindReputationHistoryList.size());
+
+    // Get the Last Evaluation depending on the agentRole
+    // put a value only to let it compile because of the if else, normally have to be assigned by the if or if else closures
+    // GIVE A 6
+//    Double expertEvaluation = 6.0;
+
+
+    // Compute Mean Value
+    // TODO: ADD HERE DISAGREEMENT RESOLUTION
+    computedReputationValue = computeMeanValue(innMindReputationHistoryList, expertEvaluation);
+    //    }
+
+
+
+    return computedReputationValue;
+  }
+
+  private Double computeReputationPerfectExpert(String agentId, String serviceId, String agentRole)
+          throws ProposalException, InvalidArgumentException, ParseException {
+    String emptyString = "";
+    Double computedReputationValue;
+
+    ArrayList<InnMindReputation> innMindReputationHistoryList;
+
+    String reputationId = agentId + serviceId + agentRole;
+
+    // Get the actual innMindReputation
+    InnMindReputation innMindReputation = ReadController
+            .getReputation(bcAgent.getHfClient(), bcAgent.getHfTransactionChannel(), reputationId);
+
+    log.info("REPUTATION ACTUAL VALUE: " + innMindReputation.getInnMindReputationId());
+    // UPDATE REPUTATION
+
+    // Get InnMindReputation History
+    innMindReputationHistoryList = RangeQueriesController.getReputationHistory(bcAgent, reputationId);
+
+    log.info("REPUTATION HISTORY SIZE: " + innMindReputationHistoryList.size());
+
+    // Get the Last Evaluation depending on the agentRole
+    Double lastEvaluation =
+            0.0; // put a value only to let it compile because of the if else, normally have to be assigned by the if or if else closures
+    if (agentRole.equals(ReputationLogic.expertRole)) {
+      // GIVE A 10
+      lastEvaluation = 10.0;
+//      lastEvaluation = Double.parseDouble(startupReview.getValue().toString());
+    } else if (agentRole.equals(ReputationLogic.startupRole)) {
+      // TODO: Think of logic of Demander InnMindReputation, for now take the value from expertReview
+      // GET THE EXECUTER EVALUATION
+      lastEvaluation = Double.parseDouble(expertReview.getValue().toString());
+    }
+
+    // Compute Mean Value
+    // TODO: ADD HERE DISAGREEMENT RESOLUTION
+    computedReputationValue = computeMeanValue(innMindReputationHistoryList, lastEvaluation);
+    //    }
+
+
+
+    return computedReputationValue;
+  }
+
   /**
-   * Wrapper of computeReputation input startupAgentId and Update (or Create) InnMindReputation
+   * Wrapper of computeReputationTourism input startupAgentId and Update (or Create) InnMindReputation
    *
    * @return
    * @throws Exception
@@ -167,7 +320,7 @@ public class ReputationLogic {
 
     // Compute the new Value
     Double newReputationValue =
-        computeReputation(startupAgentId, featureId, ReputationLogic.startupRole);
+        computeReputationStartup(startupAgentId, featureId);
 
     // Save the new Value in the BlockChain
     isUpdatedStartupReputation = ComplexWorkflowController
@@ -178,7 +331,7 @@ public class ReputationLogic {
   }
 
   /**
-   * Wrapper of computeReputation input expertAgentId and Update (or Create) InnMindReputation
+   * Wrapper of computeReputationTourism input expertAgentId and Update (or Create) InnMindReputation
    *
    * @return
    * @throws Exception
@@ -190,11 +343,46 @@ public class ReputationLogic {
     String expertAgentId = expertReview.getExpertAgentId().toString();
 
     Double newReputationValue =
-        computeReputation(expertAgentId, featureId, ReputationLogic.expertRole);
+        computeReputationTourism(expertAgentId, featureId, ReputationLogic.expertRole);
 
     isUpdatedExpertReputation = ComplexWorkflowController
         .updateOrCreateReputation(bcAgent, expertAgentId, featureId, ReputationLogic.expertRole,
             newReputationValue);
+
+    return isUpdatedExpertReputation;
+  }
+
+  public boolean updateGoodExpertReputation() throws Exception {
+    boolean isUpdatedExpertReputation;
+    Double goodExpertEvaluation = 6.0;
+
+    String featureId = expertReview.getReviewedFeatureId().toString();
+    String expertAgentId = expertReview.getExpertAgentId().toString();
+
+    Double newReputationValue =
+            computeReputationExpertCustom(expertAgentId, featureId, goodExpertEvaluation);
+
+    isUpdatedExpertReputation = ComplexWorkflowController
+            .updateOrCreateReputation(bcAgent, expertAgentId, featureId, ReputationLogic.expertRole,
+                    newReputationValue);
+
+    return isUpdatedExpertReputation;
+  }
+
+  public boolean updatePerfectExpertReputation() throws Exception {
+    boolean isUpdatedExpertReputation;
+
+    Double perfectExpertEvaluation = 10.0;
+
+    String featureId = expertReview.getReviewedFeatureId().toString();
+    String expertAgentId = expertReview.getExpertAgentId().toString();
+
+    Double newReputationValue =
+            computeReputationExpertCustom(expertAgentId, featureId, perfectExpertEvaluation);
+
+    isUpdatedExpertReputation = ComplexWorkflowController
+            .updateOrCreateReputation(bcAgent, expertAgentId, featureId, ReputationLogic.expertRole,
+                    newReputationValue);
 
     return isUpdatedExpertReputation;
   }

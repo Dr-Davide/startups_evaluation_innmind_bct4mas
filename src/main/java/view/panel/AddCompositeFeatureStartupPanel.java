@@ -45,30 +45,6 @@ public class AddCompositeFeatureStartupPanel extends JPanel {
         panelFeatureName.setLbl("Name: ");
         add(panelFeatureName, gbc_panelFeatureName);
 
-//        GridBagConstraints gbc_panelFeatureDescription = new GridBagConstraints();
-//        gbc_panelFeatureDescription.gridwidth = 3;
-//        gbc_panelFeatureDescription.fill = GridBagConstraints.BOTH;
-//        gbc_panelFeatureDescription.insets = new Insets(0, 0, 5, 5);
-//        gbc_panelFeatureDescription.gridx = 1;
-//        gbc_panelFeatureDescription.gridy = 4;
-//        add(panelFeatureDescription, gbc_panelFeatureDescription);
-
-//        GridBagConstraints gbc_panelFeatureCost = new GridBagConstraints();
-//        gbc_panelFeatureCost.gridwidth = 3;
-//        gbc_panelFeatureCost.fill = GridBagConstraints.BOTH;
-//        gbc_panelFeatureCost.insets = new Insets(0, 0, 5, 5);
-//        gbc_panelFeatureCost.gridx = 1;
-//        gbc_panelFeatureCost.gridy = 5;
-//        add(panelFeatureCost, gbc_panelFeatureCost);
-
-//        GridBagConstraints gbc_panelFeatureTime = new GridBagConstraints();
-//        gbc_panelFeatureTime.gridwidth = 3;
-//        gbc_panelFeatureTime.fill = GridBagConstraints.BOTH;
-//        gbc_panelFeatureTime.insets = new Insets(0, 0, 5, 5);
-//        gbc_panelFeatureTime.gridx = 1;
-//        gbc_panelFeatureTime.gridy = 6;
-//        add(panelFeatureTime, gbc_panelFeatureTime);
-
         GridBagConstraints gbc_panel = new GridBagConstraints();
         gbc_panel.gridwidth = 3;
         gbc_panel.insets = new Insets(0, 0, 0, 0);

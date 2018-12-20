@@ -14,7 +14,6 @@ import org.hyperledger.fabric.sdk.Channel;
 import org.hyperledger.fabric.sdk.HFClient;
 import org.hyperledger.fabric.sdk.User;
 import view.BCAgentGui;
-import view.StartupAgentGui;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -284,7 +283,7 @@ public class BCAgent extends Agent {
    * @param demanderAgentId
    */
   public void executeFeatureTrigger(String serviceId, String demanderAgentId) {
-    addBehaviour(new ExecuteFeature(this, serviceId, demanderAgentId));
+    addBehaviour(new StartupReviewFeature(this, serviceId, demanderAgentId));
   }
 
   public void acceptReviewFeatureTrigger(String serviceId, String demanderAgentId) {

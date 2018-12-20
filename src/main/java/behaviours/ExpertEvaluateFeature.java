@@ -18,9 +18,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 // TODO: Per ora usato solo dal demander, l'executer valuta il servizio quando lo esegue (addbehaviour mette in coda il behaviour, non è preemptive)
-public class EvaluateFeature extends OneShotBehaviour {
+public class ExpertEvaluateFeature extends OneShotBehaviour {
 
-  private static final Logger log = Logger.getLogger(EvaluateFeature.class);
+  private static final Logger log = Logger.getLogger(ExpertEvaluateFeature.class);
 
 
   private static final long serialVersionUID = 442251848309328026L;
@@ -28,7 +28,7 @@ public class EvaluateFeature extends OneShotBehaviour {
   private BCAgent bcAgent;
   private ACLMessage aclMessage;
 
-  EvaluateFeature(BCAgent agent, ACLMessage aclMessage) {
+  ExpertEvaluateFeature(BCAgent agent, ACLMessage aclMessage) {
     this.aclMessage = aclMessage;
     bcAgent = agent;
   }
@@ -101,7 +101,7 @@ public class EvaluateFeature extends OneShotBehaviour {
             log.info("EXECUTION LEAF SERVICE");
             TimeUnit.SECONDS.sleep(1);
             // TODO: behaviour Evaluate Feature
-            //        bcAgent.addBehaviour(new EvaluateFeature(bcAgent, 0));
+            //        bcAgent.addBehaviour(new ExpertEvaluateFeature(bcAgent, 0));
             expertReview = bcAgent.bcAgentGui.getExpertReview(executedFeatureId,bcAgent.getLocalName() );
           } else {
             // COMPOSITE SERVICE

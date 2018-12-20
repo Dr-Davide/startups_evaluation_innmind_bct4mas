@@ -251,7 +251,7 @@ public class ExpertAgent  extends BCAgent {
      * @param demanderAgentId
      */
     public void executeFeatureTrigger(String serviceId, String demanderAgentId) {
-        addBehaviour(new ExecuteFeature(this, serviceId, demanderAgentId));
+        addBehaviour(new StartupReviewFeature(this, serviceId, demanderAgentId));
     }
 
     /**
